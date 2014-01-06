@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SimDM_UploadFile.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SimDM_UploadFile_SimDM_Master_SIMDM_MASTER_WSDLService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:8080/EDMWS/earlybinding/options_2097152/DataRepository/SimDM_Master/QEX/SIMDM_MASTER_WSDL</Value>
+    </Setting>
+    <Setting Name="SimDM_UploadFile_AccessControl_EDMAccessControlService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:8080/EDMWS/AccessControl</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

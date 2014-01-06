@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:tns="http://epmtech.jotne.com/EDM_DUMMY_SCHEMA/EDMAccessControl" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:impl="http://localhost:8080/EDMWS/AccessControl" targetNamespace="http://localhost:8080/EDMWS/AccessControl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://epmtech.jotne.com/EDM_DUMMY_SCHEMA/EDMAccessControl">
+      <xsd:complexType name="EDMbaseEntity" />
+      <xsd:complexType name="fileTransferInfo">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:EDMbaseEntity">
+            <xsd:sequence>
+              <xsd:element name="uploadOrDownloadUrl" type="xsd:string" />
+              <xsd:element name="progressInfoUrl" type="xsd:string" />
+              <xsd:element name="fileNameOnServer" type="xsd:string" />
+              <xsd:element name="operation" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="versionResponse">
+    <wsdl:part name="Response" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="versionRequest">
+    <wsdl:part name="EDMSESSIONID" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="deleteTemporaryFileResponse">
+    <wsdl:part name="Response" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="deleteTemporaryFileRequest">
+    <wsdl:part name="EDMSESSIONID" type="xsd:string" />
+    <wsdl:part name="FILEINFO" type="tns:fileTransferInfo" />
+  </wsdl:message>
+  <wsdl:message name="createTemporaryFileResponse">
+    <wsdl:part name="Response" type="tns:fileTransferInfo" />
+  </wsdl:message>
+  <wsdl:message name="createTemporaryFileRequest">
+    <wsdl:part name="EDMSESSIONID" type="xsd:string" />
+    <wsdl:part name="FILENAME" type="xsd:string" />
+    <wsdl:part name="FILETYPE" type="xsd:string" />
+    <wsdl:part name="UPLOAD" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="xpxLoggingResponse">
+    <wsdl:part name="Response" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="xpxLoggingRequest">
+    <wsdl:part name="EDMSESSIONID" type="xsd:string" />
+    <wsdl:part name="ACTION" type="xsd:string" />
+    <wsdl:part name="OPTION" type="xsd:string" />
+    <wsdl:part name="MAXSIZE" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="resetAllOptionsResponse">
+    <wsdl:part name="Response" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="resetAllOptionsRequest">
+    <wsdl:part name="EDMSESSIONID" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="setOptionResponse">
+    <wsdl:part name="Response" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="setOptionRequest">
+    <wsdl:part name="EDMSESSIONID" type="xsd:string" />
+    <wsdl:part name="OPTION" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="logoutResponse">
+    <wsdl:part name="Response" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="logoutRequest">
+    <wsdl:part name="EDMSESSIONID" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="loginResponse">
+    <wsdl:part name="Response" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="loginRequest">
+    <wsdl:part name="USER" type="xsd:string" />
+    <wsdl:part name="GROUP" type="xsd:string" />
+    <wsdl:part name="PASSWORD" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:portType name="EDMAccessControl">
+    <wsdl:operation name="version" parameterOrder="EDMSESSIONID">
+      <wsdl:input name="versionRequest" message="impl:versionRequest" />
+      <wsdl:output name="versionResponse" message="impl:versionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteTemporaryFile" parameterOrder="EDMSESSIONID FILEINFO">
+      <wsdl:input name="deleteTemporaryFileRequest" message="impl:deleteTemporaryFileRequest" />
+      <wsdl:output name="deleteTemporaryFileResponse" message="impl:deleteTemporaryFileResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="createTemporaryFile" parameterOrder="EDMSESSIONID FILENAME FILETYPE UPLOAD">
+      <wsdl:input name="createTemporaryFileRequest" message="impl:createTemporaryFileRequest" />
+      <wsdl:output name="createTemporaryFileResponse" message="impl:createTemporaryFileResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="xpxLogging" parameterOrder="EDMSESSIONID ACTION OPTION MAXSIZE">
+      <wsdl:input name="xpxLoggingRequest" message="impl:xpxLoggingRequest" />
+      <wsdl:output name="xpxLoggingResponse" message="impl:xpxLoggingResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="resetAllOptions" parameterOrder="EDMSESSIONID">
+      <wsdl:input name="resetAllOptionsRequest" message="impl:resetAllOptionsRequest" />
+      <wsdl:output name="resetAllOptionsResponse" message="impl:resetAllOptionsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="setOption" parameterOrder="EDMSESSIONID OPTION">
+      <wsdl:input name="setOptionRequest" message="impl:setOptionRequest" />
+      <wsdl:output name="setOptionResponse" message="impl:setOptionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="logout" parameterOrder="EDMSESSIONID">
+      <wsdl:input name="logoutRequest" message="impl:logoutRequest" />
+      <wsdl:output name="logoutResponse" message="impl:logoutResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="login" parameterOrder="USER GROUP PASSWORD">
+      <wsdl:input name="loginRequest" message="impl:loginRequest" />
+      <wsdl:output name="loginResponse" message="impl:loginResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EDMAccessControlBinding" type="impl:EDMAccessControl">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="version">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="versionRequest">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/AccessControl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="versionResponse">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/AccessControl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteTemporaryFile">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="deleteTemporaryFileRequest">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/AccessControl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="deleteTemporaryFileResponse">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/AccessControl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createTemporaryFile">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="createTemporaryFileRequest">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/AccessControl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="createTemporaryFileResponse">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/AccessControl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="xpxLogging">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="xpxLoggingRequest">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/AccessControl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="xpxLoggingResponse">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/AccessControl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="resetAllOptions">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="resetAllOptionsRequest">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/AccessControl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="resetAllOptionsResponse">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/AccessControl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setOption">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setOptionRequest">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/AccessControl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="setOptionResponse">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/AccessControl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logout">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="logoutRequest">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/AccessControl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="logoutResponse">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/AccessControl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="login">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="loginRequest">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/AccessControl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="loginResponse">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/AccessControl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EDMAccessControlService">
+    <wsdl:port name="EDMWS" binding="impl:EDMAccessControlBinding">
+      <wsdlsoap:address location="http://localhost:8080/EDMWS/AccessControl" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
