@@ -7,106 +7,253 @@ using System.Net;
 
 using SimDM_UploadFile.SimDM_Master;
 using SimDM_UploadFile.AccessControl;
+using SimDM_UploadFile.node_query;
 
 namespace SimDM_UploadFile
 {
     class Program
     {
+        static Arguments arguments = null;
         private const String MODEL_SERVICE_PARAMS_TEMPLATE = "/earlybinding/options_2097152/{0}/{1}/QEX/SIMDM_MASTER_WSDL";
-
         private const String SERVER_URL = "http://localhost:8080/EDMWS";
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="args">-repo=InitialRepository -model=Ultralight_Glider -login=ah -pass=db -node="Centerbody Outboard" -file="c:\pipevice.CATPart"</param>
-        static void Main(string[] args)
+        static EDMAccessControlService access = null;
+        static String sessionId = null;
+        static SIMDM_MASTER_WSDLService service = null;
+        static node_queryService nodeSrv = null;
+
+        /*---------------------------------------------------------------------------------------*/
+        static v_node createNode(string name, string description, int parent)
+        /*---------------------------------------------------------------------------------------*/
         {
-            try
+            v_node newNode = new v_node();
+            newNode.id = name;
+            newNode.nodus = new v_nodus();
+            newNode.nodus.version = "1";
+            newNode.nodus.editable = true;
+            newNode.nodus.locked = false;
+            newNode.nodus.item = new v_item();
+            newNode.nodus.item.name = name;
+            newNode.nodus.item.item_type = "DESIGN";
+            newNode.nodus.item.description = description;
+
+            int[] parentId = new int[1];
+            parentId[0] = parent;
+
+            return service.node_create(sessionId, newNode, parentId);
+        }
+        /*=======================================================================================*/
+        static void createProductStructure()
+        /*
+         * -command=create_pbs -repo=InitialRepository -model=test -login=ah -pass=db
+        =========================================================================================*/
+        {
+            v_pbs pbsTop = service.pbs_get(sessionId, null);
+            v_node car = createNode("Car", "Electric cabriolet", pbsTop.nodus.item.instance_id);
+            v_node carBody = createNode("Car Body", "Body made by aluminium", car.nodus.item.instance_id);
+            v_node leftFrontDoor = createNode("Left Front Door", "", carBody.nodus.item.instance_id);
+            v_node rightFrontDoor = createNode("Right Front Door", "", carBody.nodus.item.instance_id);
+            v_node Wheels = createNode("Wheels", "", car.nodus.item.instance_id);
+            v_node Engine = createNode("Engine", "", car.nodus.item.instance_id);
+            v_node EngineBlock = createNode("Engine Block", "", Engine.nodus.item.instance_id);
+            v_node Pistons = createNode("Pistons", "", Engine.nodus.item.instance_id);
+            v_node CrankShaft = createNode("Crank Shaft", "", Engine.nodus.item.instance_id);
+            v_node tailGate = createNode("Tail gate", "", carBody.nodus.item.instance_id);
+            v_node tailGateWing = createNode("Tail gate wing", "", tailGate.nodus.item.instance_id);
+        }
+        /*=======================================================================================*/
+        static void uploadFile()
+        /*
+         * -command=upload_file -repo=InitialRepository -model=test -login=ah -pass=db -node="Engine block" -file="O:\projects\SimDM\Testdata\Glider TestModels\ConvertedByAP209e2_API\testcbeam-out.stp"
+        =========================================================================================*/
+        {
+            string fileToUpload = arguments["file"];
+            //int nodeId = Int32.Parse(arguments["id"]);
+            string nodeName = arguments["node"];
+
+
+            var list = service.pbs_search(
+                sessionId,
+                nodeName,
+                new string[] { "NODE.NAME" },
+                false, true, 0, null, false, null, null, null, null, 2, 0);
+            if (list == null || list.Length == 0)
+                throw new Exception("No nodes was found.");
+            else if (list.Length > 1)
+                throw new Exception("More than one node was found.");
+
+            FileInfo fileInfo = new FileInfo(fileToUpload);
+
+            v_file fileSpec = new v_file()
             {
-                Arguments arguments = new Arguments(args);
-                string repository = arguments["repo"];
-                string model = arguments["model"];
-                string user = arguments["login"];
-                string password = arguments["pass"];
-                string fileToUpload = arguments["file"];
-                //int nodeId = Int32.Parse(arguments["id"]);
-                string nodeName = arguments["node"];
-
-                EDMAccessControlService access = new EDMAccessControlService();
-                access.Url = SERVER_URL + "/AccessControl";
-
-                String sessionId = access.login(user, "sdai-group", password);
-
-                SIMDM_MASTER_WSDLService service = new SIMDM_MASTER_WSDLService();
-                service.Url = SERVER_URL + String.Format(MODEL_SERVICE_PARAMS_TEMPLATE, repository, model);
-
-                var list = service.pbs_search(
-                    sessionId,
-                    nodeName,
-                    new string[] { "NODE.NAME" },
-                    false, true, 0, null, false, null, null, null, null, 2, 0);
-                if (list == null || list.Length == 0)
-                    throw new Exception("No nodes was found.");
-                else if (list.Length > 1)
-                    throw new Exception("More than one node was found.");
-
-                FileInfo fileInfo = new FileInfo(fileToUpload);
-
-                v_file fileSpec = new v_file()
+                item = new v_item()
                 {
-                    item = new v_item()
-                    {
-                        name = System.IO.Path.GetFileNameWithoutExtension(fileToUpload),
-                    },
-                    extension = fileInfo.Extension,
-                    @interface = "Interface specifications",
-                    original_name = fileToUpload,
-                    original_format = "file format name", // can be derived from file name by using Win API
-                    OS = "Microsoft Windows",
-                    produced_by = "EPM Thechnology AS",
-                    size = (int)fileInfo.Length,
-                    owner = 0, // organization id
-                };
-                fileSpec = service.file_create(sessionId, fileSpec);
+                    name = System.IO.Path.GetFileNameWithoutExtension(fileToUpload),
+                },
+                extension = fileInfo.Extension,
+                @interface = "Interface specifications",
+                original_name = fileToUpload,
+                original_format = "file format name", // can be derived from file name by using Win API
+                OS = "Microsoft Windows",
+                produced_by = "EPM Thechnology AS",
+                size = (int)fileInfo.Length,
+                owner = 0, // organization id
+            };
+            fileSpec = service.file_create(sessionId, fileSpec);
 
-                v_attached_file attachedFile = new v_attached_file()
+            v_attached_file attachedFile = new v_attached_file()
+            {
+                domain = list[0].item.instance_id,
+                file = fileSpec.item.instance_id,
+                item = new v_item()
                 {
-                    domain = list[0].item.instance_id,
-                    file = fileSpec.item.instance_id,
-                    item = new v_item()
-                    {
-                        name = fileInfo.Name,
-                        description = "description must be here",
-                    },
-                };
-                attachedFile = service.attached_file_create(sessionId, attachedFile);
+                    name = fileInfo.Name,
+                    description = "description must be here",
+                },
+            };
+            attachedFile = service.attached_file_create(sessionId, attachedFile);
 
-                var transferInfo = Upload(sessionId, access, fileToUpload, fileInfo.Extension);
+            var transferInfo = Upload(sessionId, access, fileToUpload, fileInfo.Extension);
 
-                fileSpec = service.file_body_set(sessionId, fileSpec.item.instance_id, fileSpec.size, transferInfo.fileNameOnServer);
+            fileSpec = service.file_body_set(sessionId, fileSpec.item.instance_id, fileSpec.size, transferInfo.fileNameOnServer);
 
-                if ("ANALYSIS".Equals(fileSpec.item.item_type) || "DESIGN".Equals(fileSpec.item.item_type))
+            if ("ANALYSIS".Equals(fileSpec.item.item_type) || "DESIGN".Equals(fileSpec.item.item_type))
+            {
+                var resultFile = access.createTemporaryFile(sessionId, "name", ".cax", false);
+                string source = transferInfo.fileNameOnServer;
+                string result = resultFile.fileNameOnServer;
+                service.file_CAX_generate(sessionId, fileSpec.item.instance_id, source, result, null/*log file*/, true);
+            }
+            else if ("STEP".Equals(fileSpec.item.item_type) && !"[NO SCHEMA]".Equals(fileSpec.model_name))
+            {
+                fileSpec = service.file_import_STEP(sessionId, fileSpec.item.instance_id, "", transferInfo.fileNameOnServer, "");
+                if (fileSpec.CAX != -1)
                 {
                     var resultFile = access.createTemporaryFile(sessionId, "name", ".cax", false);
                     string source = transferInfo.fileNameOnServer;
                     string result = resultFile.fileNameOnServer;
                     service.file_CAX_generate(sessionId, fileSpec.item.instance_id, source, result, null/*log file*/, true);
                 }
-                else if ("STEP".Equals(fileSpec.item.item_type) && !"[NO SCHEMA]".Equals(fileSpec.model_name))
-                {
-                    fileSpec = service.file_import_STEP(sessionId, fileSpec.item.instance_id, "", transferInfo.fileNameOnServer, "");
-                    if (fileSpec.CAX != -1)
-                    {
-                        var resultFile = access.createTemporaryFile(sessionId, "name", ".cax", false);
-                        string source = transferInfo.fileNameOnServer;
-                        string result = resultFile.fileNameOnServer;
-                        service.file_CAX_generate(sessionId, fileSpec.item.instance_id, source, result, null/*log file*/, true);
-                    }
-                }
-                access.logout(sessionId);
+            }
+        }
+        /*=======================================================================================*/
+        static void executeNodeQuery()
+        /*
+         * -command=node_query -repo=DataRepository -model=CascadedCsys-ROTFIX-sol101-out -login=ah -pass=db
+         * =======================================================================================*/
+        {
+            nodeSrv = new node_queryService();
+            node_info_ve[] nodes = nodeSrv.get_node_info(sessionId);
+            for (int i = 0; i < nodes.Length; i++)
+            {
+                Console.Out.WriteLine(nodes[i].NODE_ID + ",  " + nodes[i].NODE_TYPE + ",  " + nodes[i].COORDSYS_ID
+                    + ",   " + nodes[i].COORD1 + ",   " + nodes[i].COORD2 + ",   " + nodes[i].COORD3);
+            }
+        }
+        /*=======================================================================================*/
+        static void define_property(string propType, string name)
+        /*=======================================================================================*/
+        {
+            v_pbs pbsTop = service.pbs_get(sessionId, null);
 
-                Console.Out.WriteLine("Operation completed successfully.");
+            v_property newProperty = new v_property();
+            newProperty.item = new v_item();
+            newProperty.item.item_type = propType;
+            newProperty.item.name = name;
+            newProperty.applicable_to = new string[1];
+            newProperty.applicable_to[0] = "DESIGN";
+            v_property storedTypeForBOM = service.property_create(sessionId, newProperty);
+        }
+        /*=======================================================================================*/
+        static void define_properties()
+        /*
+         * -command=define_properties -repo=InitialRepository -model=test -login=ah -pass=db
+        =========================================================================================*/
+        {
+            define_property("STRING_PROPERTY", "Type for BOM");
+            define_property("STRING_PROPERTY", "Part Number");
+            define_property("STRING_PROPERTY", "Manufacturer");
+            define_property("STRING_PROPERTY", "Manufacturer Part Number");
+            define_property("STRING_PROPERTY", "Complementary Part Number");
+            define_property("STRING_PROPERTY", "Standard");
+            define_property("STRING_PROPERTY", "Major Revision");
+            define_property("STRING_PROPERTY", "Minor Revision");
+            define_property("STRING_PROPERTY", "Author");
+        }
+        static void printTypes(string typeName, string[] typeNames)
+        {
+            Console.Out.WriteLine(typeName);
+            for (int i = 0; i < typeNames.Length; i++)
+            {
+                Console.Out.WriteLine(typeNames[i]);
+            }
+            Console.Out.WriteLine("");
+        }
+        /*=======================================================================================*/
+        static void show_types()
+        /*
+         * -command=show_types -repo=InitialRepository -model=test -login=ah -pass=db
+        =========================================================================================*/
+        {
+            string[] persontypes = service.person_list_types(sessionId);
+            printTypes("person", persontypes);
+            string[] pbstypes = service.pbs_list_types(sessionId);
+            printTypes("pbs", pbstypes);
+            string[] baselinetypes = service.baseline_list_types(sessionId);
+            printTypes("baseline", baselinetypes);
+            string[] filetypes = service.file_list_types(sessionId);
+            printTypes("file", filetypes);
+            string[] propertytypes = service.property_list_types(sessionId);
+            printTypes("property", propertytypes);
+             //string[] attached_filetypes = service.attached_file_list_types(sessionId);
+            //string[] nodetypes = service.node_list_types((sessionId);
+        }
+        /*=======================================================================================*/
+        static void Main(string[] args)
+        /*=======================================================================================*/
+        {
+            try
+            {
+                arguments = new Arguments(args);
+                string command = arguments["command"];
+                string repository = arguments["repo"];
+                string model = arguments["model"];
+                string user = arguments["login"];
+                string password = arguments["pass"];
+
+                access = new EDMAccessControlService();
+                access.Url = SERVER_URL + "/AccessControl";
+                service = new SIMDM_MASTER_WSDLService();
+                service.Url = SERVER_URL + String.Format(MODEL_SERVICE_PARAMS_TEMPLATE, repository, model);
+
+                if (command != null && (command.Equals("upload_file") || command.Equals("show_types") || command.Equals("create_pbs") || command.Equals("node_query") || command.Equals("define_properties")))
+                {
+                    sessionId = access.login(user, "sdai-group", password);
+                    if (command.Equals("upload_file"))
+                    {
+                        uploadFile();
+                    } else if (command.Equals("create_pbs")) {
+                        createProductStructure();
+                    }
+                    else if (command.Equals("node_query"))
+                    {
+                        executeNodeQuery();
+                    }
+                    else if (command.Equals("define_properties"))
+                    {
+                        define_properties();
+                    }
+                    else if (command.Equals("show_types"))
+                    {
+                        show_types();
+                    }
+                    access.logout(sessionId);
+                    Console.Out.WriteLine("Operation completed successfully.");
+                }
+                else
+                {
+                    Console.Out.WriteLine("Operation completed successfully.");
+                }
             }
             catch (Exception ex)
             {

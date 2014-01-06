@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:tns="http://epmtech.jotne.com/Ap209_multidisciplinary_analysis_and_design_mim_LF/node_query" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:impl="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" targetNamespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://epmtech.jotne.com/Ap209_multidisciplinary_analysis_and_design_mim_LF/node_query">
+      <xsd:complexType name="EDMbaseEntity" />
+      <xsd:complexType name="ListOf_node_info_ve">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="tns:node_info_ve[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="node_info_ve">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:EDMbaseEntity">
+            <xsd:sequence>
+              <xsd:element name="NODE_ID" type="xsd:string" />
+              <xsd:element name="NODE_TYPE" type="xsd:string" />
+              <xsd:element name="COORDSYS_ID" type="xsd:string" />
+              <xsd:element name="COORDSYS_TYPE" type="xsd:string" />
+              <xsd:element name="COORD1" type="xsd:string" />
+              <xsd:element name="COORD2" type="xsd:string" />
+              <xsd:element name="COORD3" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="fileTransferInfo">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:EDMbaseEntity">
+            <xsd:sequence>
+              <xsd:element name="uploadOrDownloadUrl" type="xsd:string" />
+              <xsd:element name="progressInfoUrl" type="xsd:string" />
+              <xsd:element name="fileNameOnServer" type="xsd:string" />
+              <xsd:element name="operation" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="get_node_infoResponse">
+    <wsdl:part name="Response" type="tns:ListOf_node_info_ve" />
+  </wsdl:message>
+  <wsdl:message name="get_node_infoRequest">
+    <wsdl:part name="EDMsessionId" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="_loginResponse">
+    <wsdl:part name="Response" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="_loginRequest">
+    <wsdl:part name="USER" type="xsd:string" />
+    <wsdl:part name="GROUP" type="xsd:string" />
+    <wsdl:part name="PASSWORD" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="_logoutResponse">
+    <wsdl:part name="Response" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="_logoutRequest">
+    <wsdl:part name="EDMSESSIONID" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="_createTemporaryFileResponse">
+    <wsdl:part name="Response" type="tns:fileTransferInfo" />
+  </wsdl:message>
+  <wsdl:message name="_createTemporaryFileRequest">
+    <wsdl:part name="EDMSESSIONID" type="xsd:string" />
+    <wsdl:part name="FILENAME" type="xsd:string" />
+    <wsdl:part name="FILETYPE" type="xsd:string" />
+    <wsdl:part name="UPLOAD" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="_deleteTemporaryFileResponse">
+    <wsdl:part name="Response" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="_deleteTemporaryFileRequest">
+    <wsdl:part name="EDMSESSIONID" type="xsd:string" />
+    <wsdl:part name="FILEINFO" type="tns:fileTransferInfo" />
+  </wsdl:message>
+  <wsdl:message name="_versionResponse">
+    <wsdl:part name="Response" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="_versionRequest">
+    <wsdl:part name="EDMSESSIONID" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:portType name="node_query">
+    <wsdl:operation name="get_node_info">
+      <wsdl:input name="get_node_infoRequest" message="impl:get_node_infoRequest" />
+      <wsdl:output name="get_node_infoResponse" message="impl:get_node_infoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="_login" parameterOrder="USER GROUP PASSWORD">
+      <wsdl:input name="_loginRequest" message="impl:_loginRequest" />
+      <wsdl:output name="_loginResponse" message="impl:_loginResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="_logout" parameterOrder="EDMSESSIONID">
+      <wsdl:input name="_logoutRequest" message="impl:_logoutRequest" />
+      <wsdl:output name="_logoutResponse" message="impl:_logoutResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="_createTemporaryFile" parameterOrder="EDMSESSIONID FILENAME FILETYPE UPLOAD">
+      <wsdl:input name="_createTemporaryFileRequest" message="impl:_createTemporaryFileRequest" />
+      <wsdl:output name="_createTemporaryFileResponse" message="impl:_createTemporaryFileResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="_deleteTemporaryFile" parameterOrder="EDMSESSIONID FILEINFO">
+      <wsdl:input name="_deleteTemporaryFileRequest" message="impl:_deleteTemporaryFileRequest" />
+      <wsdl:output name="_deleteTemporaryFileResponse" message="impl:_deleteTemporaryFileResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="_version" parameterOrder="EDMSESSIONID">
+      <wsdl:input name="_versionRequest" message="impl:_versionRequest" />
+      <wsdl:output name="_versionResponse" message="impl:_versionResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="node_queryBinding" type="impl:node_query">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="get_node_info">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="get_node_infoRequest">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="get_node_infoResponse">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_login">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="_loginRequest">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="_loginResponse">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_logout">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="_logoutRequest">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="_logoutResponse">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_createTemporaryFile">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="_createTemporaryFileRequest">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="_createTemporaryFileResponse">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_deleteTemporaryFile">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="_deleteTemporaryFileRequest">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="_deleteTemporaryFileResponse">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_version">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="_versionRequest">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="_versionResponse">
+        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="node_queryService">
+    <wsdl:port name="EDMWS" binding="impl:node_queryBinding">
+      <wsdlsoap:address location="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

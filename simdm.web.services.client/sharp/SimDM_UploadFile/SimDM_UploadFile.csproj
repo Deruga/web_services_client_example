@@ -53,6 +53,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\node_query\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\SimDM_Master\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -76,6 +81,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>SimDM_UploadFile_AccessControl_EDMAccessControlService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:8080/EDMWS/WSDLGenerator%3fuser=superuser&amp;password=db&amp;repository=DataRepository&amp;model=CascadedCsys-ROTFIX-sol101-out&amp;querySchema=node_query">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\node_query\</RelPath>
+      <UpdateFromURL>http://localhost:8080/EDMWS/WSDLGenerator%3fuser=superuser&amp;password=db&amp;repository=DataRepository&amp;model=CascadedCsys-ROTFIX-sol101-out&amp;querySchema=node_query</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SimDM_UploadFile_node_query_node_queryService</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="http://localhost:8080/EDMWS/WSDLGenerator%3fuser=superuser&amp;password=db&amp;repository=DataRepository&amp;model=SimDM_Master&amp;schema=SIMDM_MASTER&amp;querySchema=SIMDM_MASTER_WSDL&amp;option=LITERAL_ENCODING">
       <UrlBehavior>Dynamic</UrlBehavior>
@@ -103,6 +119,17 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\AccessControl\WSDLGenerator.wsdl" />
+    <None Include="Web References\node_query\fileTransferInfo.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\node_query\node_info_ve.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\node_query\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\node_query\WSDLGenerator.wsdl" />
     <None Include="Web References\SimDM_Master\attached_file_validation_line.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>

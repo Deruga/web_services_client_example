@@ -43,5 +43,16 @@ namespace SimDM_UploadFile.Properties {
                 return ((string)(this["SimDM_UploadFile_AccessControl_EDMAccessControlService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol10" +
+            "1-out/QEX/node_query")]
+        public string SimDM_UploadFile_node_query_node_queryService {
+            get {
+                return ((string)(this["SimDM_UploadFile_node_query_node_queryService"]));
+            }
+        }
     }
 }
