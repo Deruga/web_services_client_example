@@ -2,7 +2,11 @@ package com.jotne.epmtech;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.file.Paths;
@@ -56,7 +60,7 @@ public class Main {
 	@Argument(value = "node", description = "node (folder) name", required = false)
 	private String nodeName;
 
-	@Argument(value = "command", description = "command to execute: upload_file, create_pbs, node_query, define_properties, show_types", required = true)
+	@Argument(value = "command", description = "command to execute: upload_file, create_pbs, define_properties, show_types", required = true)
 	private String command = "upload_file";
 
 	private EDMAccessControl edmAccessControl;
@@ -99,10 +103,10 @@ public class Main {
 
 		if ("upload_file".equals(command))
 			uploadFileCommand();
+		else if ("download_file".equals(command))
+			downloadFileCommand();
 		else if ("create_pbs".equals(command))
 			createProductStructureCommand();
-		else if ("node_query".equals(command))
-			nodeQueryCommand();
 		else if ("define_properties".equals(command))
 			definePropertiesCommand();
 		else if ("show_types".equals(command))
@@ -278,6 +282,24 @@ public class Main {
 		}
 	}
 
+	private void downloadFileCommand() throws Exception {
+		V_pbs_item[] list = simDmService.pbs_search(sessionID, nodeName,
+				new String[] { "PBS_ITEM.NAME" }, false, true, 0, null, false,
+				null, null, null, null, 2, 0);
+		if (list == null || list.length == 0)
+			throw new Exception("No files was found.");
+		else if (list.length > 1)
+			throw new Exception("More than one file was found.");
+		
+		V_attached_file attachedFile = simDmService.attached_file_get(sessionID, list[0].getItem().getInstance_id());
+		FileTransferInfo transferInfo = edmAccessControl.createTemporaryFile(sessionID, "name", ".ext", false);
+		simDmService.file_body_get(sessionID, attachedFile.getFile()/* file ID */, transferInfo.getFileNameOnServer());
+		download(sessionID, filepath, transferInfo);
+		
+		// this can be skipped. temporary file is deleted after logout is performed.
+		edmAccessControl.deleteTemporaryFile(sessionID, transferInfo);
+	}
+	
 	private V_node createNode(String name, String description, int parent) throws RemoteException {
 		V_item item = new V_item();
 		item.setName(name);
@@ -324,17 +346,7 @@ public class Main {
 		HttpClient client = new HttpClient();
 		try {
 			// URL has not valid symbols. It must be encoded
-			String uploadOrDownloadUrl = transferInfo.getUploadOrDownloadUrl();
-			String encUploadOrDownloadUrl = null;
-			Pattern p = Pattern.compile(".*fileName=([^&]+)&.*");
-			Matcher m = p.matcher(uploadOrDownloadUrl);
-			if (!m.matches()) {
-				// error in regexp
-			} else {
-				String fileName = m.group(1);
-				String encFileName = URLEncoder.encode(fileName, "ASCII");
-				encUploadOrDownloadUrl = uploadOrDownloadUrl.replace(fileName, encFileName) + sessionId;
-			}
+			String encUploadOrDownloadUrl = encodeUrl(transferInfo.getUploadOrDownloadUrl()) + sessionId;
 
 			PostMethod pm = new PostMethod(encUploadOrDownloadUrl);
 			File f = new File(fileToUpload);
@@ -346,6 +358,43 @@ public class Main {
 		} finally {
 		}
 		return transferInfo;
+	}
+
+	private static FileTransferInfo download(String sessionId, String localFile, FileTransferInfo transferInfo) throws RemoteException, IOException {
+		HttpClient client = new HttpClient();
+		try {
+			// URL has not valid symbols. It must be encoded
+			String encUploadOrDownloadUrl = encodeUrl(transferInfo.getUploadOrDownloadUrl()) + sessionId;
+			
+			PostMethod pm = new PostMethod(encUploadOrDownloadUrl);
+			/* int status = */client.executeMethod(pm);
+			InputStream is = pm.getResponseBodyAsStream();
+			OutputStream os = new FileOutputStream(new File(localFile));
+			byte[] buf = new byte[1024];
+			int len;
+			while ((len = is.read(buf)) > 0) {
+				os.write(buf, 0, len);
+			}
+			is.close();
+			os.close();
+		} finally {
+		}
+		return transferInfo;
+	}
+	
+	private static String encodeUrl(String url) throws UnsupportedEncodingException
+	{
+		String encUploadOrDownloadUrl = null;
+		Pattern p = Pattern.compile(".*fileName=([^&]+)&.*");
+		Matcher m = p.matcher(url);
+		if (!m.matches()) {
+			// error in regexp
+		} else {
+			String fileName = m.group(1);
+			String encFileName = URLEncoder.encode(fileName, "ASCII");
+			encUploadOrDownloadUrl = url.replace(fileName, encFileName);
+		}
+		return encUploadOrDownloadUrl;
 	}
 
 }
