@@ -4,6 +4,8 @@ using System.Text;
 using System.IO;
 using System.Threading;
 using System.Net;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 
 using SimDM_UploadFile.SimDM_Master;
 using SimDM_UploadFile.AccessControl;
@@ -15,7 +17,7 @@ namespace SimDM_UploadFile
     {
         static Arguments arguments = null;
         private const String MODEL_SERVICE_PARAMS_TEMPLATE = "/earlybinding/options_2097152/{0}/{1}/QEX/SIMDM_MASTER_WSDL";
-        private const String SERVER_URL = "http://localhost:8080/EDMWS";
+        private const String SERVER_URL = "https://localhost:8443/EDMWS";
 
         static EDMAccessControlService access = null;
         static String sessionId = null;
@@ -212,6 +214,9 @@ namespace SimDM_UploadFile
         static void Main(string[] args)
         /*=======================================================================================*/
         {
+            // accept any not signed server certificates
+            System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate(object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
+
             try
             {
                 arguments = new Arguments(args);
