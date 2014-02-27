@@ -40,10 +40,10 @@ import localhost.EDMWS.earlybinding.options_2097152.DataRepository.SimDM_Master.
 public class Main {
 
 	@Argument(value = "server", description = "URL to server", required = false)
-	private String server = "http://localhost:8080";
+	private String server = "https://localhost:8443";
 
 	@Argument(value = "file", description = "file to upload", required = false)
-	private String filepath = "d:\\1.jpg";
+	private String filepath = "picture.jpg";
 
 	@Argument(value = "repo", description = "EDM repository name", required = true)
 	private String repository;
@@ -62,6 +62,12 @@ public class Main {
 
 	@Argument(value = "command", description = "command to execute: upload_file, create_pbs, define_properties, show_types", required = true)
 	private String command = "upload_file";
+	
+	@Argument(value = "keystore_file", description = "path to keystore file", required = false)
+	private String keystoreFile = "keystore";
+
+	@Argument(value = "keystore_pass", description = "password for keystore file", required = false)
+	private String keystorePassword = "password";
 
 	private EDMAccessControl edmAccessControl;
 
@@ -88,6 +94,12 @@ public class Main {
 			return;
 		}
 		Args.parse(this, args);
+		
+		if (server.toUpperCase().startsWith("HTTPS:")) {
+			System.setProperty("javax.net.ssl.trustStore", keystoreFile);
+			System.setProperty("javax.net.ssl.trustStorePassword", keystorePassword);
+			System.setProperty("javax.net.ssl.trustStoreType", "JKS");
+		}
 
 		EDMAccessControlServiceLocator edmAccessControlServiceLocator = new EDMAccessControlServiceLocator();
 		SIMDM_MASTER_WSDLServiceLocator simDmMasterServiceLocator = new SIMDM_MASTER_WSDLServiceLocator();
