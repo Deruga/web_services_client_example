@@ -17,7 +17,7 @@ namespace SimDM_UploadFile
     {
         static Arguments arguments = null;
         private const String MODEL_SERVICE_PARAMS_TEMPLATE = "/earlybinding/options_2097152/{0}/{1}/QEX/SIMDM_MASTER_WSDL";
-        private const String SERVER_URL = "https://localhost:8443/EDMWS";
+        private const String SERVER_URL = "http://api.eu-cloudflow.eu/jotne/EDMWS";
 
         static EDMAccessControlService access = null;
         static String sessionId = null;
