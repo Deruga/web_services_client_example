@@ -1,5 +1,6 @@
 package com.jotne.epmtech;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -364,7 +365,7 @@ public class Main {
 			File f = new File(fileToUpload);
 			pm.setRequestHeader("Content-Type", "xxx.xxx");
 			pm.setRequestHeader("Content-Length", "" + f.length());
-			pm.setRequestBody(new FileInputStream(f));
+			pm.setRequestEntity(new FileRequestEntity(f));
 			/* int status = */client.executeMethod(pm);
 			/* String response = */pm.getResponseBodyAsString();
 		} finally {
