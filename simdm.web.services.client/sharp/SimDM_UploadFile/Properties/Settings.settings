@@ -11,5 +11,8 @@
     <Setting Name="SimDM_UploadFile_node_query_node_queryService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query</Value>
     </Setting>
+    <Setting Name="SimDM_UploadFile_SimDM_Query_simdm_config_supportService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:8080/EDMWS/earlybinding/options_2097152/SimDM_system/Config/QEX/simdm_config_support</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

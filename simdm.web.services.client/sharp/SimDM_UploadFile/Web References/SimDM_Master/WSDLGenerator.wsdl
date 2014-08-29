@@ -3,18 +3,304 @@
   <wsdl:types>
     <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://epmtech.jotne.com/SIMDM_MASTER/SIMDM_MASTER_WSDL">
       <xsd:complexType name="EDMbaseEntity" />
-      <xsd:element name="test_on_error_do">
+      <xsd:element name="model_file_create">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="EDMsessionId" type="xsd:string" />
-            <xsd:element name="I" type="xsd:int" />
+            <xsd:element name="MODEL_ID" type="xsd:int" />
+            <xsd:element name="SUBJECT" type="tns:v_file" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="test_on_error_doResponse">
+      <xsd:complexType name="v_file">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:EDMbaseEntity">
+            <xsd:sequence>
+              <xsd:element name="item" type="tns:v_item" />
+              <xsd:element name="extension" type="xsd:string" />
+              <xsd:element name="owner" type="xsd:int" />
+              <xsd:element name="produced_by" type="xsd:string" />
+              <xsd:element name="interface" type="xsd:string" />
+              <xsd:element name="OS" type="xsd:string" />
+              <xsd:element name="original_name" type="xsd:string" />
+              <xsd:element name="original_format" type="xsd:string" />
+              <xsd:element name="check_sum" type="xsd:string" />
+              <xsd:element name="size" type="xsd:int" />
+              <xsd:element name="body" type="xsd:int" />
+              <xsd:element name="link" type="xsd:string" />
+              <xsd:element name="express_schema" type="xsd:string" />
+              <xsd:element name="model_name" type="xsd:string" />
+              <xsd:element name="CAX" type="xsd:int" />
+              <xsd:element name="validation" type="xsd:int" />
+              <xsd:element name="import_log" type="xsd:int" />
+              <xsd:element name="instances" type="xsd:int" />
+              <xsd:element name="errors" type="xsd:int" />
+              <xsd:element name="validation_options" type="xsd:int" />
+              <xsd:element name="warnings" type="xsd:int" />
+              <xsd:element maxOccurs="unbounded" name="derived_files" type="xsd:int" />
+              <xsd:element maxOccurs="unbounded" name="derived_from" type="xsd:int" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="v_item">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:EDMbaseEntity">
+            <xsd:sequence>
+              <xsd:element name="instance_id" type="xsd:int" />
+              <xsd:element name="item_type" type="xsd:string" />
+              <xsd:element name="name" type="xsd:string" />
+              <xsd:element name="description" type="xsd:string" />
+              <xsd:element name="introduced" type="xsd:string" />
+              <xsd:element name="creator" type="xsd:int" />
+              <xsd:element name="preview" type="xsd:string" />
+              <xsd:element name="cancelled" type="xsd:boolean" />
+              <xsd:element maxOccurs="unbounded" name="comments" type="xsd:int" />
+              <xsd:element maxOccurs="unbounded" name="events" type="xsd:int" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="model_file_createResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="v_file" type="tns:v_file" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="model_file_body_set">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="ID" type="xsd:int" />
+            <xsd:element name="SIZE" type="xsd:int" />
+            <xsd:element name="FILE_UPLOAD" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="model_file_body_setResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="v_file" type="tns:v_file" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="model_file_body_get">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="ID" type="xsd:int" />
+            <xsd:element name="DOWNLOADING_FILE" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="model_file_body_getResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Response" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="model_attached_file_get">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="ID" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="model_attached_file_getResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="v_attached_file" type="tns:v_attached_file" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="v_attached_file">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:EDMbaseEntity">
+            <xsd:sequence>
+              <xsd:element name="item" type="tns:v_item" />
+              <xsd:element name="domain" type="xsd:int" />
+              <xsd:element name="file" type="xsd:int" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="model_pbs_search">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="MODEL_ID" type="xsd:int" />
+            <xsd:element name="PATTERN" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="ROLES" type="xsd:string" />
+            <xsd:element name="CASE_SENSITIVE" type="xsd:boolean" />
+            <xsd:element name="EXACT_MATCH" type="xsd:boolean" />
+            <xsd:element name="DOMAIN" type="xsd:int" />
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="DOMAINS" type="xsd:string" />
+            <xsd:element name="LATEST_VERSION" type="xsd:boolean" />
+            <xsd:element name="BEFORE" type="xsd:string" />
+            <xsd:element name="AFTER" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="CREATORS" type="xsd:int" />
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="TYPES" type="xsd:string" />
+            <xsd:element name="PAGE" type="xsd:int" />
+            <xsd:element name="START_FROM" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="model_pbs_searchResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="v_pbs_item" type="tns:v_pbs_item" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="v_pbs_item">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:EDMbaseEntity">
+            <xsd:sequence>
+              <xsd:element name="item" type="tns:v_item" />
+              <xsd:element name="ms_type" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="node_file_list">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="NODE_ID" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="node_file_listResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="db_object" type="tns:db_object" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="db_object">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:EDMbaseEntity">
+            <xsd:sequence>
+              <xsd:element name="name" type="xsd:string" />
+              <xsd:element name="db_id" type="xsd:int" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="inner_model_node_list">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="inner_model_node_listResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="db_object" type="tns:db_object" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="model_node_list">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="MODEL_ID" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="model_node_listResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="db_object" type="tns:db_object" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="inner_property_value_set">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="NODE_ID" type="xsd:int" />
+            <xsd:element name="PROPERTY_NAME" type="xsd:string" />
+            <xsd:element name="PROPERTY_VALUE" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="inner_property_value_setResponse">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="Response" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="property_value_set">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="MODEL_ID" type="xsd:int" />
+            <xsd:element name="NODE_ID" type="xsd:int" />
+            <xsd:element name="PROPERTY_NAME" type="xsd:string" />
+            <xsd:element name="PROPERTY_VALUE" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="property_value_setResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Response" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="inner_property_create_EX1">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="PROPERTY_TYPE" type="xsd:string" />
+            <xsd:element name="PROPERTY_NAME" type="xsd:string" />
+            <xsd:element name="APPLICABLE_TO" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="inner_property_create_EX1Response">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Response" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="property_create_EX1">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="MODEL_ID" type="xsd:int" />
+            <xsd:element name="PROPERTY_TYPE" type="xsd:string" />
+            <xsd:element name="PROPERTY_NAME" type="xsd:string" />
+            <xsd:element name="APPLICABLE_TO" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="property_create_EX1Response">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Response" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="test_mapping">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="SOURCE" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="test_mappingResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Response" type="xsd:boolean" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -56,24 +342,6 @@
           </xsd:extension>
         </xsd:complexContent>
       </xsd:complexType>
-      <xsd:complexType name="v_item">
-        <xsd:complexContent mixed="false">
-          <xsd:extension base="tns:EDMbaseEntity">
-            <xsd:sequence>
-              <xsd:element name="instance_id" type="xsd:int" />
-              <xsd:element name="item_type" type="xsd:string" />
-              <xsd:element name="name" type="xsd:string" />
-              <xsd:element name="description" type="xsd:string" />
-              <xsd:element name="introduced" type="xsd:string" />
-              <xsd:element name="creator" type="xsd:int" />
-              <xsd:element name="preview" type="xsd:string" />
-              <xsd:element name="cancelled" type="xsd:boolean" />
-              <xsd:element maxOccurs="unbounded" name="comments" type="xsd:int" />
-              <xsd:element maxOccurs="unbounded" name="events" type="xsd:int" />
-            </xsd:sequence>
-          </xsd:extension>
-        </xsd:complexContent>
-      </xsd:complexType>
       <xsd:element name="test_pbs_search">
         <xsd:complexType>
           <xsd:sequence>
@@ -105,16 +373,6 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:complexType name="v_pbs_item">
-        <xsd:complexContent mixed="false">
-          <xsd:extension base="tns:EDMbaseEntity">
-            <xsd:sequence>
-              <xsd:element name="item" type="tns:v_item" />
-              <xsd:element name="ms_type" type="xsd:string" />
-            </xsd:sequence>
-          </xsd:extension>
-        </xsd:complexContent>
-      </xsd:complexType>
       <xsd:element name="node_patch_id">
         <xsd:complexType>
           <xsd:sequence>
@@ -403,17 +661,6 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:complexType name="v_attached_file">
-        <xsd:complexContent mixed="false">
-          <xsd:extension base="tns:EDMbaseEntity">
-            <xsd:sequence>
-              <xsd:element name="item" type="tns:v_item" />
-              <xsd:element name="domain" type="xsd:int" />
-              <xsd:element name="file" type="xsd:int" />
-            </xsd:sequence>
-          </xsd:extension>
-        </xsd:complexContent>
-      </xsd:complexType>
       <xsd:element name="attached_file_updateResponse">
         <xsd:complexType>
           <xsd:sequence>
@@ -1544,37 +1791,6 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:complexType name="v_file">
-        <xsd:complexContent mixed="false">
-          <xsd:extension base="tns:EDMbaseEntity">
-            <xsd:sequence>
-              <xsd:element name="item" type="tns:v_item" />
-              <xsd:element name="extension" type="xsd:string" />
-              <xsd:element name="owner" type="xsd:int" />
-              <xsd:element name="produced_by" type="xsd:string" />
-              <xsd:element name="interface" type="xsd:string" />
-              <xsd:element name="OS" type="xsd:string" />
-              <xsd:element name="original_name" type="xsd:string" />
-              <xsd:element name="original_format" type="xsd:string" />
-              <xsd:element name="check_sum" type="xsd:string" />
-              <xsd:element name="size" type="xsd:int" />
-              <xsd:element name="body" type="xsd:int" />
-              <xsd:element name="link" type="xsd:string" />
-              <xsd:element name="express_schema" type="xsd:string" />
-              <xsd:element name="model_name" type="xsd:string" />
-              <xsd:element name="CAX" type="xsd:int" />
-              <xsd:element name="validation" type="xsd:int" />
-              <xsd:element name="import_log" type="xsd:int" />
-              <xsd:element name="instances" type="xsd:int" />
-              <xsd:element name="errors" type="xsd:int" />
-              <xsd:element name="validation_options" type="xsd:int" />
-              <xsd:element name="warnings" type="xsd:int" />
-              <xsd:element maxOccurs="unbounded" name="derived_files" type="xsd:int" />
-              <xsd:element maxOccurs="unbounded" name="derived_from" type="xsd:int" />
-            </xsd:sequence>
-          </xsd:extension>
-        </xsd:complexContent>
-      </xsd:complexType>
       <xsd:element name="file_CAX_setResponse">
         <xsd:complexType>
           <xsd:sequence>
@@ -3179,11 +3395,83 @@
       </xsd:element>
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="test_on_error_doResponse">
-    <wsdl:part name="parameters" element="tns:test_on_error_doResponse" />
+  <wsdl:message name="model_file_createResponse">
+    <wsdl:part name="parameters" element="tns:model_file_createResponse" />
   </wsdl:message>
-  <wsdl:message name="test_on_error_doRequest">
-    <wsdl:part name="parameters" element="tns:test_on_error_do" />
+  <wsdl:message name="model_file_createRequest">
+    <wsdl:part name="parameters" element="tns:model_file_create" />
+  </wsdl:message>
+  <wsdl:message name="model_file_body_setResponse">
+    <wsdl:part name="parameters" element="tns:model_file_body_setResponse" />
+  </wsdl:message>
+  <wsdl:message name="model_file_body_setRequest">
+    <wsdl:part name="parameters" element="tns:model_file_body_set" />
+  </wsdl:message>
+  <wsdl:message name="model_file_body_getResponse">
+    <wsdl:part name="parameters" element="tns:model_file_body_getResponse" />
+  </wsdl:message>
+  <wsdl:message name="model_file_body_getRequest">
+    <wsdl:part name="parameters" element="tns:model_file_body_get" />
+  </wsdl:message>
+  <wsdl:message name="model_attached_file_getResponse">
+    <wsdl:part name="parameters" element="tns:model_attached_file_getResponse" />
+  </wsdl:message>
+  <wsdl:message name="model_attached_file_getRequest">
+    <wsdl:part name="parameters" element="tns:model_attached_file_get" />
+  </wsdl:message>
+  <wsdl:message name="model_pbs_searchResponse">
+    <wsdl:part name="parameters" element="tns:model_pbs_searchResponse" />
+  </wsdl:message>
+  <wsdl:message name="model_pbs_searchRequest">
+    <wsdl:part name="parameters" element="tns:model_pbs_search" />
+  </wsdl:message>
+  <wsdl:message name="node_file_listResponse">
+    <wsdl:part name="parameters" element="tns:node_file_listResponse" />
+  </wsdl:message>
+  <wsdl:message name="node_file_listRequest">
+    <wsdl:part name="parameters" element="tns:node_file_list" />
+  </wsdl:message>
+  <wsdl:message name="inner_model_node_listResponse">
+    <wsdl:part name="parameters" element="tns:inner_model_node_listResponse" />
+  </wsdl:message>
+  <wsdl:message name="inner_model_node_listRequest">
+    <wsdl:part name="parameters" element="tns:inner_model_node_list" />
+  </wsdl:message>
+  <wsdl:message name="model_node_listResponse">
+    <wsdl:part name="parameters" element="tns:model_node_listResponse" />
+  </wsdl:message>
+  <wsdl:message name="model_node_listRequest">
+    <wsdl:part name="parameters" element="tns:model_node_list" />
+  </wsdl:message>
+  <wsdl:message name="inner_property_value_setResponse">
+    <wsdl:part name="parameters" element="tns:inner_property_value_setResponse" />
+  </wsdl:message>
+  <wsdl:message name="inner_property_value_setRequest">
+    <wsdl:part name="parameters" element="tns:inner_property_value_set" />
+  </wsdl:message>
+  <wsdl:message name="property_value_setResponse">
+    <wsdl:part name="parameters" element="tns:property_value_setResponse" />
+  </wsdl:message>
+  <wsdl:message name="property_value_setRequest">
+    <wsdl:part name="parameters" element="tns:property_value_set" />
+  </wsdl:message>
+  <wsdl:message name="inner_property_create_EX1Response">
+    <wsdl:part name="parameters" element="tns:inner_property_create_EX1Response" />
+  </wsdl:message>
+  <wsdl:message name="inner_property_create_EX1Request">
+    <wsdl:part name="parameters" element="tns:inner_property_create_EX1" />
+  </wsdl:message>
+  <wsdl:message name="property_create_EX1Response">
+    <wsdl:part name="parameters" element="tns:property_create_EX1Response" />
+  </wsdl:message>
+  <wsdl:message name="property_create_EX1Request">
+    <wsdl:part name="parameters" element="tns:property_create_EX1" />
+  </wsdl:message>
+  <wsdl:message name="test_mappingResponse">
+    <wsdl:part name="parameters" element="tns:test_mappingResponse" />
+  </wsdl:message>
+  <wsdl:message name="test_mappingRequest">
+    <wsdl:part name="parameters" element="tns:test_mapping" />
   </wsdl:message>
   <wsdl:message name="test_pbs_assignments_selectResponse">
     <wsdl:part name="parameters" element="tns:test_pbs_assignments_selectResponse" />
@@ -4230,9 +4518,57 @@
     <wsdl:part name="parameters" element="tns:_version" />
   </wsdl:message>
   <wsdl:portType name="SIMDM_MASTER_WSDL">
-    <wsdl:operation name="test_on_error_do">
-      <wsdl:input name="test_on_error_doRequest" message="impl:test_on_error_doRequest" />
-      <wsdl:output name="test_on_error_doResponse" message="impl:test_on_error_doResponse" />
+    <wsdl:operation name="model_file_create">
+      <wsdl:input name="model_file_createRequest" message="impl:model_file_createRequest" />
+      <wsdl:output name="model_file_createResponse" message="impl:model_file_createResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="model_file_body_set">
+      <wsdl:input name="model_file_body_setRequest" message="impl:model_file_body_setRequest" />
+      <wsdl:output name="model_file_body_setResponse" message="impl:model_file_body_setResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="model_file_body_get">
+      <wsdl:input name="model_file_body_getRequest" message="impl:model_file_body_getRequest" />
+      <wsdl:output name="model_file_body_getResponse" message="impl:model_file_body_getResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="model_attached_file_get">
+      <wsdl:input name="model_attached_file_getRequest" message="impl:model_attached_file_getRequest" />
+      <wsdl:output name="model_attached_file_getResponse" message="impl:model_attached_file_getResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="model_pbs_search">
+      <wsdl:input name="model_pbs_searchRequest" message="impl:model_pbs_searchRequest" />
+      <wsdl:output name="model_pbs_searchResponse" message="impl:model_pbs_searchResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="node_file_list">
+      <wsdl:input name="node_file_listRequest" message="impl:node_file_listRequest" />
+      <wsdl:output name="node_file_listResponse" message="impl:node_file_listResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="inner_model_node_list">
+      <wsdl:input name="inner_model_node_listRequest" message="impl:inner_model_node_listRequest" />
+      <wsdl:output name="inner_model_node_listResponse" message="impl:inner_model_node_listResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="model_node_list">
+      <wsdl:input name="model_node_listRequest" message="impl:model_node_listRequest" />
+      <wsdl:output name="model_node_listResponse" message="impl:model_node_listResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="inner_property_value_set">
+      <wsdl:input name="inner_property_value_setRequest" message="impl:inner_property_value_setRequest" />
+      <wsdl:output name="inner_property_value_setResponse" message="impl:inner_property_value_setResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="property_value_set">
+      <wsdl:input name="property_value_setRequest" message="impl:property_value_setRequest" />
+      <wsdl:output name="property_value_setResponse" message="impl:property_value_setResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="inner_property_create_EX1">
+      <wsdl:input name="inner_property_create_EX1Request" message="impl:inner_property_create_EX1Request" />
+      <wsdl:output name="inner_property_create_EX1Response" message="impl:inner_property_create_EX1Response" />
+    </wsdl:operation>
+    <wsdl:operation name="property_create_EX1">
+      <wsdl:input name="property_create_EX1Request" message="impl:property_create_EX1Request" />
+      <wsdl:output name="property_create_EX1Response" message="impl:property_create_EX1Response" />
+    </wsdl:operation>
+    <wsdl:operation name="test_mapping">
+      <wsdl:input name="test_mappingRequest" message="impl:test_mappingRequest" />
+      <wsdl:output name="test_mappingResponse" message="impl:test_mappingResponse" />
     </wsdl:operation>
     <wsdl:operation name="test_pbs_assignments_select">
       <wsdl:input name="test_pbs_assignments_selectRequest" message="impl:test_pbs_assignments_selectRequest" />
@@ -4933,12 +5269,120 @@
   </wsdl:portType>
   <wsdl:binding name="SIMDM_MASTER_WSDLBinding" type="impl:SIMDM_MASTER_WSDL">
     <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="test_on_error_do">
+    <wsdl:operation name="model_file_create">
       <wsdlsoap:operation soapAction="" />
-      <wsdl:input name="test_on_error_doRequest">
+      <wsdl:input name="model_file_createRequest">
         <wsdlsoap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="test_on_error_doResponse">
+      <wsdl:output name="model_file_createResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="model_file_body_set">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="model_file_body_setRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="model_file_body_setResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="model_file_body_get">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="model_file_body_getRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="model_file_body_getResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="model_attached_file_get">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="model_attached_file_getRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="model_attached_file_getResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="model_pbs_search">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="model_pbs_searchRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="model_pbs_searchResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="node_file_list">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="node_file_listRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="node_file_listResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="inner_model_node_list">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="inner_model_node_listRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="inner_model_node_listResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="model_node_list">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="model_node_listRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="model_node_listResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="inner_property_value_set">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="inner_property_value_setRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="inner_property_value_setResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="property_value_set">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="property_value_setRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="property_value_setResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="inner_property_create_EX1">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="inner_property_create_EX1Request">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="inner_property_create_EX1Response">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="property_create_EX1">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="property_create_EX1Request">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="property_create_EX1Response">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="test_mapping">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="test_mappingRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="test_mappingResponse">
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
