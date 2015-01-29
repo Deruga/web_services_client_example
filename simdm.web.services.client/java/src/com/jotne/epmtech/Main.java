@@ -41,7 +41,7 @@ import localhost.EDMWS.earlybinding.options_2097152.DataRepository.SimDM_Master.
 public class Main {
 
 	@Argument(value = "server", description = "URL to server", required = false)
-	private String server = "https://localhost:8443";
+	private String server = "https://api.eu-cloudflow.eu/jotne";
 
 	@Argument(value = "file", description = "file to upload", required = false)
 	private String filepath = "picture.jpg";
@@ -96,11 +96,11 @@ public class Main {
 		}
 		Args.parse(this, args);
 		
-		if (server.toUpperCase().startsWith("HTTPS:")) {
+		/*if (server.toUpperCase().startsWith("HTTPS:")) {
 			System.setProperty("javax.net.ssl.trustStore", keystoreFile);
 			System.setProperty("javax.net.ssl.trustStorePassword", keystorePassword);
 			System.setProperty("javax.net.ssl.trustStoreType", "JKS");
-		}
+		}*/
 
 		EDMAccessControlServiceLocator edmAccessControlServiceLocator = new EDMAccessControlServiceLocator();
 		SIMDM_MASTER_WSDLServiceLocator simDmMasterServiceLocator = new SIMDM_MASTER_WSDLServiceLocator();
@@ -267,7 +267,7 @@ public class Main {
 		attachedFile.setItem(item);
 		attachedFile.setDomain(list[0].getItem().getInstance_id());
 		attachedFile.setFile(fileSpec.getItem().getInstance_id());
-
+		
 		attachedFile = simDmService.attached_file_create(sessionID, attachedFile);
 
 		FileTransferInfo transferInfo = upload(sessionID, edmAccessControl, filepath, GetFileExtension(fileName));
