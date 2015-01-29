@@ -1,0 +1,956 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:tns="http://epmtech.jotne.com/SimDM_config/SimDM_config_support" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://localhost:8080/EDMWS/earlybinding/options_2097152/SimDM_system/Config/QEX/simdm_config_support" targetNamespace="http://localhost:8080/EDMWS/earlybinding/options_2097152/SimDM_system/Config/QEX/simdm_config_support" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://epmtech.jotne.com/SimDM_config/SimDM_config_support">
+      <xsd:complexType name="EDMbaseEntity" />
+      <xsd:element name="model_id_get">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="REPOSITORY_NAME" type="xsd:string" />
+            <xsd:element name="MODEL_NAME" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="model_id_getResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Response" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="repository_model_name_list">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="REPOSITORY_NAME" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="repository_model_name_listResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="string" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="repository_name_list">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="repository_name_listResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="string" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="test__check_environment_variables">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="I" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="test__check_environment_variablesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Response" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="delete_repository">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="NAME" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="delete_repositoryResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Response" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="delete_model">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="REPOSITORY_NAME" type="xsd:string" />
+            <xsd:element name="MODEL_NAME" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="DERIVED_MODELS" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="delete_modelResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Response" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="create_model">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="REPO_NAME" type="xsd:string" />
+            <xsd:element name="MODEL_NAME" type="xsd:string" />
+            <xsd:element name="DESCRIPTION" type="xsd:string" />
+            <xsd:element name="PBS_TYPE" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="create_modelResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="v_model" type="tns:v_model" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="v_model">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:EDMbaseEntity">
+            <xsd:sequence>
+              <xsd:element name="pbs_type" type="tns:model_type" />
+              <xsd:element name="parent" type="xsd:string" />
+              <xsd:element name="name" type="xsd:string" />
+              <xsd:element name="description" type="xsd:string" />
+              <xsd:element name="created_by" type="xsd:string" />
+              <xsd:element name="created" type="xsd:string" />
+              <xsd:element name="locked" type="xsd:boolean" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:simpleType name="model_type">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="analysis" />
+          <xsd:enumeration value="design" />
+          <xsd:enumeration value="program" />
+          <xsd:enumeration value="project" />
+          <xsd:enumeration value="product" />
+          <xsd:enumeration value="part" />
+          <xsd:enumeration value="document" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="create_repository">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="NAME" type="xsd:string" />
+            <xsd:element name="DESCRIPTION" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="create_repositoryResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="v_repository" type="tns:v_repository" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="v_repository">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:EDMbaseEntity">
+            <xsd:sequence>
+              <xsd:element name="name" type="xsd:string" />
+              <xsd:element name="description" type="xsd:string" />
+              <xsd:element name="created_by" type="xsd:string" />
+              <xsd:element name="created" type="xsd:string" />
+              <xsd:element maxOccurs="unbounded" name="models" type="tns:v_model" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="repository_list">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="repository_listResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="v_repository" type="tns:v_repository" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="system__get_config">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="DIVISION" type="xsd:string" />
+            <xsd:element name="NAME" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="system__get_configResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Response" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="get_entry">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="DIVISION" type="xsd:string" />
+            <xsd:element name="NAME" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="get_entryResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Response" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="set_entry">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="DIVISION" type="xsd:string" />
+            <xsd:element name="NAME" type="xsd:string" />
+            <xsd:element name="ENTRY_VALUE" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="set_entryResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="entry" type="tns:entry" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="entry">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:EDMbaseEntity">
+            <xsd:sequence>
+              <xsd:element name="division" type="xsd:string" />
+              <xsd:element name="name" type="xsd:string" />
+              <xsd:element name="entry_value" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="init_entries">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="EDM_HOME" type="xsd:string" />
+            <xsd:element name="EXPORT_REPOSITORY" type="xsd:string" />
+            <xsd:element name="EDM_TEMP_FOLDER" type="xsd:string" />
+            <xsd:element name="VCOLLAB_FOLDER" type="xsd:string" />
+            <xsd:element name="AUX1" type="xsd:string" />
+            <xsd:element name="AUX2" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="init_entriesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="string" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="total_export">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="EXPORT_FOLDER" type="xsd:string" />
+            <xsd:element name="LOG_FOLDER" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="total_exportResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="string" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="master_model_export">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="SOURCE_MODEL" type="xsd:string" />
+            <xsd:element name="EXPORT_PACK" type="xsd:string" />
+            <xsd:element name="PDI_FILE" type="xsd:string" />
+            <xsd:element name="CONVERTOR_LOG" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="master_model_exportResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Response" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="master_model_ap209_import">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="AP209_STEP" type="xsd:string" />
+            <xsd:element name="AP209_MODEL" type="xsd:string" />
+            <xsd:element name="TARGET_MASTER_MODEL" type="xsd:string" />
+            <xsd:element name="LOG_FILE" type="xsd:string" />
+            <xsd:element name="REMOVE_AP209_MODEL" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="master_model_ap209_importResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Response" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="master_model_import">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="EXPORT_PACK" type="xsd:string" />
+            <xsd:element name="AP209_MODEL" type="xsd:string" />
+            <xsd:element name="TARGET_MODEL" type="xsd:string" />
+            <xsd:element name="FROM_AP209" type="xsd:boolean" />
+            <xsd:element name="REMOVE_TMP" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="master_model_importResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="v_model" type="tns:v_model" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="system_get_EDM_server_version">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="system_get_EDM_server_versionResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Response" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="system_get_query_schema_version">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+            <xsd:element name="EXPRESS_SCHEMA" type="xsd:string" />
+            <xsd:element name="QUERY_SCHEMA_NAME" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="system_get_query_schema_versionResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Response" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="system_get_version">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMsessionId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="system_get_versionResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Response" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="_login">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="USER" type="xsd:string" />
+            <xsd:element name="GROUP" type="xsd:string" />
+            <xsd:element name="PASSWORD" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="_loginResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Response" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="_logout">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMSESSIONID" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="_logoutResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Response" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="_createTemporaryFile">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMSESSIONID" type="xsd:string" />
+            <xsd:element name="FILENAME" type="xsd:string" />
+            <xsd:element name="FILETYPE" type="xsd:string" />
+            <xsd:element name="UPLOAD" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="_createTemporaryFileResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="fileTransferInfo" type="tns:fileTransferInfo" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="fileTransferInfo">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:EDMbaseEntity">
+            <xsd:sequence>
+              <xsd:element name="uploadOrDownloadUrl" type="xsd:string" />
+              <xsd:element name="progressInfoUrl" type="xsd:string" />
+              <xsd:element name="fileNameOnServer" type="xsd:string" />
+              <xsd:element name="operation" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="_deleteTemporaryFile">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMSESSIONID" type="xsd:string" />
+            <xsd:element name="FILEINFO" type="tns:fileTransferInfo" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="_deleteTemporaryFileResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Response" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="_version">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EDMSESSIONID" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="_versionResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Response" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="model_id_getResponse">
+    <wsdl:part name="parameters" element="tns:model_id_getResponse" />
+  </wsdl:message>
+  <wsdl:message name="model_id_getRequest">
+    <wsdl:part name="parameters" element="tns:model_id_get" />
+  </wsdl:message>
+  <wsdl:message name="repository_model_name_listResponse">
+    <wsdl:part name="parameters" element="tns:repository_model_name_listResponse" />
+  </wsdl:message>
+  <wsdl:message name="repository_model_name_listRequest">
+    <wsdl:part name="parameters" element="tns:repository_model_name_list" />
+  </wsdl:message>
+  <wsdl:message name="repository_name_listResponse">
+    <wsdl:part name="parameters" element="tns:repository_name_listResponse" />
+  </wsdl:message>
+  <wsdl:message name="repository_name_listRequest">
+    <wsdl:part name="parameters" element="tns:repository_name_list" />
+  </wsdl:message>
+  <wsdl:message name="test__check_environment_variablesResponse">
+    <wsdl:part name="parameters" element="tns:test__check_environment_variablesResponse" />
+  </wsdl:message>
+  <wsdl:message name="test__check_environment_variablesRequest">
+    <wsdl:part name="parameters" element="tns:test__check_environment_variables" />
+  </wsdl:message>
+  <wsdl:message name="delete_repositoryResponse">
+    <wsdl:part name="parameters" element="tns:delete_repositoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="delete_repositoryRequest">
+    <wsdl:part name="parameters" element="tns:delete_repository" />
+  </wsdl:message>
+  <wsdl:message name="delete_modelResponse">
+    <wsdl:part name="parameters" element="tns:delete_modelResponse" />
+  </wsdl:message>
+  <wsdl:message name="delete_modelRequest">
+    <wsdl:part name="parameters" element="tns:delete_model" />
+  </wsdl:message>
+  <wsdl:message name="create_modelResponse">
+    <wsdl:part name="parameters" element="tns:create_modelResponse" />
+  </wsdl:message>
+  <wsdl:message name="create_modelRequest">
+    <wsdl:part name="parameters" element="tns:create_model" />
+  </wsdl:message>
+  <wsdl:message name="create_repositoryResponse">
+    <wsdl:part name="parameters" element="tns:create_repositoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="create_repositoryRequest">
+    <wsdl:part name="parameters" element="tns:create_repository" />
+  </wsdl:message>
+  <wsdl:message name="repository_listResponse">
+    <wsdl:part name="parameters" element="tns:repository_listResponse" />
+  </wsdl:message>
+  <wsdl:message name="repository_listRequest">
+    <wsdl:part name="parameters" element="tns:repository_list" />
+  </wsdl:message>
+  <wsdl:message name="system__get_configResponse">
+    <wsdl:part name="parameters" element="tns:system__get_configResponse" />
+  </wsdl:message>
+  <wsdl:message name="system__get_configRequest">
+    <wsdl:part name="parameters" element="tns:system__get_config" />
+  </wsdl:message>
+  <wsdl:message name="get_entryResponse">
+    <wsdl:part name="parameters" element="tns:get_entryResponse" />
+  </wsdl:message>
+  <wsdl:message name="get_entryRequest">
+    <wsdl:part name="parameters" element="tns:get_entry" />
+  </wsdl:message>
+  <wsdl:message name="set_entryResponse">
+    <wsdl:part name="parameters" element="tns:set_entryResponse" />
+  </wsdl:message>
+  <wsdl:message name="set_entryRequest">
+    <wsdl:part name="parameters" element="tns:set_entry" />
+  </wsdl:message>
+  <wsdl:message name="init_entriesResponse">
+    <wsdl:part name="parameters" element="tns:init_entriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="init_entriesRequest">
+    <wsdl:part name="parameters" element="tns:init_entries" />
+  </wsdl:message>
+  <wsdl:message name="total_exportResponse">
+    <wsdl:part name="parameters" element="tns:total_exportResponse" />
+  </wsdl:message>
+  <wsdl:message name="total_exportRequest">
+    <wsdl:part name="parameters" element="tns:total_export" />
+  </wsdl:message>
+  <wsdl:message name="master_model_exportResponse">
+    <wsdl:part name="parameters" element="tns:master_model_exportResponse" />
+  </wsdl:message>
+  <wsdl:message name="master_model_exportRequest">
+    <wsdl:part name="parameters" element="tns:master_model_export" />
+  </wsdl:message>
+  <wsdl:message name="master_model_ap209_importResponse">
+    <wsdl:part name="parameters" element="tns:master_model_ap209_importResponse" />
+  </wsdl:message>
+  <wsdl:message name="master_model_ap209_importRequest">
+    <wsdl:part name="parameters" element="tns:master_model_ap209_import" />
+  </wsdl:message>
+  <wsdl:message name="master_model_importResponse">
+    <wsdl:part name="parameters" element="tns:master_model_importResponse" />
+  </wsdl:message>
+  <wsdl:message name="master_model_importRequest">
+    <wsdl:part name="parameters" element="tns:master_model_import" />
+  </wsdl:message>
+  <wsdl:message name="system_get_EDM_server_versionResponse">
+    <wsdl:part name="parameters" element="tns:system_get_EDM_server_versionResponse" />
+  </wsdl:message>
+  <wsdl:message name="system_get_EDM_server_versionRequest">
+    <wsdl:part name="parameters" element="tns:system_get_EDM_server_version" />
+  </wsdl:message>
+  <wsdl:message name="system_get_query_schema_versionResponse">
+    <wsdl:part name="parameters" element="tns:system_get_query_schema_versionResponse" />
+  </wsdl:message>
+  <wsdl:message name="system_get_query_schema_versionRequest">
+    <wsdl:part name="parameters" element="tns:system_get_query_schema_version" />
+  </wsdl:message>
+  <wsdl:message name="system_get_versionResponse">
+    <wsdl:part name="parameters" element="tns:system_get_versionResponse" />
+  </wsdl:message>
+  <wsdl:message name="system_get_versionRequest">
+    <wsdl:part name="parameters" element="tns:system_get_version" />
+  </wsdl:message>
+  <wsdl:message name="_loginResponse">
+    <wsdl:part name="parameters" element="tns:_loginResponse" />
+  </wsdl:message>
+  <wsdl:message name="_loginRequest">
+    <wsdl:part name="parameters" element="tns:_login" />
+  </wsdl:message>
+  <wsdl:message name="_logoutResponse">
+    <wsdl:part name="parameters" element="tns:_logoutResponse" />
+  </wsdl:message>
+  <wsdl:message name="_logoutRequest">
+    <wsdl:part name="parameters" element="tns:_logout" />
+  </wsdl:message>
+  <wsdl:message name="_createTemporaryFileResponse">
+    <wsdl:part name="parameters" element="tns:_createTemporaryFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="_createTemporaryFileRequest">
+    <wsdl:part name="parameters" element="tns:_createTemporaryFile" />
+  </wsdl:message>
+  <wsdl:message name="_deleteTemporaryFileResponse">
+    <wsdl:part name="parameters" element="tns:_deleteTemporaryFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="_deleteTemporaryFileRequest">
+    <wsdl:part name="parameters" element="tns:_deleteTemporaryFile" />
+  </wsdl:message>
+  <wsdl:message name="_versionResponse">
+    <wsdl:part name="parameters" element="tns:_versionResponse" />
+  </wsdl:message>
+  <wsdl:message name="_versionRequest">
+    <wsdl:part name="parameters" element="tns:_version" />
+  </wsdl:message>
+  <wsdl:portType name="simdm_config_support">
+    <wsdl:operation name="model_id_get">
+      <wsdl:input name="model_id_getRequest" message="impl:model_id_getRequest" />
+      <wsdl:output name="model_id_getResponse" message="impl:model_id_getResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="repository_model_name_list">
+      <wsdl:input name="repository_model_name_listRequest" message="impl:repository_model_name_listRequest" />
+      <wsdl:output name="repository_model_name_listResponse" message="impl:repository_model_name_listResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="repository_name_list">
+      <wsdl:input name="repository_name_listRequest" message="impl:repository_name_listRequest" />
+      <wsdl:output name="repository_name_listResponse" message="impl:repository_name_listResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="test__check_environment_variables">
+      <wsdl:input name="test__check_environment_variablesRequest" message="impl:test__check_environment_variablesRequest" />
+      <wsdl:output name="test__check_environment_variablesResponse" message="impl:test__check_environment_variablesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="delete_repository">
+      <wsdl:input name="delete_repositoryRequest" message="impl:delete_repositoryRequest" />
+      <wsdl:output name="delete_repositoryResponse" message="impl:delete_repositoryResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="delete_model">
+      <wsdl:input name="delete_modelRequest" message="impl:delete_modelRequest" />
+      <wsdl:output name="delete_modelResponse" message="impl:delete_modelResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="create_model">
+      <wsdl:input name="create_modelRequest" message="impl:create_modelRequest" />
+      <wsdl:output name="create_modelResponse" message="impl:create_modelResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="create_repository">
+      <wsdl:input name="create_repositoryRequest" message="impl:create_repositoryRequest" />
+      <wsdl:output name="create_repositoryResponse" message="impl:create_repositoryResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="repository_list">
+      <wsdl:input name="repository_listRequest" message="impl:repository_listRequest" />
+      <wsdl:output name="repository_listResponse" message="impl:repository_listResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="system__get_config">
+      <wsdl:input name="system__get_configRequest" message="impl:system__get_configRequest" />
+      <wsdl:output name="system__get_configResponse" message="impl:system__get_configResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="get_entry">
+      <wsdl:input name="get_entryRequest" message="impl:get_entryRequest" />
+      <wsdl:output name="get_entryResponse" message="impl:get_entryResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="set_entry">
+      <wsdl:input name="set_entryRequest" message="impl:set_entryRequest" />
+      <wsdl:output name="set_entryResponse" message="impl:set_entryResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="init_entries">
+      <wsdl:input name="init_entriesRequest" message="impl:init_entriesRequest" />
+      <wsdl:output name="init_entriesResponse" message="impl:init_entriesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="total_export">
+      <wsdl:input name="total_exportRequest" message="impl:total_exportRequest" />
+      <wsdl:output name="total_exportResponse" message="impl:total_exportResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="master_model_export">
+      <wsdl:input name="master_model_exportRequest" message="impl:master_model_exportRequest" />
+      <wsdl:output name="master_model_exportResponse" message="impl:master_model_exportResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="master_model_ap209_import">
+      <wsdl:input name="master_model_ap209_importRequest" message="impl:master_model_ap209_importRequest" />
+      <wsdl:output name="master_model_ap209_importResponse" message="impl:master_model_ap209_importResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="master_model_import">
+      <wsdl:input name="master_model_importRequest" message="impl:master_model_importRequest" />
+      <wsdl:output name="master_model_importResponse" message="impl:master_model_importResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="system_get_EDM_server_version">
+      <wsdl:input name="system_get_EDM_server_versionRequest" message="impl:system_get_EDM_server_versionRequest" />
+      <wsdl:output name="system_get_EDM_server_versionResponse" message="impl:system_get_EDM_server_versionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="system_get_query_schema_version">
+      <wsdl:input name="system_get_query_schema_versionRequest" message="impl:system_get_query_schema_versionRequest" />
+      <wsdl:output name="system_get_query_schema_versionResponse" message="impl:system_get_query_schema_versionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="system_get_version">
+      <wsdl:input name="system_get_versionRequest" message="impl:system_get_versionRequest" />
+      <wsdl:output name="system_get_versionResponse" message="impl:system_get_versionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="_login">
+      <wsdl:input name="_loginRequest" message="impl:_loginRequest" />
+      <wsdl:output name="_loginResponse" message="impl:_loginResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="_logout">
+      <wsdl:input name="_logoutRequest" message="impl:_logoutRequest" />
+      <wsdl:output name="_logoutResponse" message="impl:_logoutResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="_createTemporaryFile">
+      <wsdl:input name="_createTemporaryFileRequest" message="impl:_createTemporaryFileRequest" />
+      <wsdl:output name="_createTemporaryFileResponse" message="impl:_createTemporaryFileResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="_deleteTemporaryFile">
+      <wsdl:input name="_deleteTemporaryFileRequest" message="impl:_deleteTemporaryFileRequest" />
+      <wsdl:output name="_deleteTemporaryFileResponse" message="impl:_deleteTemporaryFileResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="_version">
+      <wsdl:input name="_versionRequest" message="impl:_versionRequest" />
+      <wsdl:output name="_versionResponse" message="impl:_versionResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="simdm_config_supportBinding" type="impl:simdm_config_support">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="model_id_get">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="model_id_getRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="model_id_getResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="repository_model_name_list">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="repository_model_name_listRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="repository_model_name_listResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="repository_name_list">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="repository_name_listRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="repository_name_listResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="test__check_environment_variables">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="test__check_environment_variablesRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="test__check_environment_variablesResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delete_repository">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="delete_repositoryRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="delete_repositoryResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delete_model">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="delete_modelRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="delete_modelResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="create_model">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="create_modelRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="create_modelResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="create_repository">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="create_repositoryRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="create_repositoryResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="repository_list">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="repository_listRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="repository_listResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="system__get_config">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="system__get_configRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="system__get_configResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_entry">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="get_entryRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="get_entryResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="set_entry">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="set_entryRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="set_entryResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="init_entries">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="init_entriesRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="init_entriesResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="total_export">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="total_exportRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="total_exportResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="master_model_export">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="master_model_exportRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="master_model_exportResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="master_model_ap209_import">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="master_model_ap209_importRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="master_model_ap209_importResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="master_model_import">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="master_model_importRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="master_model_importResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="system_get_EDM_server_version">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="system_get_EDM_server_versionRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="system_get_EDM_server_versionResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="system_get_query_schema_version">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="system_get_query_schema_versionRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="system_get_query_schema_versionResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="system_get_version">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="system_get_versionRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="system_get_versionResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_login">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="_loginRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="_loginResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_logout">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="_logoutRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="_logoutResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_createTemporaryFile">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="_createTemporaryFileRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="_createTemporaryFileResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_deleteTemporaryFile">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="_deleteTemporaryFileRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="_deleteTemporaryFileResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_version">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="_versionRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="_versionResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="simdm_config_supportService">
+    <wsdl:port name="EDMWS" binding="impl:simdm_config_supportBinding">
+      <wsdlsoap:address location="http://localhost:8080/EDMWS/earlybinding/options_2097152/SimDM_system/Config/QEX/simdm_config_support" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
