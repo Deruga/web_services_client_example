@@ -4,8 +4,6 @@ using System.Text;
 using System.IO;
 using System.Threading;
 using System.Net;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
 
 using SimDM_UploadFile.SimDM_Master;
 using SimDM_UploadFile.AccessControl;
@@ -19,7 +17,7 @@ namespace SimDM_UploadFile
         static Arguments arguments = null;
         private const String MODEL_SERVICE_PARAMS_TEMPLATE = "/earlybinding/options_2097152/{0}/{1}/QEX/SIMDM_MASTER_WSDL";
         private const String SERVER_URL = "http://localhost:8080/EDMWS";
-        //private const String SERVER_URL = "http://api.eu-cloudflow.eu/jotne/EDMWS";
+        //private const String SERVER_URL = "https://api.eu-cloudflow.eu/jotne_64/EDMWS";
         private const String CONFIG_URL = "/earlybinding/options_2097152/SimDM_system/Config/QEX/simdm_config_support";
         private const String MASTER_URL = "/earlybinding/options_2097152/SimDM_system/user_management/QEX/SIMDM_MASTER_WSDL";
 
@@ -28,10 +26,10 @@ namespace SimDM_UploadFile
         static SIMDM_MASTER_WSDLService service = null;
         static SIMDM_MASTER_WSDLService modelNeutralSrv = null;
         static node_queryService nodeSrv = null;
-        static simdm_config_supportService configSrv = null;
+        static SimDM_UploadFile.SimDM_Query.SimDM_config_supportService configSrv = null;
 
         /*---------------------------------------------------------------------------------------*/
-        static v_node createNode(string name, string description, int parent)
+        static v_node createNode(string name, string description, long parent)
         /*---------------------------------------------------------------------------------------*/
         {
             v_node newNode = new v_node();
@@ -45,7 +43,7 @@ namespace SimDM_UploadFile
             newNode.nodus.item.item_type = "DESIGN";
             newNode.nodus.item.description = description;
 
-            int[] parentId = new int[1];
+            long[] parentId = new long[1];
             parentId[0] = parent;
 
             return service.node_create(sessionId, newNode, parentId);
@@ -72,7 +70,7 @@ namespace SimDM_UploadFile
 
 
         /*=======================================================================================*/
-        static int getNodeId(string nodeName)
+        static long getNodeId(string nodeName)
         /*=======================================================================================*/
         {
             var list = service.pbs_search(sessionId, nodeName, new string[] { "NODE.NAME" },
@@ -167,7 +165,7 @@ namespace SimDM_UploadFile
             string downloadToFile = arguments["local_file"];
             string PLM_file = arguments["PLM_file"];
             string nodeName = arguments["node"];
-            int model_id = plm_get_model_id(arguments["repo"], arguments["model"]);
+            long model_id = plm_get_model_id(arguments["repo"], arguments["model"]);
 
             // Get name and id of all nodes in the specified model
             db_object[] theNodes = service.model_node_list(sessionId, model_id);
@@ -180,7 +178,7 @@ namespace SimDM_UploadFile
                        if (theFiles[j].name.Equals(PLM_file))
                        {
                            AccessControl.fileTransferInfo downloadFile = access.createTemporaryFile(sessionId, "PLM_file", ".txt", false);
-                           int EDMfileId = service.model_file_body_get(sessionId, theFiles[j].db_id, downloadFile.fileNameOnServer);
+                           long EDMfileId = service.model_file_body_get(sessionId, theFiles[j].db_id, downloadFile.fileNameOnServer);
                            downloadFileFromEDM(downloadFile.uploadOrDownloadUrl + sessionId, downloadToFile);
                            string deleteRetur = access.deleteTemporaryFile(sessionId, downloadFile);
                        }
@@ -196,7 +194,7 @@ namespace SimDM_UploadFile
         {
             string fileToUpload = arguments["file"];
             string nodeName = arguments["node"];
-            int model_id = plm_get_model_id(arguments["repo"], arguments["model"]);
+            long model_id = plm_get_model_id(arguments["repo"], arguments["model"]);
 
             var list = service.model_pbs_search(sessionId, model_id, nodeName, new string[] { "NODE.NAME" },
                 false, true, 0, null, false, null, null, null, null, 2, 0);
@@ -269,17 +267,18 @@ namespace SimDM_UploadFile
             v_property storedTypeForBOM = service.property_create(sessionId, newProperty);
         }
         /*=======================================================================================*/
-        static int plm_get_model_id(string repositoryName, string modelName)
+        static long plm_get_model_id(string repositoryName, string modelName)
         /*=======================================================================================*/
         {
             string[] repnames = configSrv.repository_name_list(sessionId);
-            for (int i = 0; i < repnames.Length; i++)
+            for (
+                int i = 0; i < repnames.Length; i++)
             {
                 if (repositoryName.Equals(repnames[i])) {
                     string[] modelNames = configSrv.repository_model_name_list(sessionId, repositoryName);
                     for (int j=0; j < modelNames.Length; j++) {
                         if (modelName.Equals(modelNames[j])) {
-                            int model_id = configSrv.model_id_get(sessionId, repositoryName, modelName);
+                            long model_id = configSrv.model_id_get(sessionId, repositoryName, modelName);
                             return model_id;
                         }
                     }
@@ -300,9 +299,9 @@ namespace SimDM_UploadFile
             string property_type = arguments["property_type"];
             string property_name = arguments["property_name"];
             string applicable_to = arguments["applicable_to"];
-            int model_id = plm_get_model_id(repositoryName, modelName);
+            long model_id = plm_get_model_id(repositoryName, modelName);
 
-            string OK = service.property_create_EX1(sessionId, model_id, property_type, property_name, applicable_to); 
+            string OK = service.model_property_create(sessionId, model_id, property_type, property_name, applicable_to); 
 
             Console.Out.WriteLine("Model id =" + model_id);
 
@@ -318,11 +317,11 @@ namespace SimDM_UploadFile
             string property_value = arguments["property_value"];
             string property_name = arguments["property_name"];
             string node = arguments["node"];
-            int node_id = getNodeId(node);
+            long node_id = getNodeId(node);
 
-            int model_id = plm_get_model_id(repositoryName, modelName);
+            long model_id = plm_get_model_id(repositoryName, modelName);
 
-            string propValueReturned = service.property_value_set(sessionId, model_id, node_id, property_name, property_value); 
+            string propValueReturned = service.model_property_value_set(sessionId, model_id, node_id, property_name, property_value); 
 
             Console.Out.WriteLine("Model id =" + model_id);
 
@@ -336,21 +335,42 @@ namespace SimDM_UploadFile
             string repositoryName = arguments["repo"];
             string modelName = arguments["model"];
 
-            int model_id = plm_get_model_id(repositoryName, modelName);
+            long model_id = plm_get_model_id(repositoryName, modelName);
 
             // Get name and id of all nodes in the specified model
             db_object[] theNodes = service.model_node_list(sessionId, model_id);
             for (int i = 0; i < theNodes.Length; i++)
             {
-                Console.Out.WriteLine(theNodes[i].name + " - " + theNodes[i].db_id);
+                Console.Out.WriteLine("<option value=\"" + theNodes[i].db_id + "\">" + theNodes[i].name + "</option>");
             }
             if (theNodes.Length > 1)
             {
                 // Get name and id of all files in the specified node
                 db_object[] theFiles = service.node_file_list(sessionId, theNodes[1].db_id);
+                Console.Out.WriteLine("\n\nHere is the files of " + theNodes[1].name + " listed.");
                 for (int i = 0; i < theFiles.Length; i++)
                 {
-                    Console.Out.WriteLine(theFiles[i].name + " - " + theNodes[i].db_id);
+                    Console.Out.WriteLine(theFiles[i].name);// + " - " + theNodes[i].db_id);
+                }
+            }
+            if (theNodes.Length > 79)
+            {
+                //int previousPaddingSize = 0;
+                //long parent = theNodes[0].db_id;
+                //for (int i = 0; i < theNodes.Length; i++)
+                //{
+                //    string nodeName = theNodes[i].name.TrimStart();
+                //    int levelPaddingSize = theNodes[i].name.Length - nodeName.Length;
+                //    if (levelPaddingSize > previousPaddingSize)
+                //    {
+                //        parent = prevNode;
+                //    } else 
+                //}
+                v_node node_79 = service.node_get(sessionId, theNodes[79].db_id, null);
+                db_object[] subNodes = service.model_node_list(sessionId, theNodes[79].db_id);
+                for (int i = 0; i < subNodes.Length; i++)
+                {
+                    Console.Out.WriteLine(theNodes[i].name + " - " + theNodes[i].db_id);
                 }
             }
         }
@@ -516,11 +536,88 @@ namespace SimDM_UploadFile
             }
         }
         /*=======================================================================================*/
+        static void download_folder()
+        /*
+         * -command=download_folder -repo=InitialRepository -model=Ultralight_Glider -login=ah -pass=db -nodeName="ULG Coarse Grid FE Analysis" -local_folder=O:\projects\CloudFlow\local_folder
+        =========================================================================================*/
+        {
+            string local_folder = arguments["local_folder"];
+            
+            string nodeName = arguments["nodeName"];
+            long model_id = plm_get_model_id(arguments["repo"], arguments["model"]);
+
+            // Get name and id of all nodes/folders in the specified model
+            v_pbs_item[] theNodes = service.model_pbs_search(sessionId, model_id, nodeName, new string[] { "NODE.NAME" }, false, true, 0, null, false, null, null, null, null, 2, 0);
+            
+            if (theNodes != null && theNodes.Length == 1)
+            {
+                AccessControl.fileTransferInfo downloadFile = access.createTemporaryFile(sessionId, "PLM_file", ".txt", false);
+                // Get info about all files attached to the specified node/folder
+                db_object[] theFiles = service.node_file_list(sessionId, theNodes[0].item.instance_id);
+                for (int j = 0; j < theFiles.Length; j++)
+                {
+                    // Copy the file from the database to a temporary file on the server
+                    long EDMfileId = service.model_file_body_get(sessionId, theFiles[j].db_id, downloadFile.fileNameOnServer);
+                    string local_file_path = Path.Combine(local_folder, theFiles[j].name);
+                    downloadFileFromEDM(downloadFile.uploadOrDownloadUrl + sessionId, local_file_path);
+                }
+                string deleteRetur = access.deleteTemporaryFile(sessionId, downloadFile);
+            }
+        }
+        /*=======================================================================================*/
+        static void new_node_version()
+        /*
+         * -command=new_node_version -repo=InitialRepository -model=Ultralight_Glider -login=ah -pass=db -nodeName="ULG Coarse Grid FE Analysis"
+         * 
+         * use node_create_successor
+         * 
+           node_create_successor creates next version of specified node in current state 
+           of PBS, replacing in some parents reference to prev. version with new one. 
+           New version is created as clone of the existing one, including person and 
+           organization assignments, attachments, references, properties and child 
+           nodes. Only assigned approvals and tasks are not moved.
+
+           To call the query logged in user shall be associated with a person granted 
+           with writing privileges in all provided parent nodes (EDITOR_TYPE, 
+           ADMIN_TYPE for the person or group where the person is registered).
+           
+           id                -  db ID of node version to be ancestor of newly created.
+           new_version       -  optional version tag for new node version, if unset or 
+                                empty version tag is generated in sequence of existing
+           remove_old_form   -  optional list of parent nodes' db ID where from old 
+                                version (id) shall be replaced by newly created
+           add_new_to        -  optional list of parent nodes' db ID where newly created 
+                                version shall be added as child 
+           inherit_children  -  TRUE if new version inherits used nodes of the old one
+           inherit_files     -  TRUE if newly created version gets copy of file 
+                                attachments
+                                
+           NOTE: (1) remove_old_form and add_new_to are unset the new version becomes a root
+                    node of the current pbs state, 
+                 (2) if remove_old_form exists and add_new_to is unset new version will be 
+                    added to parents listed in remove_old_form (to replace old)
+                 
+           Returns actual attributes of the newly added node version (see v_node
+           description).
+        =========================================================================================*/
+        {
+            string nodeName = arguments["nodeName"];
+            long model_id = plm_get_model_id(arguments["repo"], arguments["model"]);
+
+            v_pbs_item[] theNodes = service.model_pbs_search(sessionId, model_id, nodeName, new string[] { "NODE.NAME" }, false, true, 0, null, false, null, null, null, null, 2, 0);
+            if (theNodes != null && theNodes.Length == 1)
+            {
+                v_node new_version = service.node_create_successor(sessionId, theNodes[0].item.instance_id, null, null, null, true, true);
+                new_version = null;
+            }
+        }
+        /*=======================================================================================*/
         static void Main(string[] args)
         /*=======================================================================================*/
         {
             try
             {
+                sessionId = null;
                 arguments = new Arguments(args);
                 string command = arguments["command"];
                 string repository = arguments["repo"];
@@ -528,23 +625,26 @@ namespace SimDM_UploadFile
                 string user = arguments["login"];
                 string password = arguments["pass"];
                 string keystoneSessionId = arguments["keystoneSessionId"];
+                string version = "";
 
                 access = new EDMAccessControlService();
-                access.Url = SERVER_URL + "/AccessControl";
+                access.Url = SERVER_URL + "/AccessControl?option=LITERAL_ENCODING";
                 service = new SIMDM_MASTER_WSDLService();           // Use this service for operations that are dependant on repository and model in the URL
                 modelNeutralSrv = new SIMDM_MASTER_WSDLService();   // Use this service for model neutral operations or operations that have model id as parameter
-                configSrv = new simdm_config_supportService();
+                configSrv = new SimDM_config_supportService();
 
                 service.Url = SERVER_URL + String.Format(MODEL_SERVICE_PARAMS_TEMPLATE, repository, model);
                 configSrv.Url = SERVER_URL + CONFIG_URL;
                 modelNeutralSrv.Url = SERVER_URL + MASTER_URL;
                 //service.Url = "http://api.eu-cloudflow.eu/jotne/EDMWS/earlybinding/options_2097152/SimDM_system/user_management/QEX/SIMDM_MASTER_WSDL";
 
-                if (command != null && (command.Equals("change_password") || command.Equals("delete_user") || command.Equals("create_user") || command.Equals("model_downloadFile") || command.Equals("model_uploadFile") || command.Equals("plm_node_list") || command.Equals("plm_set_property_value") || command.Equals("plm_define_property") || command.Equals("node_file_list") || command.Equals("move_file") || command.Equals("upload_file") || command.Equals("show_types") || command.Equals("create_pbs") || command.Equals("node_query") || command.Equals("define_properties")))
+                if (command != null && (command.Equals("new_node_version") || command.Equals("download_folder") || command.Equals("change_password") || command.Equals("delete_user") || command.Equals("create_user") || command.Equals("model_downloadFile") || command.Equals("model_uploadFile") || command.Equals("plm_node_list") || command.Equals("plm_set_property_value") || command.Equals("plm_define_property") || command.Equals("node_file_list") || command.Equals("move_file") || command.Equals("upload_file") || command.Equals("show_types") || command.Equals("create_pbs") || command.Equals("node_query") || command.Equals("define_properties")))
                 {
                     if (keystoneSessionId == null)
                     {
                         sessionId = access.login(user, "sdai-group", password);
+                        AccessControl.fileTransferInfo remoteFile = access.createTemporaryFile(sessionId, "myFile", ".txt", true);
+                        version = configSrv.system_get_EDM_server_version(sessionId);
                     } else {
                         sessionId = keystoneSessionId;
                     }
@@ -608,7 +708,14 @@ namespace SimDM_UploadFile
                     {
                         delete_user();
                     }
-                    access.logout(sessionId);
+                    else if (command.Equals("download_folder"))
+                    {
+                        download_folder();
+                    }
+                    else if (command.Equals("new_node_version"))
+                    {
+                        new_node_version();
+                    }
                     Console.Out.WriteLine("Operation completed successfully.");
 
                 }
@@ -622,6 +729,8 @@ namespace SimDM_UploadFile
                 
                 Console.Out.WriteLine(ex.Message);
             }
+            if (sessionId != null)
+                access.logout(sessionId);
             Console.Out.WriteLine("Press any key to finish.");
             Console.In.Peek();
         }
