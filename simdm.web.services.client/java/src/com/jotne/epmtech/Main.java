@@ -1,8 +1,6 @@
 package com.jotne.epmtech;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -174,6 +172,7 @@ public class Main {
 		item.setName(name);
 		item.setDescription("");
 		item.setIntroduced("");
+		item.setLast_changed("");
 		item.setPreview("");
 
 		V_property prop = new V_property();
@@ -215,6 +214,7 @@ public class Main {
 		item.setItem_type("");
 		item.setDescription("");
 		item.setIntroduced("");
+		item.setLast_changed("");
 		item.setPreview("");
 
 		V_file fileSpec = new V_file();
@@ -225,7 +225,7 @@ public class Main {
 		fileSpec.setOriginal_format("file format name"); // can be derived from file name by using System API
 		fileSpec.setOS("Microsoft Windows"/* any text */);
 		fileSpec.setProduced_by("EPM Thechnology AS");
-		fileSpec.setSize((int) new File(filepath).length());
+		fileSpec.setSize(0); // size will be set on server
 		fileSpec.setOwner(0); // organization id
 		fileSpec.setCheck_sum("");
 		fileSpec.setLink("");
@@ -239,6 +239,7 @@ public class Main {
 		item.setItem_type("");
 		item.setDescription("");
 		item.setIntroduced("");
+		item.setLast_changed("");
 		item.setPreview("");
 		item.setName(fileName);
 		item.setDescription("description must be here");
@@ -297,6 +298,7 @@ public class Main {
 		item.setItem_type("DESIGN");
 		item.setDescription(description);
 		item.setIntroduced("");
+		item.setLast_changed("");
 		item.setPreview("");
 
 		V_nodus nodus = new V_nodus();
