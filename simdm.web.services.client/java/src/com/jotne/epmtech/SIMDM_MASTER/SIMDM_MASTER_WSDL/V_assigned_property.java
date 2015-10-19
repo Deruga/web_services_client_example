@@ -10,9 +10,9 @@ package com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL;
 public class V_assigned_property  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.EDMbaseEntity  implements java.io.Serializable {
     private com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.V_item item;
 
-    private int assignment;
+    private long assignment;
 
-    private int domain;
+    private long domain;
 
     private java.lang.String[] values;
 
@@ -21,8 +21,8 @@ public class V_assigned_property  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_M
 
     public V_assigned_property(
            com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.V_item item,
-           int assignment,
-           int domain,
+           long assignment,
+           long domain,
            java.lang.String[] values) {
         this.item = item;
         this.assignment = assignment;
@@ -56,7 +56,7 @@ public class V_assigned_property  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_M
      * 
      * @return assignment
      */
-    public int getAssignment() {
+    public long getAssignment() {
         return assignment;
     }
 
@@ -66,7 +66,7 @@ public class V_assigned_property  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_M
      * 
      * @param assignment
      */
-    public void setAssignment(int assignment) {
+    public void setAssignment(long assignment) {
         this.assignment = assignment;
     }
 
@@ -76,7 +76,7 @@ public class V_assigned_property  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_M
      * 
      * @return domain
      */
-    public int getDomain() {
+    public long getDomain() {
         return domain;
     }
 
@@ -86,7 +86,7 @@ public class V_assigned_property  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_M
      * 
      * @param domain
      */
-    public void setDomain(int domain) {
+    public void setDomain(long domain) {
         this.domain = domain;
     }
 
@@ -152,8 +152,8 @@ public class V_assigned_property  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_M
         if (getItem() != null) {
             _hashCode += getItem().hashCode();
         }
-        _hashCode += getAssignment();
-        _hashCode += getDomain();
+        _hashCode += new Long(getAssignment()).hashCode();
+        _hashCode += new Long(getDomain()).hashCode();
         if (getValues() != null) {
             for (int i=0;
                  i<java.lang.reflect.Array.getLength(getValues());
@@ -184,13 +184,13 @@ public class V_assigned_property  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_M
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("assignment");
         elemField.setXmlName(new javax.xml.namespace.QName("", "assignment"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("domain");
         elemField.setXmlName(new javax.xml.namespace.QName("", "domain"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();

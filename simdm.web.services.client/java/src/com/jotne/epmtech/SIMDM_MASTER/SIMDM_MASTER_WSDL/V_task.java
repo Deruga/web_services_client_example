@@ -10,29 +10,29 @@ package com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL;
 public class V_task  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.EDMbaseEntity  implements java.io.Serializable {
     private com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.V_item item;
 
-    private int subject;
+    private long subject;
 
-    private int assigned;
+    private long assigned;
 
-    private int action;
+    private long action;
 
     private java.lang.String to_start;
 
     private java.lang.String to_finish;
 
-    private int[] approvals;
+    private long[] approvals;
 
     public V_task() {
     }
 
     public V_task(
            com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.V_item item,
-           int subject,
-           int assigned,
-           int action,
+           long subject,
+           long assigned,
+           long action,
            java.lang.String to_start,
            java.lang.String to_finish,
-           int[] approvals) {
+           long[] approvals) {
         this.item = item;
         this.subject = subject;
         this.assigned = assigned;
@@ -68,7 +68,7 @@ public class V_task  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @return subject
      */
-    public int getSubject() {
+    public long getSubject() {
         return subject;
     }
 
@@ -78,7 +78,7 @@ public class V_task  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @param subject
      */
-    public void setSubject(int subject) {
+    public void setSubject(long subject) {
         this.subject = subject;
     }
 
@@ -88,7 +88,7 @@ public class V_task  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @return assigned
      */
-    public int getAssigned() {
+    public long getAssigned() {
         return assigned;
     }
 
@@ -98,7 +98,7 @@ public class V_task  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @param assigned
      */
-    public void setAssigned(int assigned) {
+    public void setAssigned(long assigned) {
         this.assigned = assigned;
     }
 
@@ -108,7 +108,7 @@ public class V_task  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @return action
      */
-    public int getAction() {
+    public long getAction() {
         return action;
     }
 
@@ -118,7 +118,7 @@ public class V_task  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @param action
      */
-    public void setAction(int action) {
+    public void setAction(long action) {
         this.action = action;
     }
 
@@ -168,7 +168,7 @@ public class V_task  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @return approvals
      */
-    public int[] getApprovals() {
+    public long[] getApprovals() {
         return approvals;
     }
 
@@ -178,15 +178,15 @@ public class V_task  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @param approvals
      */
-    public void setApprovals(int[] approvals) {
+    public void setApprovals(long[] approvals) {
         this.approvals = approvals;
     }
 
-    public int getApprovals(int i) {
+    public long getApprovals(int i) {
         return this.approvals[i];
     }
 
-    public void setApprovals(int i, int _value) {
+    public void setApprovals(int i, long _value) {
         this.approvals[i] = _value;
     }
 
@@ -231,9 +231,9 @@ public class V_task  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
         if (getItem() != null) {
             _hashCode += getItem().hashCode();
         }
-        _hashCode += getSubject();
-        _hashCode += getAssigned();
-        _hashCode += getAction();
+        _hashCode += new Long(getSubject()).hashCode();
+        _hashCode += new Long(getAssigned()).hashCode();
+        _hashCode += new Long(getAction()).hashCode();
         if (getTo_start() != null) {
             _hashCode += getTo_start().hashCode();
         }
@@ -270,19 +270,19 @@ public class V_task  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("subject");
         elemField.setXmlName(new javax.xml.namespace.QName("", "subject"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("assigned");
         elemField.setXmlName(new javax.xml.namespace.QName("", "assigned"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("action");
         elemField.setXmlName(new javax.xml.namespace.QName("", "action"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
@@ -300,7 +300,7 @@ public class V_task  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("approvals");
         elemField.setXmlName(new javax.xml.namespace.QName("", "approvals"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         elemField.setMaxOccursUnbounded(true);
         typeDesc.addFieldDesc(elemField);

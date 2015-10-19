@@ -18,7 +18,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.PostMethod;
 
-import com.jotne.epmtech.Ap209_multidisciplinary_analysis_and_design_mim_LF.node_query.Node_info_ve;
 import com.jotne.epmtech.EDM_DUMMY_SCHEMA.EDMAccessControl.FileTransferInfo;
 import com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.V_attached_file;
 import com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.V_file;
@@ -33,10 +32,11 @@ import com.sampullara.cli.Argument;
 
 import localhost.EDMWS.AccessControl.EDMAccessControl;
 import localhost.EDMWS.AccessControl.EDMAccessControlServiceLocator;
-import localhost.EDMWS.earlybinding.DataRepository.CascadedCsys_ROTFIX_sol101_out.QEX.node_query.Node_query;
-import localhost.EDMWS.earlybinding.DataRepository.CascadedCsys_ROTFIX_sol101_out.QEX.node_query.Node_queryServiceLocator;
 import localhost.EDMWS.earlybinding.options_2097152.DataRepository.SimDM_Master.QEX.SIMDM_MASTER_WSDL.SIMDM_MASTER_WSDL;
 import localhost.EDMWS.earlybinding.options_2097152.DataRepository.SimDM_Master.QEX.SIMDM_MASTER_WSDL.SIMDM_MASTER_WSDLServiceLocator;
+import localhost.EDMWS.earlybinding.options_2097152.DataRepository.SimDM_Master_AP209e2.QEX.SimDMobjectViewerQuerySchema.SimDMobjectViewerQuerySchema;
+import localhost.EDMWS.earlybinding.options_2097152.DataRepository.SimDM_Master_AP209e2.QEX.SimDMobjectViewerQuerySchema.SimDMobjectViewerQuerySchemaService;
+import localhost.EDMWS.earlybinding.options_2097152.DataRepository.SimDM_Master_AP209e2.QEX.SimDMobjectViewerQuerySchema.SimDMobjectViewerQuerySchemaServiceLocator;
 
 public class Main {
 
@@ -74,7 +74,7 @@ public class Main {
 
 	private SIMDM_MASTER_WSDL simDmService;
 
-	private Node_query nodeService;
+	private SimDMobjectViewerQuerySchema nodeService;
 
 	private String sessionID;
 
@@ -104,7 +104,7 @@ public class Main {
 
 		EDMAccessControlServiceLocator edmAccessControlServiceLocator = new EDMAccessControlServiceLocator();
 		SIMDM_MASTER_WSDLServiceLocator simDmMasterServiceLocator = new SIMDM_MASTER_WSDLServiceLocator();
-		Node_queryServiceLocator nodeServiceLocator = new Node_queryServiceLocator();
+		SimDMobjectViewerQuerySchemaServiceLocator nodeServiceLocator = new SimDMobjectViewerQuerySchemaServiceLocator();
 
 		edmAccessControl = edmAccessControlServiceLocator.getEDMWS(new URL(server + "/EDMWS/AccessControl?option=LITERAL_ENCODING"));
 		String url = String.format("%s/EDMWS/earlybinding/options_2097152/%s/%s/QEX/SIMDM_MASTER_WSDL", server, repository, model);
@@ -199,28 +199,6 @@ public class Main {
 		/* V_node tailGateWing = */createNode("Tail gate wing", "", tailGate.getNodus().getItem().getInstance_id());
 	}
 
-	private void nodeQueryCommand() throws RemoteException {
-		Node_info_ve[] nodes = nodeService.get_node_info(sessionID);
-		if (nodes != null) {
-			for (int i = 0; i < nodes.length; i++) {
-				StringBuilder sb = new StringBuilder();
-				sb.append(nodes[i].getNODE_ID());
-				sb.append(",  ");
-				sb.append(nodes[i].getNODE_TYPE());
-				sb.append(",  ");
-				sb.append(nodes[i].getCOORDSYS_ID());
-				sb.append(",  ");
-				sb.append(nodes[i].getCOORD1());
-				sb.append(",  ");
-				sb.append(nodes[i].getCOORD2());
-				sb.append(",  ");
-				sb.append(nodes[i].getCOORD3());
-
-				System.out.println(sb.toString());
-			}
-		}
-	}
-
 	private void uploadFileCommand() throws Exception {
 		V_pbs_item[] list = simDmService.pbs_search(sessionID, nodeName,
 				new String[] { "NODE.NAME" }, false, true, 0, null, false,
@@ -313,7 +291,7 @@ public class Main {
 		edmAccessControl.deleteTemporaryFile(sessionID, transferInfo);
 	}
 	
-	private V_node createNode(String name, String description, int parent) throws RemoteException {
+	private V_node createNode(String name, String description, long parent) throws RemoteException {
 		V_item item = new V_item();
 		item.setName(name);
 		item.setItem_type("DESIGN");
@@ -330,7 +308,7 @@ public class Main {
 		node.setId(name);
 		node.setRealization("");
 
-		return simDmService.node_create(sessionID, node, new int[] { parent });
+		return simDmService.node_create(sessionID, node, new long[] { parent });
 	}
 
 	private static String GetFileExtension(String fileName) {

@@ -12,7 +12,7 @@ public class Extract_result  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER
 
     private java.lang.String model_name;
 
-    private int log_id;
+    private long log_id;
 
     public Extract_result() {
     }
@@ -20,7 +20,7 @@ public class Extract_result  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER
     public Extract_result(
            java.lang.String repository,
            java.lang.String model_name,
-           int log_id) {
+           long log_id) {
         this.repository = repository;
         this.model_name = model_name;
         this.log_id = log_id;
@@ -72,7 +72,7 @@ public class Extract_result  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER
      * 
      * @return log_id
      */
-    public int getLog_id() {
+    public long getLog_id() {
         return log_id;
     }
 
@@ -82,7 +82,7 @@ public class Extract_result  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER
      * 
      * @param log_id
      */
-    public void setLog_id(int log_id) {
+    public void setLog_id(long log_id) {
         this.log_id = log_id;
     }
 
@@ -122,7 +122,7 @@ public class Extract_result  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER
         if (getModel_name() != null) {
             _hashCode += getModel_name().hashCode();
         }
-        _hashCode += getLog_id();
+        _hashCode += new Long(getLog_id()).hashCode();
         __hashCodeCalc = false;
         return _hashCode;
     }
@@ -148,7 +148,7 @@ public class Extract_result  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("log_id");
         elemField.setXmlName(new javax.xml.namespace.QName("", "log_id"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
     }

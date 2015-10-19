@@ -12,7 +12,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
 
     private java.lang.String extension;
 
-    private int owner;
+    private long owner;
 
     private java.lang.String produced_by;
 
@@ -26,9 +26,9 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
 
     private java.lang.String check_sum;
 
-    private int size;
+    private long size;
 
-    private int body;
+    private long body;
 
     private java.lang.String link;
 
@@ -36,23 +36,23 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
 
     private java.lang.String model_name;
 
-    private int CAX;
+    private long CAX;
 
-    private int validation;
+    private long validation;
 
-    private int import_log;
+    private long import_log;
 
-    private int instances;
+    private long instances;
 
-    private int errors;
+    private long errors;
 
-    private int validation_options;
+    private long validation_options;
 
-    private int warnings;
+    private long warnings;
 
-    private int[] derived_files;
+    private long[] derived_files;
 
-    private int[] derived_from;
+    private long[] derived_from;
 
     public V_file() {
     }
@@ -60,27 +60,27 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
     public V_file(
            com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.V_item item,
            java.lang.String extension,
-           int owner,
+           long owner,
            java.lang.String produced_by,
            java.lang.String _interface,
            java.lang.String OS,
            java.lang.String original_name,
            java.lang.String original_format,
            java.lang.String check_sum,
-           int size,
-           int body,
+           long size,
+           long body,
            java.lang.String link,
            java.lang.String express_schema,
            java.lang.String model_name,
-           int CAX,
-           int validation,
-           int import_log,
-           int instances,
-           int errors,
-           int validation_options,
-           int warnings,
-           int[] derived_files,
-           int[] derived_from) {
+           long CAX,
+           long validation,
+           long import_log,
+           long instances,
+           long errors,
+           long validation_options,
+           long warnings,
+           long[] derived_files,
+           long[] derived_from) {
         this.item = item;
         this.extension = extension;
         this.owner = owner;
@@ -152,7 +152,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @return owner
      */
-    public int getOwner() {
+    public long getOwner() {
         return owner;
     }
 
@@ -162,7 +162,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @param owner
      */
-    public void setOwner(int owner) {
+    public void setOwner(long owner) {
         this.owner = owner;
     }
 
@@ -292,7 +292,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @return size
      */
-    public int getSize() {
+    public long getSize() {
         return size;
     }
 
@@ -302,7 +302,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @param size
      */
-    public void setSize(int size) {
+    public void setSize(long size) {
         this.size = size;
     }
 
@@ -312,7 +312,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @return body
      */
-    public int getBody() {
+    public long getBody() {
         return body;
     }
 
@@ -322,7 +322,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @param body
      */
-    public void setBody(int body) {
+    public void setBody(long body) {
         this.body = body;
     }
 
@@ -392,7 +392,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @return CAX
      */
-    public int getCAX() {
+    public long getCAX() {
         return CAX;
     }
 
@@ -402,7 +402,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @param CAX
      */
-    public void setCAX(int CAX) {
+    public void setCAX(long CAX) {
         this.CAX = CAX;
     }
 
@@ -412,7 +412,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @return validation
      */
-    public int getValidation() {
+    public long getValidation() {
         return validation;
     }
 
@@ -422,7 +422,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @param validation
      */
-    public void setValidation(int validation) {
+    public void setValidation(long validation) {
         this.validation = validation;
     }
 
@@ -432,7 +432,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @return import_log
      */
-    public int getImport_log() {
+    public long getImport_log() {
         return import_log;
     }
 
@@ -442,7 +442,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @param import_log
      */
-    public void setImport_log(int import_log) {
+    public void setImport_log(long import_log) {
         this.import_log = import_log;
     }
 
@@ -452,7 +452,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @return instances
      */
-    public int getInstances() {
+    public long getInstances() {
         return instances;
     }
 
@@ -462,7 +462,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @param instances
      */
-    public void setInstances(int instances) {
+    public void setInstances(long instances) {
         this.instances = instances;
     }
 
@@ -472,7 +472,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @return errors
      */
-    public int getErrors() {
+    public long getErrors() {
         return errors;
     }
 
@@ -482,7 +482,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @param errors
      */
-    public void setErrors(int errors) {
+    public void setErrors(long errors) {
         this.errors = errors;
     }
 
@@ -492,7 +492,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @return validation_options
      */
-    public int getValidation_options() {
+    public long getValidation_options() {
         return validation_options;
     }
 
@@ -502,7 +502,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @param validation_options
      */
-    public void setValidation_options(int validation_options) {
+    public void setValidation_options(long validation_options) {
         this.validation_options = validation_options;
     }
 
@@ -512,7 +512,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @return warnings
      */
-    public int getWarnings() {
+    public long getWarnings() {
         return warnings;
     }
 
@@ -522,7 +522,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @param warnings
      */
-    public void setWarnings(int warnings) {
+    public void setWarnings(long warnings) {
         this.warnings = warnings;
     }
 
@@ -532,7 +532,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @return derived_files
      */
-    public int[] getDerived_files() {
+    public long[] getDerived_files() {
         return derived_files;
     }
 
@@ -542,15 +542,15 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @param derived_files
      */
-    public void setDerived_files(int[] derived_files) {
+    public void setDerived_files(long[] derived_files) {
         this.derived_files = derived_files;
     }
 
-    public int getDerived_files(int i) {
+    public long getDerived_files(int i) {
         return this.derived_files[i];
     }
 
-    public void setDerived_files(int i, int _value) {
+    public void setDerived_files(int i, long _value) {
         this.derived_files[i] = _value;
     }
 
@@ -560,7 +560,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @return derived_from
      */
-    public int[] getDerived_from() {
+    public long[] getDerived_from() {
         return derived_from;
     }
 
@@ -570,15 +570,15 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @param derived_from
      */
-    public void setDerived_from(int[] derived_from) {
+    public void setDerived_from(long[] derived_from) {
         this.derived_from = derived_from;
     }
 
-    public int getDerived_from(int i) {
+    public long getDerived_from(int i) {
         return this.derived_from[i];
     }
 
-    public void setDerived_from(int i, int _value) {
+    public void setDerived_from(int i, long _value) {
         this.derived_from[i] = _value;
     }
 
@@ -660,7 +660,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
         if (getExtension() != null) {
             _hashCode += getExtension().hashCode();
         }
-        _hashCode += getOwner();
+        _hashCode += new Long(getOwner()).hashCode();
         if (getProduced_by() != null) {
             _hashCode += getProduced_by().hashCode();
         }
@@ -679,8 +679,8 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
         if (getCheck_sum() != null) {
             _hashCode += getCheck_sum().hashCode();
         }
-        _hashCode += getSize();
-        _hashCode += getBody();
+        _hashCode += new Long(getSize()).hashCode();
+        _hashCode += new Long(getBody()).hashCode();
         if (getLink() != null) {
             _hashCode += getLink().hashCode();
         }
@@ -690,13 +690,13 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
         if (getModel_name() != null) {
             _hashCode += getModel_name().hashCode();
         }
-        _hashCode += getCAX();
-        _hashCode += getValidation();
-        _hashCode += getImport_log();
-        _hashCode += getInstances();
-        _hashCode += getErrors();
-        _hashCode += getValidation_options();
-        _hashCode += getWarnings();
+        _hashCode += new Long(getCAX()).hashCode();
+        _hashCode += new Long(getValidation()).hashCode();
+        _hashCode += new Long(getImport_log()).hashCode();
+        _hashCode += new Long(getInstances()).hashCode();
+        _hashCode += new Long(getErrors()).hashCode();
+        _hashCode += new Long(getValidation_options()).hashCode();
+        _hashCode += new Long(getWarnings()).hashCode();
         if (getDerived_files() != null) {
             for (int i=0;
                  i<java.lang.reflect.Array.getLength(getDerived_files());
@@ -744,7 +744,7 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("owner");
         elemField.setXmlName(new javax.xml.namespace.QName("", "owner"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
@@ -786,13 +786,13 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("size");
         elemField.setXmlName(new javax.xml.namespace.QName("", "size"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("body");
         elemField.setXmlName(new javax.xml.namespace.QName("", "body"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
@@ -816,56 +816,56 @@ public class V_file  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("CAX");
         elemField.setXmlName(new javax.xml.namespace.QName("", "CAX"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("validation");
         elemField.setXmlName(new javax.xml.namespace.QName("", "validation"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("import_log");
         elemField.setXmlName(new javax.xml.namespace.QName("", "import_log"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("instances");
         elemField.setXmlName(new javax.xml.namespace.QName("", "instances"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("errors");
         elemField.setXmlName(new javax.xml.namespace.QName("", "errors"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("validation_options");
         elemField.setXmlName(new javax.xml.namespace.QName("", "validation_options"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("warnings");
         elemField.setXmlName(new javax.xml.namespace.QName("", "warnings"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("derived_files");
         elemField.setXmlName(new javax.xml.namespace.QName("", "derived_files"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         elemField.setMaxOccursUnbounded(true);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("derived_from");
         elemField.setXmlName(new javax.xml.namespace.QName("", "derived_from"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         elemField.setMaxOccursUnbounded(true);
         typeDesc.addFieldDesc(elemField);

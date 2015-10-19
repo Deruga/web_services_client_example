@@ -8,7 +8,7 @@
 package com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL;
 
 public class Specified_master_item  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.EDMbaseEntity  implements java.io.Serializable {
-    private int instance_id;
+    private long instance_id;
 
     private java.lang.String ms_type;
 
@@ -16,7 +16,7 @@ public class Specified_master_item  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM
     }
 
     public Specified_master_item(
-           int instance_id,
+           long instance_id,
            java.lang.String ms_type) {
         this.instance_id = instance_id;
         this.ms_type = ms_type;
@@ -28,7 +28,7 @@ public class Specified_master_item  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM
      * 
      * @return instance_id
      */
-    public int getInstance_id() {
+    public long getInstance_id() {
         return instance_id;
     }
 
@@ -38,7 +38,7 @@ public class Specified_master_item  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM
      * 
      * @param instance_id
      */
-    public void setInstance_id(int instance_id) {
+    public void setInstance_id(long instance_id) {
         this.instance_id = instance_id;
     }
 
@@ -89,7 +89,7 @@ public class Specified_master_item  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM
         }
         __hashCodeCalc = true;
         int _hashCode = super.hashCode();
-        _hashCode += getInstance_id();
+        _hashCode += new Long(getInstance_id()).hashCode();
         if (getMs_type() != null) {
             _hashCode += getMs_type().hashCode();
         }
@@ -106,7 +106,7 @@ public class Specified_master_item  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("instance_id");
         elemField.setXmlName(new javax.xml.namespace.QName("", "instance_id"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();

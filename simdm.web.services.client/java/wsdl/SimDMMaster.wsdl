@@ -3,18 +3,43 @@
   <wsdl:types>
     <schema targetNamespace="http://epmtech.jotne.com/SIMDM_MASTER/SIMDM_MASTER_WSDL" xmlns="http://www.w3.org/2001/XMLSchema">
       <complexType name="EDMbaseEntity"/>
-      <element name="test_on_error_do">
+      <element name="test_blob_size">
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="I" type="xsd:int"/>
           </sequence>
         </complexType>
       </element>
-      <element name="test_on_error_doResponse">
+      <element name="test_blob_sizeResponse">
         <complexType>
           <sequence>
-            <element name="Response" type="xsd:string"/>
+            <element name="v_blob_size_test" type="tns:v_blob_size_test" minOccurs="0" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+      <complexType name="v_blob_size_test">
+        <complexContent>
+          <extension base="tns:EDMbaseEntity">
+            <sequence>
+              <element name="id" nillable="false" type="xsd:long"/>
+              <element name="size" nillable="false" type="xsd:long"/>
+              <element name="calculated" nillable="false" type="xsd:long"/>
+            </sequence>
+          </extension>
+        </complexContent>
+      </complexType>
+      <element name="test_mapping">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="SOURCE" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="test_mappingResponse">
+        <complexType>
+          <sequence>
+            <element name="Response" type="xsd:boolean"/>
           </sequence>
         </complexType>
       </element>
@@ -22,18 +47,18 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ITEM1" type="xsd:int"/>
-            <element name="ITEM2" type="xsd:int"/>
-            <element name="DOMAIN" type="xsd:int"/>
+            <element name="ITEM1" type="xsd:long"/>
+            <element name="ITEM2" type="xsd:long"/>
+            <element name="DOMAIN" type="xsd:long"/>
             <element name="DOMAIN_TYPE1" type="xsd:string"/>
             <element name="DOMAIN_TYPE2" type="xsd:string"/>
             <element name="LATEST_VERSION" type="xsd:boolean"/>
             <element name="BEFORE" type="xsd:string"/>
             <element name="AFTER" type="xsd:string"/>
-            <element name="CREATOR1" type="xsd:int"/>
-            <element name="CREATOR2" type="xsd:int"/>
-            <element name="PAGE" type="xsd:int"/>
-            <element name="START_FROM" type="xsd:int"/>
+            <element name="CREATOR1" type="xsd:long"/>
+            <element name="CREATOR2" type="xsd:long"/>
+            <element name="PAGE" type="xsd:long"/>
+            <element name="START_FROM" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -49,8 +74,8 @@
           <extension base="tns:EDMbaseEntity">
             <sequence>
               <element name="item" nillable="false" type="tns:v_item"/>
-              <element name="assignment" nillable="false" type="xsd:int"/>
-              <element name="domain" nillable="false" type="xsd:int"/>
+              <element name="assignment" nillable="false" type="xsd:long"/>
+              <element name="domain" nillable="false" type="xsd:long"/>
               <element name="ms_type" nillable="false" type="xsd:string"/>
             </sequence>
           </extension>
@@ -60,16 +85,18 @@
         <complexContent>
           <extension base="tns:EDMbaseEntity">
             <sequence>
-              <element name="instance_id" nillable="false" type="xsd:int"/>
-              <element name="item_type" nillable="true" type="xsd:string"/>
+              <element name="instance_id" nillable="false" type="xsd:long"/>
+              <element name="item_type" nillable="false" type="xsd:string"/>
               <element name="name" nillable="false" type="xsd:string"/>
-              <element name="description" nillable="true" type="xsd:string"/>
-              <element name="introduced" nillable="true" type="xsd:string"/>
-              <element name="creator" nillable="true" type="xsd:int"/>
-              <element name="preview" nillable="true" type="xsd:string"/>
-              <element name="cancelled" nillable="true" type="xsd:boolean"/>
-              <element name="comments" nillable="true" maxOccurs="unbounded" type="xsd:int"/>
-              <element name="events" nillable="true" maxOccurs="unbounded" type="xsd:int"/>
+              <element name="description" nillable="false" type="xsd:string"/>
+              <element name="introduced" nillable="false" type="xsd:string"/>
+              <element name="creator" nillable="false" type="xsd:long"/>
+              <element name="last_changed" nillable="false" type="xsd:string"/>
+              <element name="last_editor" nillable="false" type="xsd:long"/>
+              <element name="preview" nillable="false" type="xsd:string"/>
+              <element name="cancelled" nillable="false" type="xsd:boolean"/>
+              <element name="comments" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
+              <element name="events" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
             </sequence>
           </extension>
         </complexContent>
@@ -79,7 +106,7 @@
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
             <element name="PATTERN" type="xsd:string"/>
-            <element name="DOMAIN" type="xsd:int"/>
+            <element name="DOMAIN" type="xsd:long"/>
             <element name="DOMAIN_TYPE1" type="xsd:string"/>
             <element name="DOMAIN_TYPE2" type="xsd:string"/>
             <element name="TYPE1" type="xsd:string"/>
@@ -91,10 +118,10 @@
             <element name="LATEST_VERSION" type="xsd:boolean"/>
             <element name="BEFORE" type="xsd:string"/>
             <element name="AFTER" type="xsd:string"/>
-            <element name="CREATOR1" type="xsd:int"/>
-            <element name="CREATOR2" type="xsd:int"/>
-            <element name="PAGE" type="xsd:int"/>
-            <element name="START_FROM" type="xsd:int"/>
+            <element name="CREATOR1" type="xsd:long"/>
+            <element name="CREATOR2" type="xsd:long"/>
+            <element name="PAGE" type="xsd:long"/>
+            <element name="START_FROM" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -115,6 +142,783 @@
           </extension>
         </complexContent>
       </complexType>
+      <element name="test__echo">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="TEXT" type="xsd:string"/>
+            <element name="DELAY_IN_SECONDS" type="xsd:long"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="test__echoResponse">
+        <complexType>
+          <sequence>
+            <element name="Response" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_test_import_file_system">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="PARENT" type="xsd:long"/>
+            <element name="COMMENT" type="xsd:string"/>
+            <element name="NODE_TYPE" type="xsd:string"/>
+            <element name="FILE_TYPE" type="xsd:string"/>
+            <element name="UPLOAD" type="xsd:boolean"/>
+            <element name="I1" type="xsd:string"/>
+            <element name="I2" type="xsd:string"/>
+            <element name="I3" type="xsd:string"/>
+            <element name="I4" type="xsd:string"/>
+            <element name="I5" type="xsd:string"/>
+            <element name="I6" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_test_import_file_systemResponse">
+        <complexType>
+          <sequence>
+            <element name="stm_node_in_tree" type="tns:stm_node_in_tree"/>
+          </sequence>
+        </complexType>
+      </element>
+      <complexType name="stm_node_in_tree">
+        <complexContent>
+          <extension base="tns:EDMbaseEntity">
+            <sequence>
+              <element name="instance_id" nillable="false" type="xsd:long"/>
+              <element name="name" nillable="false" type="xsd:string"/>
+              <element name="node_type" nillable="false" type="xsd:string"/>
+              <element name="version" nillable="false" type="xsd:string"/>
+              <element name="description" nillable="true" type="xsd:string"/>
+              <element name="readable" nillable="false" type="xsd:boolean"/>
+              <element name="editable" nillable="false" type="xsd:boolean"/>
+              <element name="manageable" nillable="false" type="xsd:boolean"/>
+              <element name="has_children" nillable="false" type="xsd:boolean"/>
+              <element name="children" nillable="false" maxOccurs="unbounded" type="tns:stm_node_in_tree"/>
+              <element name="files" nillable="true" maxOccurs="unbounded" type="tns:stm_file"/>
+            </sequence>
+          </extension>
+        </complexContent>
+      </complexType>
+      <complexType name="stm_file">
+        <complexContent>
+          <extension base="tns:EDMbaseEntity">
+            <sequence>
+              <element name="instance_id" nillable="false" type="xsd:long"/>
+              <element name="name" nillable="false" type="xsd:string"/>
+              <element name="extension" nillable="false" type="xsd:string"/>
+              <element name="file_type" nillable="false" type="xsd:string"/>
+              <element name="size" nillable="true" type="xsd:long"/>
+              <element name="description" nillable="true" type="xsd:string"/>
+              <element name="link" nillable="true" type="xsd:string"/>
+              <element name="properties" nillable="true" maxOccurs="unbounded" type="tns:stm_property"/>
+              <element name="remarks" nillable="true" maxOccurs="unbounded" type="tns:stm_remark"/>
+              <element name="introduced_by" nillable="false" type="xsd:string"/>
+              <element name="introduced" nillable="false" type="xsd:string"/>
+            </sequence>
+          </extension>
+        </complexContent>
+      </complexType>
+      <complexType name="stm_property">
+        <complexContent>
+          <extension base="tns:EDMbaseEntity">
+            <sequence>
+              <element name="name" nillable="false" type="xsd:string"/>
+              <element name="value_type" nillable="false" type="xsd:string"/>
+              <element name="p_value" nillable="false" type="xsd:string"/>
+              <element name="description" nillable="true" type="xsd:string"/>
+              <element name="assigned_by" nillable="false" type="xsd:string"/>
+              <element name="assigned" nillable="false" type="xsd:string"/>
+            </sequence>
+          </extension>
+        </complexContent>
+      </complexType>
+      <complexType name="stm_remark">
+        <complexContent>
+          <extension base="tns:EDMbaseEntity">
+            <sequence>
+              <element name="instance_id" nillable="false" type="xsd:long"/>
+              <element name="subj" nillable="false" type="xsd:string"/>
+              <element name="remark" nillable="false" type="xsd:string"/>
+              <element name="related_to" nillable="false" type="xsd:long"/>
+              <element name="related_type" nillable="false" type="xsd:string"/>
+              <element name="login" nillable="false" type="xsd:string"/>
+              <element name="dropped_by" nillable="false" type="xsd:string"/>
+              <element name="dropped" nillable="false" type="xsd:string"/>
+              <element name="mine" nillable="false" type="xsd:boolean"/>
+              <element name="feedbacks" nillable="false" maxOccurs="unbounded" type="tns:stm_remark"/>
+            </sequence>
+          </extension>
+        </complexContent>
+      </complexType>
+      <element name="stm_import_file_system">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="PARENT" type="xsd:long"/>
+            <element name="COMMENT" type="xsd:string"/>
+            <element name="ITEMS" type="tns:stm_file_system_item" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="NODE_TYPE" type="xsd:string"/>
+            <element name="FILE_TYPE" type="xsd:string"/>
+            <element name="UPLOAD" type="xsd:boolean"/>
+          </sequence>
+        </complexType>
+      </element>
+      <complexType name="stm_file_system_item">
+        <complexContent>
+          <extension base="tns:EDMbaseEntity">
+            <sequence>
+              <element name="name" nillable="false" type="xsd:string"/>
+              <element name="level" nillable="false" type="xsd:long"/>
+              <element name="link" nillable="true" type="xsd:string"/>
+              <element name="size" nillable="false" type="xsd:long"/>
+            </sequence>
+          </extension>
+        </complexContent>
+      </complexType>
+      <element name="stm_import_file_systemResponse">
+        <complexType>
+          <sequence>
+            <element name="stm_node_in_tree" type="tns:stm_node_in_tree"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_list_node_types">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_list_node_typesResponse">
+        <complexType>
+          <sequence>
+            <element name="string" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_file_delete">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="FILE" type="xsd:long"/>
+            <element name="NODE" type="xsd:long"/>
+            <element name="COMMENT" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_file_deleteResponse">
+        <complexType>
+          <sequence>
+            <element name="stm_instance_wrapper" type="tns:stm_instance_wrapper" minOccurs="0" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+      <complexType name="stm_instance_wrapper">
+        <complexContent>
+          <extension base="tns:EDMbaseEntity">
+            <sequence>
+              <element name="instance_id" nillable="false" type="xsd:long"/>
+              <element name="inst_type" nillable="false" type="xsd:string"/>
+            </sequence>
+          </extension>
+        </complexContent>
+      </complexType>
+      <element name="stm_node_delete">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="SUBJECT" type="xsd:long"/>
+            <element name="PARENT" type="xsd:long"/>
+            <element name="COMMENT" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_node_deleteResponse">
+        <complexType>
+          <sequence>
+            <element name="stm_instance_wrapper" type="tns:stm_instance_wrapper" minOccurs="0" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_get_latest_remarks">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="AFTER" type="xsd:string"/>
+            <element name="PAGE_SIZE" type="xsd:long"/>
+            <element name="PAGE" type="xsd:long"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_get_latest_remarksResponse">
+        <complexType>
+          <sequence>
+            <element name="stm_remark" type="tns:stm_remark" minOccurs="0" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_withdraw_resolution">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="RESOLUTION" type="xsd:long"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_withdraw_resolutionResponse">
+        <complexType>
+          <sequence>
+            <element name="Response" type="xsd:boolean"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_node_add_resolution">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="NODE" type="xsd:long"/>
+            <element name="RESOLUTION" type="xsd:string"/>
+            <element name="REMARK" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_node_add_resolutionResponse">
+        <complexType>
+          <sequence>
+            <element name="stm_resolution" type="tns:stm_resolution"/>
+          </sequence>
+        </complexType>
+      </element>
+      <complexType name="stm_resolution">
+        <complexContent>
+          <extension base="tns:EDMbaseEntity">
+            <sequence>
+              <element name="instance_id" nillable="false" type="xsd:long"/>
+              <element name="resolution" nillable="false" type="xsd:string"/>
+              <element name="description" nillable="true" type="xsd:string"/>
+              <element name="assigned_by" nillable="false" type="xsd:string"/>
+              <element name="assigned" nillable="false" type="xsd:string"/>
+              <element name="mine" nillable="false" type="xsd:boolean"/>
+            </sequence>
+          </extension>
+        </complexContent>
+      </complexType>
+      <element name="stm_list_resolutions_awalable_for_me">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="NODE_ID" type="xsd:long"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_list_resolutions_awalable_for_meResponse">
+        <complexType>
+          <sequence>
+            <element name="string" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_list_awalable_resolutions">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_list_awalable_resolutionsResponse">
+        <complexType>
+          <sequence>
+            <element name="string" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_withdraw_remark">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="REMARK" type="xsd:long"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_withdraw_remarkResponse">
+        <complexType>
+          <sequence>
+            <element name="Response" type="xsd:boolean"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_add_remark">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="ITEM" type="xsd:long"/>
+            <element name="SUBJ" type="xsd:string"/>
+            <element name="REMARK" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_add_remarkResponse">
+        <complexType>
+          <sequence>
+            <element name="stm_remark" type="tns:stm_remark"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_node_get_files">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="ID" type="xsd:long"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_node_get_filesResponse">
+        <complexType>
+          <sequence>
+            <element name="stm_file" type="tns:stm_file" minOccurs="0" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_node_get_resolutions">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="ID" type="xsd:long"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_node_get_resolutionsResponse">
+        <complexType>
+          <sequence>
+            <element name="stm_resolution" type="tns:stm_resolution" minOccurs="0" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_node_get_remarks">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="ID" type="xsd:long"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_node_get_remarksResponse">
+        <complexType>
+          <sequence>
+            <element name="stm_remark" type="tns:stm_remark" minOccurs="0" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_node_get_properties">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="N" type="xsd:long"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_node_get_propertiesResponse">
+        <complexType>
+          <sequence>
+            <element name="stm_property" type="tns:stm_property" minOccurs="0" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_file_extract">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="FILE" type="xsd:long"/>
+            <element name="LINK" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_file_extractResponse">
+        <complexType>
+          <sequence>
+            <element name="Response" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_node_assign_file">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="NODE" type="xsd:long"/>
+            <element name="NAME" type="xsd:string"/>
+            <element name="FILE_TYPE" type="xsd:string"/>
+            <element name="LINK" type="xsd:string"/>
+            <element name="DESCRIPTION" type="xsd:string"/>
+            <element name="SIZE" type="xsd:long"/>
+            <element name="UPLOAD" type="xsd:boolean"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_node_assign_fileResponse">
+        <complexType>
+          <sequence>
+            <element name="stm_file" type="tns:stm_file"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_list_file_types">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_list_file_typesResponse">
+        <complexType>
+          <sequence>
+            <element name="string" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_node_get_representation">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="ID" type="xsd:long"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_node_get_representationResponse">
+        <complexType>
+          <sequence>
+            <element name="stm_node_representation" type="tns:stm_node_representation"/>
+          </sequence>
+        </complexType>
+      </element>
+      <complexType name="stm_node_representation">
+        <complexContent>
+          <extension base="tns:EDMbaseEntity">
+            <sequence>
+              <element name="instance_id" nillable="false" type="xsd:long"/>
+              <element name="name" nillable="false" type="xsd:string"/>
+              <element name="node_type" nillable="false" type="xsd:string"/>
+              <element name="version" nillable="false" type="xsd:string"/>
+              <element name="description" nillable="true" type="xsd:string"/>
+              <element name="created_by" nillable="false" type="xsd:string"/>
+              <element name="created" nillable="false" type="xsd:string"/>
+              <element name="modified_by" nillable="true" type="xsd:string"/>
+              <element name="modified" nillable="true" type="xsd:string"/>
+              <element name="files" nillable="true" maxOccurs="unbounded" type="tns:stm_file"/>
+              <element name="properties" nillable="true" maxOccurs="unbounded" type="tns:stm_property"/>
+              <element name="resolutions" nillable="true" maxOccurs="unbounded" type="tns:stm_resolution"/>
+              <element name="remarks" nillable="true" maxOccurs="unbounded" type="tns:stm_remark"/>
+            </sequence>
+          </extension>
+        </complexContent>
+      </complexType>
+      <element name="stm_node_get_file_system">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="ID" type="xsd:long"/>
+            <element name="DEPTH" type="xsd:long"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_node_get_file_systemResponse">
+        <complexType>
+          <sequence>
+            <element name="stm_node_in_tree" type="tns:stm_node_in_tree"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_open_node">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="ID" type="xsd:long"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_open_nodeResponse">
+        <complexType>
+          <sequence>
+            <element name="stm_node_in_tree" type="tns:stm_node_in_tree" minOccurs="0" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_node_get_children">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="ID" type="xsd:long"/>
+            <element name="TAGS" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="stm_node_get_childrenResponse">
+        <complexType>
+          <sequence>
+            <element name="stm_node_in_tree" type="tns:stm_node_in_tree" minOccurs="0" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="model_file_create">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="MODEL_ID" type="xsd:long"/>
+            <element name="SUBJECT" type="tns:v_file"/>
+          </sequence>
+        </complexType>
+      </element>
+      <complexType name="v_file">
+        <complexContent>
+          <extension base="tns:EDMbaseEntity">
+            <sequence>
+              <element name="item" nillable="false" type="tns:v_item"/>
+              <element name="extension" nillable="false" type="xsd:string"/>
+              <element name="owner" nillable="false" type="xsd:long"/>
+              <element name="produced_by" nillable="false" type="xsd:string"/>
+              <element name="interface" nillable="false" type="xsd:string"/>
+              <element name="OS" nillable="false" type="xsd:string"/>
+              <element name="original_name" nillable="false" type="xsd:string"/>
+              <element name="original_format" nillable="false" type="xsd:string"/>
+              <element name="check_sum" nillable="false" type="xsd:string"/>
+              <element name="size" nillable="false" type="xsd:long"/>
+              <element name="body" nillable="false" type="xsd:long"/>
+              <element name="link" nillable="false" type="xsd:string"/>
+              <element name="express_schema" nillable="false" type="xsd:string"/>
+              <element name="model_name" nillable="false" type="xsd:string"/>
+              <element name="CAX" nillable="false" type="xsd:long"/>
+              <element name="validation" nillable="false" type="xsd:long"/>
+              <element name="import_log" nillable="false" type="xsd:long"/>
+              <element name="instances" nillable="false" type="xsd:long"/>
+              <element name="errors" nillable="false" type="xsd:long"/>
+              <element name="validation_options" nillable="false" type="xsd:long"/>
+              <element name="warnings" nillable="false" type="xsd:long"/>
+              <element name="derived_files" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
+              <element name="derived_from" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
+            </sequence>
+          </extension>
+        </complexContent>
+      </complexType>
+      <element name="model_file_createResponse">
+        <complexType>
+          <sequence>
+            <element name="v_file" type="tns:v_file"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="model_file_body_set">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="ID" type="xsd:long"/>
+            <element name="SIZE" type="xsd:long"/>
+            <element name="FILE_UPLOAD" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="model_file_body_setResponse">
+        <complexType>
+          <sequence>
+            <element name="v_file" type="tns:v_file"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="model_file_body_get">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="ID" type="xsd:long"/>
+            <element name="DOWNLOADING_FILE" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="model_file_body_getResponse">
+        <complexType>
+          <sequence>
+            <element name="Response" type="xsd:long"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="model_attached_file_get">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="ID" type="xsd:long"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="model_attached_file_getResponse">
+        <complexType>
+          <sequence>
+            <element name="v_attached_file" type="tns:v_attached_file"/>
+          </sequence>
+        </complexType>
+      </element>
+      <complexType name="v_attached_file">
+        <complexContent>
+          <extension base="tns:EDMbaseEntity">
+            <sequence>
+              <element name="item" nillable="false" type="tns:v_item"/>
+              <element name="domain" nillable="false" type="xsd:long"/>
+              <element name="file" nillable="false" type="xsd:long"/>
+            </sequence>
+          </extension>
+        </complexContent>
+      </complexType>
+      <element name="model_pbs_search">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="MODEL_ID" type="xsd:long"/>
+            <element name="PATTERN" type="xsd:string"/>
+            <element name="ROLES" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="CASE_SENSITIVE" type="xsd:boolean"/>
+            <element name="EXACT_MATCH" type="xsd:boolean"/>
+            <element name="DOMAIN" type="xsd:long"/>
+            <element name="DOMAINS" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="LATEST_VERSION" type="xsd:boolean"/>
+            <element name="BEFORE" type="xsd:string"/>
+            <element name="AFTER" type="xsd:string"/>
+            <element name="CREATORS" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="TYPES" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="PAGE" type="xsd:long"/>
+            <element name="START_FROM" type="xsd:long"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="model_pbs_searchResponse">
+        <complexType>
+          <sequence>
+            <element name="v_pbs_item" type="tns:v_pbs_item" minOccurs="0" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="node_file_list">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="NODE_ID" type="xsd:long"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="node_file_listResponse">
+        <complexType>
+          <sequence>
+            <element name="db_object" type="tns:db_object" minOccurs="0" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+      <complexType name="db_object">
+        <complexContent>
+          <extension base="tns:EDMbaseEntity">
+            <sequence>
+              <element name="name" nillable="false" type="xsd:string"/>
+              <element name="db_id" nillable="false" type="xsd:long"/>
+            </sequence>
+          </extension>
+        </complexContent>
+      </complexType>
+      <element name="inner_model_node_list">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="inner_model_node_listResponse">
+        <complexType>
+          <sequence>
+            <element name="db_object" type="tns:db_object" minOccurs="0" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="model_node_list">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="MODEL_ID" type="xsd:long"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="model_node_listResponse">
+        <complexType>
+          <sequence>
+            <element name="db_object" type="tns:db_object" minOccurs="0" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="inner_property_value_set">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="NODE_ID" type="xsd:long"/>
+            <element name="PROPERTY_NAME" type="xsd:string"/>
+            <element name="PROPERTY_VALUE" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="inner_property_value_setResponse">
+        <complexType>
+          <sequence>
+            <element name="Response" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="model_property_value_set">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="MODEL_ID" type="xsd:long"/>
+            <element name="NODE_ID" type="xsd:long"/>
+            <element name="PROPERTY_NAME" type="xsd:string"/>
+            <element name="PROPERTY_VALUE" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="model_property_value_setResponse">
+        <complexType>
+          <sequence>
+            <element name="Response" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="inner_model_property_create">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="PROPERTY_TYPE" type="xsd:string"/>
+            <element name="PROPERTY_NAME" type="xsd:string"/>
+            <element name="APPLICABLE_TO" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="inner_model_property_createResponse">
+        <complexType>
+          <sequence>
+            <element name="Response" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="model_property_create">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="MODEL_ID" type="xsd:long"/>
+            <element name="PROPERTY_TYPE" type="xsd:string"/>
+            <element name="PROPERTY_NAME" type="xsd:string"/>
+            <element name="APPLICABLE_TO" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="model_property_createResponse">
+        <complexType>
+          <sequence>
+            <element name="Response" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
       <element name="node_patch_id">
         <complexType>
           <sequence>
@@ -133,7 +937,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -157,8 +961,8 @@
           <extension base="tns:EDMbaseEntity">
             <sequence>
               <element name="item" nillable="false" type="tns:v_item"/>
-              <element name="domain" nillable="false" type="xsd:int"/>
-              <element name="link" nillable="false" type="xsd:int"/>
+              <element name="domain" nillable="false" type="xsd:long"/>
+              <element name="link" nillable="false" type="xsd:long"/>
             </sequence>
           </extension>
         </complexContent>
@@ -174,9 +978,9 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="NODE" type="xsd:int"/>
-            <element name="FILE" type="xsd:int"/>
-            <element name="CREATOR" type="xsd:int"/>
+            <element name="NODE" type="xsd:long"/>
+            <element name="FILE" type="xsd:long"/>
+            <element name="CREATOR" type="xsd:long"/>
             <element name="FILE_TYPE" type="xsd:string"/>
             <element name="LINK_TYPE" type="xsd:string"/>
           </sequence>
@@ -193,7 +997,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="IDS" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="IDS" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
           </sequence>
         </complexType>
       </element>
@@ -208,7 +1012,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -238,7 +1042,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -253,7 +1057,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -277,12 +1081,12 @@
           <extension base="tns:EDMbaseEntity">
             <sequence>
               <element name="item" nillable="false" type="tns:v_item"/>
-              <element name="subject" nillable="false" type="xsd:int"/>
-              <element name="assigned" nillable="false" type="xsd:int"/>
-              <element name="action" nillable="false" type="xsd:int"/>
+              <element name="subject" nillable="false" type="xsd:long"/>
+              <element name="assigned" nillable="false" type="xsd:long"/>
+              <element name="action" nillable="false" type="xsd:long"/>
               <element name="to_start" nillable="false" type="xsd:string"/>
               <element name="to_finish" nillable="false" type="xsd:string"/>
-              <element name="approvals" nillable="false" maxOccurs="unbounded" type="xsd:int"/>
+              <element name="approvals" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
             </sequence>
           </extension>
         </complexContent>
@@ -298,11 +1102,11 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="NODE" type="xsd:int"/>
-            <element name="PERSON" type="xsd:int"/>
-            <element name="METHOD" type="xsd:int"/>
-            <element name="APPROVAL" type="xsd:int"/>
-            <element name="CREATOR" type="xsd:int"/>
+            <element name="NODE" type="xsd:long"/>
+            <element name="PERSON" type="xsd:long"/>
+            <element name="METHOD" type="xsd:long"/>
+            <element name="APPROVAL" type="xsd:long"/>
+            <element name="CREATOR" type="xsd:long"/>
             <element name="TO_START_LESS" type="xsd:string"/>
             <element name="TO_START_GREATER" type="xsd:string"/>
             <element name="TO_FINISH_LESS" type="xsd:string"/>
@@ -324,7 +1128,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="IDS" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="IDS" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
           </sequence>
         </complexType>
       </element>
@@ -339,7 +1143,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -369,7 +1173,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -384,7 +1188,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -403,17 +1207,6 @@
           </sequence>
         </complexType>
       </element>
-      <complexType name="v_attached_file">
-        <complexContent>
-          <extension base="tns:EDMbaseEntity">
-            <sequence>
-              <element name="item" nillable="false" type="tns:v_item"/>
-              <element name="domain" nillable="false" type="xsd:int"/>
-              <element name="file" nillable="false" type="xsd:int"/>
-            </sequence>
-          </extension>
-        </complexContent>
-      </complexType>
       <element name="attached_file_updateResponse">
         <complexType>
           <sequence>
@@ -425,8 +1218,8 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="NODE" type="xsd:int"/>
-            <element name="CREATOR" type="xsd:int"/>
+            <element name="NODE" type="xsd:long"/>
+            <element name="CREATOR" type="xsd:long"/>
             <element name="BEFORE" type="xsd:string"/>
             <element name="AFTER" type="xsd:string"/>
             <element name="ATTACHED_FILE_TYPE" type="xsd:string"/>
@@ -444,7 +1237,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="IDS" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="IDS" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
           </sequence>
         </complexType>
       </element>
@@ -459,7 +1252,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -489,7 +1282,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -504,7 +1297,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -520,8 +1313,8 @@
           <extension base="tns:EDMbaseEntity">
             <sequence>
               <element name="item" nillable="false" type="tns:v_item"/>
-              <element name="assignment" nillable="false" type="xsd:int"/>
-              <element name="domain" nillable="false" type="xsd:int"/>
+              <element name="assignment" nillable="false" type="xsd:long"/>
+              <element name="domain" nillable="false" type="xsd:long"/>
               <element name="values" nillable="false" maxOccurs="unbounded" type="xsd:string"/>
             </sequence>
           </extension>
@@ -546,9 +1339,9 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="NODE" type="xsd:int"/>
-            <element name="PROPERTY" type="xsd:int"/>
-            <element name="CREATOR" type="xsd:int"/>
+            <element name="NODE" type="xsd:long"/>
+            <element name="PROPERTY" type="xsd:long"/>
+            <element name="CREATOR" type="xsd:long"/>
             <element name="BEFORE" type="xsd:string"/>
             <element name="AFTER" type="xsd:string"/>
             <element name="PROPERTY_TYPE" type="xsd:string"/>
@@ -567,7 +1360,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="IDS" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="IDS" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
           </sequence>
         </complexType>
       </element>
@@ -582,7 +1375,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -612,7 +1405,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -627,7 +1420,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -651,8 +1444,8 @@
           <extension base="tns:EDMbaseEntity">
             <sequence>
               <element name="item" nillable="false" type="tns:v_item"/>
-              <element name="assignment" nillable="false" type="xsd:int"/>
-              <element name="domain" nillable="false" type="xsd:int"/>
+              <element name="assignment" nillable="false" type="xsd:long"/>
+              <element name="domain" nillable="false" type="xsd:long"/>
             </sequence>
           </extension>
         </complexContent>
@@ -668,9 +1461,9 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="NODE" type="xsd:int"/>
-            <element name="PERSON" type="xsd:int"/>
-            <element name="CREATOR" type="xsd:int"/>
+            <element name="NODE" type="xsd:long"/>
+            <element name="PERSON" type="xsd:long"/>
+            <element name="CREATOR" type="xsd:long"/>
             <element name="BEFORE" type="xsd:string"/>
             <element name="AFTER" type="xsd:string"/>
             <element name="PERSON_TYPE" type="xsd:string"/>
@@ -689,7 +1482,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="IDS" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="IDS" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
           </sequence>
         </complexType>
       </element>
@@ -704,7 +1497,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -734,7 +1527,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -749,7 +1542,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -773,8 +1566,8 @@
           <extension base="tns:EDMbaseEntity">
             <sequence>
               <element name="item" nillable="false" type="tns:v_item"/>
-              <element name="assignment" nillable="false" type="xsd:int"/>
-              <element name="domain" nillable="false" type="xsd:int"/>
+              <element name="assignment" nillable="false" type="xsd:long"/>
+              <element name="domain" nillable="false" type="xsd:long"/>
             </sequence>
           </extension>
         </complexContent>
@@ -790,9 +1583,9 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="NODE" type="xsd:int"/>
-            <element name="ORGANIZATION" type="xsd:int"/>
-            <element name="CREATOR" type="xsd:int"/>
+            <element name="NODE" type="xsd:long"/>
+            <element name="ORGANIZATION" type="xsd:long"/>
+            <element name="CREATOR" type="xsd:long"/>
             <element name="BEFORE" type="xsd:string"/>
             <element name="AFTER" type="xsd:string"/>
             <element name="ORGANIZATION_TYPE" type="xsd:string"/>
@@ -811,7 +1604,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="IDS" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="IDS" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
           </sequence>
         </complexType>
       </element>
@@ -826,7 +1619,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -856,7 +1649,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -871,7 +1664,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -895,7 +1688,7 @@
           <extension base="tns:EDMbaseEntity">
             <sequence>
               <element name="item" nillable="false" type="tns:v_item"/>
-              <element name="assignment" nillable="false" type="xsd:int"/>
+              <element name="assignment" nillable="false" type="xsd:long"/>
               <element name="domain" nillable="false" type="tns:specified_master_item"/>
             </sequence>
           </extension>
@@ -905,7 +1698,7 @@
         <complexContent>
           <extension base="tns:EDMbaseEntity">
             <sequence>
-              <element name="instance_id" nillable="false" type="xsd:int"/>
+              <element name="instance_id" nillable="false" type="xsd:long"/>
               <element name="ms_type" nillable="false" type="xsd:string"/>
             </sequence>
           </extension>
@@ -922,10 +1715,10 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="NODE" type="xsd:int"/>
-            <element name="TASK" type="xsd:int"/>
-            <element name="APPROVAL" type="xsd:int"/>
-            <element name="CREATOR" type="xsd:int"/>
+            <element name="NODE" type="xsd:long"/>
+            <element name="TASK" type="xsd:long"/>
+            <element name="APPROVAL" type="xsd:long"/>
+            <element name="CREATOR" type="xsd:long"/>
             <element name="BEFORE" type="xsd:string"/>
             <element name="AFTER" type="xsd:string"/>
             <element name="APPROVAL_TYPE" type="xsd:string"/>
@@ -944,7 +1737,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="IDS" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="IDS" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
           </sequence>
         </complexType>
       </element>
@@ -959,7 +1752,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -989,7 +1782,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
             <element name="MS_TYPE" type="xsd:string"/>
           </sequence>
         </complexType>
@@ -1005,9 +1798,9 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="TARGET_NODE_ID" type="xsd:int"/>
+            <element name="TARGET_NODE_ID" type="xsd:long"/>
             <element name="SOURCE_MODEL" type="xsd:string"/>
-            <element name="SOURCE_ITEM_ID" type="xsd:int"/>
+            <element name="SOURCE_ITEM_ID" type="xsd:long"/>
             <element name="USER_COMMENT" type="xsd:string"/>
             <element name="FORK_DATE" type="xsd:string"/>
           </sequence>
@@ -1025,7 +1818,7 @@
           <extension base="tns:EDMbaseEntity">
             <sequence>
               <element name="target" nillable="false" type="tns:v_node"/>
-              <element name="log_id" nillable="false" type="xsd:int"/>
+              <element name="log_id" nillable="false" type="xsd:long"/>
             </sequence>
           </extension>
         </complexContent>
@@ -1038,16 +1831,16 @@
               <element name="id" nillable="false" type="xsd:string"/>
               <element name="realization" nillable="false" type="xsd:string"/>
               <element name="parents" nillable="false" maxOccurs="unbounded" type="tns:specified_master_item"/>
-              <element name="baselines" nillable="false" maxOccurs="unbounded" type="xsd:int"/>
-              <element name="file_shortcuts" nillable="false" maxOccurs="unbounded" type="xsd:int"/>
-              <element name="node_shortcuts" nillable="false" maxOccurs="unbounded" type="xsd:int"/>
-              <element name="back_links" nillable="false" maxOccurs="unbounded" type="xsd:int"/>
-              <element name="assigned_persons" nillable="false" maxOccurs="unbounded" type="xsd:int"/>
-              <element name="assigned_organizations" nillable="false" maxOccurs="unbounded" type="xsd:int"/>
-              <element name="attached_files" nillable="false" maxOccurs="unbounded" type="xsd:int"/>
-              <element name="assigned_approvals" nillable="false" maxOccurs="unbounded" type="xsd:int"/>
-              <element name="assigned_properties" nillable="false" maxOccurs="unbounded" type="xsd:int"/>
-              <element name="tasks" nillable="false" maxOccurs="unbounded" type="xsd:int"/>
+              <element name="baselines" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
+              <element name="file_shortcuts" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
+              <element name="node_shortcuts" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
+              <element name="back_links" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
+              <element name="assigned_persons" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
+              <element name="assigned_organizations" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
+              <element name="attached_files" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
+              <element name="assigned_approvals" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
+              <element name="assigned_properties" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
+              <element name="tasks" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
             </sequence>
           </extension>
         </complexContent>
@@ -1061,8 +1854,8 @@
               <element name="editable" nillable="false" type="xsd:boolean"/>
               <element name="version" nillable="false" type="xsd:string"/>
               <element name="versions" nillable="false" maxOccurs="unbounded" type="xsd:string"/>
-              <element name="ancestor" nillable="false" type="xsd:int"/>
-              <element name="nodes" nillable="false" maxOccurs="unbounded" type="xsd:int"/>
+              <element name="ancestor" nillable="false" type="xsd:long"/>
+              <element name="nodes" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
             </sequence>
           </extension>
         </complexContent>
@@ -1071,7 +1864,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="SUBJECT" type="xsd:int"/>
+            <element name="SUBJECT" type="xsd:long"/>
             <element name="SUBSTITUTE" type="xsd:string"/>
             <element name="REMOVE_ALL_VERSIONS" type="xsd:boolean"/>
           </sequence>
@@ -1080,7 +1873,7 @@
       <element name="node_delete_versionResponse">
         <complexType>
           <sequence>
-            <element name="Response" type="xsd:int"/>
+            <element name="Response" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -1088,7 +1881,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -1103,8 +1896,8 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="SOURCE" type="xsd:int"/>
-            <element name="PARENTS" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="SOURCE" type="xsd:long"/>
+            <element name="PARENTS" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
             <element name="SCELETON_ONLY" type="xsd:boolean"/>
           </sequence>
         </complexType>
@@ -1120,9 +1913,9 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
-            <element name="OLD_PARENTS" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
-            <element name="NEW_PARENTS" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="ID" type="xsd:long"/>
+            <element name="OLD_PARENTS" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="NEW_PARENTS" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
           </sequence>
         </complexType>
       </element>
@@ -1137,7 +1930,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -1152,7 +1945,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -1167,7 +1960,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -1182,7 +1975,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -1222,7 +2015,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
             <element name="WITH_HISTORY" type="xsd:boolean"/>
             <element name="USER_COMMENT" type="xsd:string"/>
             <element name="TARGET_MODEL" type="xsd:string"/>
@@ -1243,7 +2036,7 @@
             <sequence>
               <element name="repository" nillable="false" type="xsd:string"/>
               <element name="model_name" nillable="false" type="xsd:string"/>
-              <element name="log_id" nillable="false" type="xsd:int"/>
+              <element name="log_id" nillable="false" type="xsd:long"/>
             </sequence>
           </extension>
         </complexContent>
@@ -1252,7 +2045,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
             <element name="WITH_HISTORY" type="xsd:boolean"/>
             <element name="USER_COMMENT" type="xsd:string"/>
             <element name="TARGET_MODEL" type="xsd:string"/>
@@ -1271,8 +2064,8 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="NODE_ID" type="xsd:int"/>
-            <element name="BRANCH" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="NODE_ID" type="xsd:long"/>
+            <element name="BRANCH" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
             <element name="INHERIT_CHILDREN" type="xsd:boolean"/>
             <element name="INHERIT_FILES" type="xsd:boolean"/>
           </sequence>
@@ -1289,9 +2082,9 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="REPLACE_IN" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
-            <element name="ADD_TO" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
-            <element name="NODE_ID" type="xsd:int"/>
+            <element name="REPLACE_IN" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="ADD_TO" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="NODE_ID" type="xsd:long"/>
             <element name="VERSION_TAG" type="xsd:string"/>
           </sequence>
         </complexType>
@@ -1307,10 +2100,10 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
             <element name="NEW_VERSION" type="xsd:string"/>
-            <element name="REMOVE_OLD_FORM" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
-            <element name="ADD_NEW_TO" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="REMOVE_OLD_FORM" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="ADD_NEW_TO" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
             <element name="INHERIT_CHILDREN" type="xsd:boolean"/>
             <element name="INHERIT_FILES" type="xsd:boolean"/>
           </sequence>
@@ -1323,11 +2116,27 @@
           </sequence>
         </complexType>
       </element>
+      <element name="node_get_children">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="ID" type="xsd:long"/>
+            <element name="VERSION" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="node_get_childrenResponse">
+        <complexType>
+          <sequence>
+            <element name="v_node" type="tns:v_node" minOccurs="0" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
       <element name="node_list">
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="IDS" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="IDS" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
           </sequence>
         </complexType>
       </element>
@@ -1338,11 +2147,42 @@
           </sequence>
         </complexType>
       </element>
+      <element name="node_get_whole_branch">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="ID" type="xsd:long"/>
+            <element name="VERSION" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="node_get_whole_branchResponse">
+        <complexType>
+          <sequence>
+            <element name="t_nodus" type="tns:t_nodus"/>
+          </sequence>
+        </complexType>
+      </element>
+      <complexType name="t_nodus">
+        <complexContent>
+          <extension base="tns:EDMbaseEntity">
+            <sequence>
+              <element name="item" nillable="false" type="tns:v_item"/>
+              <element name="locked" nillable="false" type="xsd:boolean"/>
+              <element name="editable" nillable="false" type="xsd:boolean"/>
+              <element name="version" nillable="false" type="xsd:string"/>
+              <element name="versions" nillable="false" maxOccurs="unbounded" type="xsd:string"/>
+              <element name="ancestor" nillable="false" type="xsd:long"/>
+              <element name="nodes" nillable="false" maxOccurs="unbounded" type="tns:t_nodus"/>
+            </sequence>
+          </extension>
+        </complexContent>
+      </complexType>
       <element name="node_get">
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
             <element name="VERSION" type="xsd:string"/>
           </sequence>
         </complexType>
@@ -1359,7 +2199,7 @@
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
             <element name="SUBJECT" type="tns:v_node"/>
-            <element name="IN_DOMAIN_OF_NODES" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="IN_DOMAIN_OF_NODES" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
           </sequence>
         </complexType>
       </element>
@@ -1374,7 +2214,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -1389,7 +2229,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -1404,7 +2244,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
             <element name="CLIENT_TIMESTAMP" type="xsd:string"/>
           </sequence>
         </complexType>
@@ -1420,7 +2260,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
             <element name="RETURN_ALL" type="xsd:boolean"/>
             <element name="NOT_VALIDATED_ONLY" type="xsd:boolean"/>
           </sequence>
@@ -1437,13 +2277,13 @@
         <complexContent>
           <extension base="tns:EDMbaseEntity">
             <sequence>
-              <element name="attachment_id" nillable="false" type="xsd:int"/>
-              <element name="file_id" nillable="false" type="xsd:int"/>
+              <element name="attachment_id" nillable="false" type="xsd:long"/>
+              <element name="file_id" nillable="false" type="xsd:long"/>
               <element name="file_type" nillable="false" type="xsd:string"/>
               <element name="file_name" nillable="false" type="xsd:string"/>
               <element name="file_introduced" nillable="false" type="xsd:string"/>
               <element name="file_creator" nillable="false" type="xsd:string"/>
-              <element name="node_id" nillable="false" type="xsd:int"/>
+              <element name="node_id" nillable="false" type="xsd:long"/>
               <element name="node_path_name" nillable="false" type="xsd:string"/>
               <element name="valid" nillable="false" type="tns:logical"/>
             </sequence>
@@ -1461,7 +2301,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
             <element name="FLAG" type="xsd:boolean"/>
           </sequence>
         </complexType>
@@ -1477,7 +2317,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
             <element name="FLAG" type="xsd:boolean"/>
           </sequence>
         </complexType>
@@ -1523,7 +2363,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
             <element name="LOG_FILE" type="xsd:string"/>
           </sequence>
         </complexType>
@@ -1531,7 +2371,7 @@
       <element name="file_get_validation_logResponse">
         <complexType>
           <sequence>
-            <element name="Response" type="xsd:int"/>
+            <element name="Response" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -1539,46 +2379,15 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
             <element name="CAX_FILE" type="tns:v_file"/>
           </sequence>
         </complexType>
       </element>
-      <complexType name="v_file">
-        <complexContent>
-          <extension base="tns:EDMbaseEntity">
-            <sequence>
-              <element name="item" nillable="false" type="tns:v_item"/>
-              <element name="extension" nillable="false" type="xsd:string"/>
-              <element name="owner" nillable="false" type="xsd:int"/>
-              <element name="produced_by" nillable="false" type="xsd:string"/>
-              <element name="interface" nillable="false" type="xsd:string"/>
-              <element name="OS" nillable="false" type="xsd:string"/>
-              <element name="original_name" nillable="false" type="xsd:string"/>
-              <element name="original_format" nillable="false" type="xsd:string"/>
-              <element name="check_sum" nillable="false" type="xsd:string"/>
-              <element name="size" nillable="false" type="xsd:int"/>
-              <element name="body" nillable="false" type="xsd:int"/>
-              <element name="link" nillable="false" type="xsd:string"/>
-              <element name="express_schema" nillable="false" type="xsd:string"/>
-              <element name="model_name" nillable="false" type="xsd:string"/>
-              <element name="CAX" nillable="false" type="xsd:int"/>
-              <element name="validation" nillable="false" type="xsd:int"/>
-              <element name="import_log" nillable="false" type="xsd:int"/>
-              <element name="instances" nillable="false" type="xsd:int"/>
-              <element name="errors" nillable="false" type="xsd:int"/>
-              <element name="validation_options" nillable="false" type="xsd:int"/>
-              <element name="warnings" nillable="false" type="xsd:int"/>
-              <element name="derived_files" nillable="false" maxOccurs="unbounded" type="xsd:int"/>
-              <element name="derived_from" nillable="false" maxOccurs="unbounded" type="xsd:int"/>
-            </sequence>
-          </extension>
-        </complexContent>
-      </complexType>
       <element name="file_CAX_setResponse">
         <complexType>
           <sequence>
-            <element name="Response" type="xsd:int"/>
+            <element name="Response" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -1586,7 +2395,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
             <element name="DOWNLOADING_FILE" type="xsd:string"/>
           </sequence>
         </complexType>
@@ -1594,7 +2403,7 @@
       <element name="file_body_getResponse">
         <complexType>
           <sequence>
-            <element name="Response" type="xsd:int"/>
+            <element name="Response" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -1602,8 +2411,8 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="IDS" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
-            <element name="OPTIONS" type="xsd:int"/>
+            <element name="IDS" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="OPTIONS" type="xsd:long"/>
             <element name="LOG_FILE" type="xsd:string"/>
             <element name="STORE_RESULT" type="xsd:boolean"/>
           </sequence>
@@ -1620,12 +2429,12 @@
         <complexContent>
           <extension base="tns:EDMbaseEntity">
             <sequence>
-              <element name="file" nillable="false" type="xsd:int"/>
+              <element name="file" nillable="false" type="xsd:long"/>
               <element name="file_name" nillable="false" type="xsd:string"/>
               <element name="parent_folder" nillable="false" type="xsd:string"/>
-              <element name="validation_options" nillable="false" type="xsd:int"/>
-              <element name="errors" nillable="false" type="xsd:int"/>
-              <element name="warnings" nillable="false" type="xsd:int"/>
+              <element name="validation_options" nillable="false" type="xsd:long"/>
+              <element name="errors" nillable="false" type="xsd:long"/>
+              <element name="warnings" nillable="false" type="xsd:long"/>
             </sequence>
           </extension>
         </complexContent>
@@ -1634,8 +2443,8 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
-            <element name="OPTIONS" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
+            <element name="OPTIONS" type="xsd:long"/>
             <element name="LOG_FILE" type="xsd:string"/>
             <element name="STORE_RESULT" type="xsd:boolean"/>
           </sequence>
@@ -1652,7 +2461,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
             <element name="SRC_FILE" type="xsd:string"/>
             <element name="RESULT_FILE" type="xsd:string"/>
             <element name="LOG_FILE" type="xsd:string"/>
@@ -1663,7 +2472,7 @@
       <element name="file_CAX_generateResponse">
         <complexType>
           <sequence>
-            <element name="Response" type="xsd:int"/>
+            <element name="Response" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -1671,7 +2480,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
             <element name="MODEL_NAME" type="xsd:string"/>
             <element name="FILE_UPLOAD" type="xsd:string"/>
             <element name="IMPORT_LOG" type="xsd:string"/>
@@ -1689,8 +2498,8 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
-            <element name="SIZE" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
+            <element name="SIZE" type="xsd:long"/>
             <element name="FILE_UPLOAD" type="xsd:string"/>
           </sequence>
         </complexType>
@@ -1706,7 +2515,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -1736,7 +2545,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="IDS" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="IDS" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
           </sequence>
         </complexType>
       </element>
@@ -1751,7 +2560,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -1795,7 +2604,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -1819,7 +2628,7 @@
           <extension base="tns:EDMbaseEntity">
             <sequence>
               <element name="item" nillable="false" type="tns:v_item"/>
-              <element name="commented_item" nillable="false" type="xsd:int"/>
+              <element name="commented_item" nillable="false" type="xsd:long"/>
             </sequence>
           </extension>
         </complexContent>
@@ -1836,7 +2645,7 @@
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
             <element name="SUBJ" type="tns:specified_master_item"/>
-            <element name="AUTHOR" type="xsd:int"/>
+            <element name="AUTHOR" type="xsd:long"/>
             <element name="AFTER" type="xsd:string"/>
             <element name="BEFORE" type="xsd:string"/>
           </sequence>
@@ -1853,7 +2662,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="IDS" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="IDS" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
           </sequence>
         </complexType>
       </element>
@@ -1868,7 +2677,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -1912,7 +2721,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -1951,8 +2760,8 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="PBS" type="xsd:int"/>
-            <element name="CREATOR" type="xsd:int"/>
+            <element name="PBS" type="xsd:long"/>
+            <element name="CREATOR" type="xsd:long"/>
             <element name="VERSION" type="xsd:string"/>
             <element name="KIND" type="xsd:string"/>
           </sequence>
@@ -1969,7 +2778,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="IDS" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="IDS" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
           </sequence>
         </complexType>
       </element>
@@ -1984,7 +2793,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -2028,7 +2837,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -2056,8 +2865,8 @@
               <element name="units" nillable="false" type="xsd:string"/>
               <element name="mandatory" nillable="false" type="xsd:boolean"/>
               <element name="scalar" nillable="false" type="xsd:boolean"/>
-              <element name="low_dimension" nillable="false" type="xsd:int"/>
-              <element name="high_dimension" nillable="false" type="xsd:int"/>
+              <element name="low_dimension" nillable="false" type="xsd:long"/>
+              <element name="high_dimension" nillable="false" type="xsd:long"/>
               <element name="default_value" nillable="false" type="xsd:string"/>
             </sequence>
           </extension>
@@ -2074,8 +2883,8 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="PBS" type="xsd:int"/>
-            <element name="CREATOR" type="xsd:int"/>
+            <element name="PBS" type="xsd:long"/>
+            <element name="CREATOR" type="xsd:long"/>
             <element name="VERSION" type="xsd:string"/>
             <element name="KIND" type="xsd:string"/>
             <element name="APPLICABLE_TO" type="xsd:string"/>
@@ -2093,7 +2902,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="IDS" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="IDS" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
           </sequence>
         </complexType>
       </element>
@@ -2108,7 +2917,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -2152,7 +2961,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -2191,8 +3000,8 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="PBS" type="xsd:int"/>
-            <element name="CREATOR" type="xsd:int"/>
+            <element name="PBS" type="xsd:long"/>
+            <element name="CREATOR" type="xsd:long"/>
             <element name="VERSION" type="xsd:string"/>
             <element name="KIND" type="xsd:string"/>
           </sequence>
@@ -2209,7 +3018,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="IDS" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="IDS" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
           </sequence>
         </complexType>
       </element>
@@ -2224,7 +3033,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -2268,8 +3077,8 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
-            <element name="PERSON" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
+            <element name="PERSON" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -2285,7 +3094,7 @@
           <extension base="tns:EDMbaseEntity">
             <sequence>
               <element name="item" nillable="false" type="tns:v_item"/>
-              <element name="persons" nillable="false" maxOccurs="unbounded" type="xsd:int"/>
+              <element name="persons" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
             </sequence>
           </extension>
         </complexContent>
@@ -2294,8 +3103,8 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
-            <element name="PERSON" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
+            <element name="PERSON" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -2310,7 +3119,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -2340,8 +3149,8 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="PBS" type="xsd:int"/>
-            <element name="PERSON" type="xsd:int"/>
+            <element name="PBS" type="xsd:long"/>
+            <element name="PERSON" type="xsd:long"/>
             <element name="VERSION" type="xsd:string"/>
             <element name="ROLE" type="xsd:string"/>
           </sequence>
@@ -2358,7 +3167,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="IDS" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="IDS" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
           </sequence>
         </complexType>
       </element>
@@ -2373,7 +3182,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -2417,7 +3226,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -2442,7 +3251,7 @@
             <sequence>
               <element name="item" nillable="false" type="tns:v_item"/>
               <element name="login" nillable="false" type="xsd:string"/>
-              <element name="organizations" nillable="false" maxOccurs="unbounded" type="xsd:int"/>
+              <element name="organizations" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
             </sequence>
           </extension>
         </complexContent>
@@ -2458,8 +3267,8 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="PBS" type="xsd:int"/>
-            <element name="ORGANIZATION" type="xsd:int"/>
+            <element name="PBS" type="xsd:long"/>
+            <element name="ORGANIZATION" type="xsd:long"/>
             <element name="VERSION" type="xsd:string"/>
             <element name="ROLE" type="xsd:string"/>
           </sequence>
@@ -2505,7 +3314,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="IDS" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="IDS" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
           </sequence>
         </complexType>
       </element>
@@ -2520,7 +3329,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -2578,7 +3387,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
             <element name="LOG_HEADER" type="xsd:string"/>
             <element name="WITH_HISTORY" type="xsd:boolean"/>
             <element name="TARGET_MODEL" type="xsd:string"/>
@@ -2597,7 +3406,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
             <element name="WITH_HISTORY" type="xsd:boolean"/>
             <element name="USER_COMMENT" type="xsd:string"/>
             <element name="TARGET_MODEL" type="xsd:string"/>
@@ -2616,7 +3425,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -2641,7 +3450,7 @@
             <sequence>
               <element name="item" nillable="false" type="tns:v_item"/>
               <element name="editable" nillable="false" type="xsd:boolean"/>
-              <element name="nodes" nillable="false" maxOccurs="unbounded" type="xsd:int"/>
+              <element name="nodes" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
               <element name="exported_to" nillable="false" maxOccurs="unbounded" type="xsd:string"/>
             </sequence>
           </extension>
@@ -2672,7 +3481,7 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="ID" type="xsd:int"/>
+            <element name="ID" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -2730,15 +3539,15 @@
         <complexType>
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
-            <element name="PBS_ITEMS" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
-            <element name="DOMAIN" type="xsd:int"/>
+            <element name="PBS_ITEMS" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="DOMAIN" type="xsd:long"/>
             <element name="DOMAINS" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
             <element name="LATEST_VERSION" type="xsd:boolean"/>
             <element name="BEFORE" type="xsd:string"/>
             <element name="AFTER" type="xsd:string"/>
-            <element name="CREATORS" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
-            <element name="PAGE" type="xsd:int"/>
-            <element name="START_FROM" type="xsd:int"/>
+            <element name="CREATORS" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="PAGE" type="xsd:long"/>
+            <element name="START_FROM" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -2757,15 +3566,15 @@
             <element name="ROLES" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
             <element name="CASE_SENSITIVE" type="xsd:boolean"/>
             <element name="EXACT_MATCH" type="xsd:boolean"/>
-            <element name="DOMAIN" type="xsd:int"/>
+            <element name="DOMAIN" type="xsd:long"/>
             <element name="DOMAINS" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
             <element name="LATEST_VERSION" type="xsd:boolean"/>
             <element name="BEFORE" type="xsd:string"/>
             <element name="AFTER" type="xsd:string"/>
-            <element name="CREATORS" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="CREATORS" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
             <element name="TYPES" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
-            <element name="PAGE" type="xsd:int"/>
-            <element name="START_FROM" type="xsd:int"/>
+            <element name="PAGE" type="xsd:long"/>
+            <element name="START_FROM" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -2781,7 +3590,7 @@
           <sequence>
             <element name="EDMsessionId" type="xsd:string"/>
             <element name="SOURCE_MODEL" type="xsd:string"/>
-            <element name="SOURCE_ITEM_ID" type="xsd:int"/>
+            <element name="SOURCE_ITEM_ID" type="xsd:long"/>
             <element name="TARGET_VERSION" type="xsd:string"/>
             <element name="USER_COMMENT" type="xsd:string"/>
             <element name="FORK_DATE" type="xsd:string"/>
@@ -2853,11 +3662,11 @@
             <sequence>
               <element name="nodus" nillable="false" type="tns:v_nodus"/>
               <element name="parents" nillable="false" maxOccurs="unbounded" type="xsd:string"/>
-              <element name="persons" nillable="false" maxOccurs="unbounded" type="xsd:int"/>
-              <element name="organizations" nillable="false" maxOccurs="unbounded" type="xsd:int"/>
-              <element name="approvals" nillable="false" maxOccurs="unbounded" type="xsd:int"/>
-              <element name="properties" nillable="false" maxOccurs="unbounded" type="xsd:int"/>
-              <element name="methods" nillable="false" maxOccurs="unbounded" type="xsd:int"/>
+              <element name="persons" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
+              <element name="organizations" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
+              <element name="approvals" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
+              <element name="properties" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
+              <element name="methods" nillable="false" maxOccurs="unbounded" type="xsd:long"/>
             </sequence>
           </extension>
         </complexContent>
@@ -2937,6 +3746,21 @@
         <complexType>
           <sequence>
             <element name="v_pbs" type="tns:v_pbs"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="pbs_get_whole_tree">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="VERSION" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="pbs_get_whole_treeResponse">
+        <complexType>
+          <sequence>
+            <element name="t_nodus" type="tns:t_nodus"/>
           </sequence>
         </complexType>
       </element>
@@ -3075,6 +3899,21 @@
           </sequence>
         </complexType>
       </element>
+      <element name="system_text_error">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="ERROR" type="xsd:long"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="system_text_errorResponse">
+        <complexType>
+          <sequence>
+            <element name="Response" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
       <element name="system_get_version">
         <complexType>
           <sequence>
@@ -3086,6 +3925,20 @@
         <complexType>
           <sequence>
             <element name="Response" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="fix_extension">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="fix_extensionResponse">
+        <complexType>
+          <sequence>
+            <element name="Response" type="xsd:long"/>
           </sequence>
         </complexType>
       </element>
@@ -3179,11 +4032,17 @@
       </element>
     </schema>
   </wsdl:types>
-  <wsdl:message name="test_on_error_doResponse">
-    <wsdl:part name="parameters" element="tns:test_on_error_doResponse"/>
+  <wsdl:message name="test_blob_sizeResponse">
+    <wsdl:part name="parameters" element="tns:test_blob_sizeResponse"/>
   </wsdl:message>
-  <wsdl:message name="test_on_error_doRequest">
-    <wsdl:part name="parameters" element="tns:test_on_error_do"/>
+  <wsdl:message name="test_blob_sizeRequest">
+    <wsdl:part name="parameters" element="tns:test_blob_size"/>
+  </wsdl:message>
+  <wsdl:message name="test_mappingResponse">
+    <wsdl:part name="parameters" element="tns:test_mappingResponse"/>
+  </wsdl:message>
+  <wsdl:message name="test_mappingRequest">
+    <wsdl:part name="parameters" element="tns:test_mapping"/>
   </wsdl:message>
   <wsdl:message name="test_pbs_assignments_selectResponse">
     <wsdl:part name="parameters" element="tns:test_pbs_assignments_selectResponse"/>
@@ -3196,6 +4055,222 @@
   </wsdl:message>
   <wsdl:message name="test_pbs_searchRequest">
     <wsdl:part name="parameters" element="tns:test_pbs_search"/>
+  </wsdl:message>
+  <wsdl:message name="test__echoResponse">
+    <wsdl:part name="parameters" element="tns:test__echoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="test__echoRequest">
+    <wsdl:part name="parameters" element="tns:test__echo"/>
+  </wsdl:message>
+  <wsdl:message name="stm_test_import_file_systemResponse">
+    <wsdl:part name="parameters" element="tns:stm_test_import_file_systemResponse"/>
+  </wsdl:message>
+  <wsdl:message name="stm_test_import_file_systemRequest">
+    <wsdl:part name="parameters" element="tns:stm_test_import_file_system"/>
+  </wsdl:message>
+  <wsdl:message name="stm_import_file_systemResponse">
+    <wsdl:part name="parameters" element="tns:stm_import_file_systemResponse"/>
+  </wsdl:message>
+  <wsdl:message name="stm_import_file_systemRequest">
+    <wsdl:part name="parameters" element="tns:stm_import_file_system"/>
+  </wsdl:message>
+  <wsdl:message name="stm_list_node_typesResponse">
+    <wsdl:part name="parameters" element="tns:stm_list_node_typesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="stm_list_node_typesRequest">
+    <wsdl:part name="parameters" element="tns:stm_list_node_types"/>
+  </wsdl:message>
+  <wsdl:message name="stm_file_deleteResponse">
+    <wsdl:part name="parameters" element="tns:stm_file_deleteResponse"/>
+  </wsdl:message>
+  <wsdl:message name="stm_file_deleteRequest">
+    <wsdl:part name="parameters" element="tns:stm_file_delete"/>
+  </wsdl:message>
+  <wsdl:message name="stm_node_deleteResponse">
+    <wsdl:part name="parameters" element="tns:stm_node_deleteResponse"/>
+  </wsdl:message>
+  <wsdl:message name="stm_node_deleteRequest">
+    <wsdl:part name="parameters" element="tns:stm_node_delete"/>
+  </wsdl:message>
+  <wsdl:message name="stm_get_latest_remarksResponse">
+    <wsdl:part name="parameters" element="tns:stm_get_latest_remarksResponse"/>
+  </wsdl:message>
+  <wsdl:message name="stm_get_latest_remarksRequest">
+    <wsdl:part name="parameters" element="tns:stm_get_latest_remarks"/>
+  </wsdl:message>
+  <wsdl:message name="stm_withdraw_resolutionResponse">
+    <wsdl:part name="parameters" element="tns:stm_withdraw_resolutionResponse"/>
+  </wsdl:message>
+  <wsdl:message name="stm_withdraw_resolutionRequest">
+    <wsdl:part name="parameters" element="tns:stm_withdraw_resolution"/>
+  </wsdl:message>
+  <wsdl:message name="stm_node_add_resolutionResponse">
+    <wsdl:part name="parameters" element="tns:stm_node_add_resolutionResponse"/>
+  </wsdl:message>
+  <wsdl:message name="stm_node_add_resolutionRequest">
+    <wsdl:part name="parameters" element="tns:stm_node_add_resolution"/>
+  </wsdl:message>
+  <wsdl:message name="stm_list_resolutions_awalable_for_meResponse">
+    <wsdl:part name="parameters" element="tns:stm_list_resolutions_awalable_for_meResponse"/>
+  </wsdl:message>
+  <wsdl:message name="stm_list_resolutions_awalable_for_meRequest">
+    <wsdl:part name="parameters" element="tns:stm_list_resolutions_awalable_for_me"/>
+  </wsdl:message>
+  <wsdl:message name="stm_list_awalable_resolutionsResponse">
+    <wsdl:part name="parameters" element="tns:stm_list_awalable_resolutionsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="stm_list_awalable_resolutionsRequest">
+    <wsdl:part name="parameters" element="tns:stm_list_awalable_resolutions"/>
+  </wsdl:message>
+  <wsdl:message name="stm_withdraw_remarkResponse">
+    <wsdl:part name="parameters" element="tns:stm_withdraw_remarkResponse"/>
+  </wsdl:message>
+  <wsdl:message name="stm_withdraw_remarkRequest">
+    <wsdl:part name="parameters" element="tns:stm_withdraw_remark"/>
+  </wsdl:message>
+  <wsdl:message name="stm_add_remarkResponse">
+    <wsdl:part name="parameters" element="tns:stm_add_remarkResponse"/>
+  </wsdl:message>
+  <wsdl:message name="stm_add_remarkRequest">
+    <wsdl:part name="parameters" element="tns:stm_add_remark"/>
+  </wsdl:message>
+  <wsdl:message name="stm_node_get_filesResponse">
+    <wsdl:part name="parameters" element="tns:stm_node_get_filesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="stm_node_get_filesRequest">
+    <wsdl:part name="parameters" element="tns:stm_node_get_files"/>
+  </wsdl:message>
+  <wsdl:message name="stm_node_get_resolutionsResponse">
+    <wsdl:part name="parameters" element="tns:stm_node_get_resolutionsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="stm_node_get_resolutionsRequest">
+    <wsdl:part name="parameters" element="tns:stm_node_get_resolutions"/>
+  </wsdl:message>
+  <wsdl:message name="stm_node_get_remarksResponse">
+    <wsdl:part name="parameters" element="tns:stm_node_get_remarksResponse"/>
+  </wsdl:message>
+  <wsdl:message name="stm_node_get_remarksRequest">
+    <wsdl:part name="parameters" element="tns:stm_node_get_remarks"/>
+  </wsdl:message>
+  <wsdl:message name="stm_node_get_propertiesResponse">
+    <wsdl:part name="parameters" element="tns:stm_node_get_propertiesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="stm_node_get_propertiesRequest">
+    <wsdl:part name="parameters" element="tns:stm_node_get_properties"/>
+  </wsdl:message>
+  <wsdl:message name="stm_file_extractResponse">
+    <wsdl:part name="parameters" element="tns:stm_file_extractResponse"/>
+  </wsdl:message>
+  <wsdl:message name="stm_file_extractRequest">
+    <wsdl:part name="parameters" element="tns:stm_file_extract"/>
+  </wsdl:message>
+  <wsdl:message name="stm_node_assign_fileResponse">
+    <wsdl:part name="parameters" element="tns:stm_node_assign_fileResponse"/>
+  </wsdl:message>
+  <wsdl:message name="stm_node_assign_fileRequest">
+    <wsdl:part name="parameters" element="tns:stm_node_assign_file"/>
+  </wsdl:message>
+  <wsdl:message name="stm_list_file_typesResponse">
+    <wsdl:part name="parameters" element="tns:stm_list_file_typesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="stm_list_file_typesRequest">
+    <wsdl:part name="parameters" element="tns:stm_list_file_types"/>
+  </wsdl:message>
+  <wsdl:message name="stm_node_get_representationResponse">
+    <wsdl:part name="parameters" element="tns:stm_node_get_representationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="stm_node_get_representationRequest">
+    <wsdl:part name="parameters" element="tns:stm_node_get_representation"/>
+  </wsdl:message>
+  <wsdl:message name="stm_node_get_file_systemResponse">
+    <wsdl:part name="parameters" element="tns:stm_node_get_file_systemResponse"/>
+  </wsdl:message>
+  <wsdl:message name="stm_node_get_file_systemRequest">
+    <wsdl:part name="parameters" element="tns:stm_node_get_file_system"/>
+  </wsdl:message>
+  <wsdl:message name="stm_open_nodeResponse">
+    <wsdl:part name="parameters" element="tns:stm_open_nodeResponse"/>
+  </wsdl:message>
+  <wsdl:message name="stm_open_nodeRequest">
+    <wsdl:part name="parameters" element="tns:stm_open_node"/>
+  </wsdl:message>
+  <wsdl:message name="stm_node_get_childrenResponse">
+    <wsdl:part name="parameters" element="tns:stm_node_get_childrenResponse"/>
+  </wsdl:message>
+  <wsdl:message name="stm_node_get_childrenRequest">
+    <wsdl:part name="parameters" element="tns:stm_node_get_children"/>
+  </wsdl:message>
+  <wsdl:message name="model_file_createResponse">
+    <wsdl:part name="parameters" element="tns:model_file_createResponse"/>
+  </wsdl:message>
+  <wsdl:message name="model_file_createRequest">
+    <wsdl:part name="parameters" element="tns:model_file_create"/>
+  </wsdl:message>
+  <wsdl:message name="model_file_body_setResponse">
+    <wsdl:part name="parameters" element="tns:model_file_body_setResponse"/>
+  </wsdl:message>
+  <wsdl:message name="model_file_body_setRequest">
+    <wsdl:part name="parameters" element="tns:model_file_body_set"/>
+  </wsdl:message>
+  <wsdl:message name="model_file_body_getResponse">
+    <wsdl:part name="parameters" element="tns:model_file_body_getResponse"/>
+  </wsdl:message>
+  <wsdl:message name="model_file_body_getRequest">
+    <wsdl:part name="parameters" element="tns:model_file_body_get"/>
+  </wsdl:message>
+  <wsdl:message name="model_attached_file_getResponse">
+    <wsdl:part name="parameters" element="tns:model_attached_file_getResponse"/>
+  </wsdl:message>
+  <wsdl:message name="model_attached_file_getRequest">
+    <wsdl:part name="parameters" element="tns:model_attached_file_get"/>
+  </wsdl:message>
+  <wsdl:message name="model_pbs_searchResponse">
+    <wsdl:part name="parameters" element="tns:model_pbs_searchResponse"/>
+  </wsdl:message>
+  <wsdl:message name="model_pbs_searchRequest">
+    <wsdl:part name="parameters" element="tns:model_pbs_search"/>
+  </wsdl:message>
+  <wsdl:message name="node_file_listResponse">
+    <wsdl:part name="parameters" element="tns:node_file_listResponse"/>
+  </wsdl:message>
+  <wsdl:message name="node_file_listRequest">
+    <wsdl:part name="parameters" element="tns:node_file_list"/>
+  </wsdl:message>
+  <wsdl:message name="inner_model_node_listResponse">
+    <wsdl:part name="parameters" element="tns:inner_model_node_listResponse"/>
+  </wsdl:message>
+  <wsdl:message name="inner_model_node_listRequest">
+    <wsdl:part name="parameters" element="tns:inner_model_node_list"/>
+  </wsdl:message>
+  <wsdl:message name="model_node_listResponse">
+    <wsdl:part name="parameters" element="tns:model_node_listResponse"/>
+  </wsdl:message>
+  <wsdl:message name="model_node_listRequest">
+    <wsdl:part name="parameters" element="tns:model_node_list"/>
+  </wsdl:message>
+  <wsdl:message name="inner_property_value_setResponse">
+    <wsdl:part name="parameters" element="tns:inner_property_value_setResponse"/>
+  </wsdl:message>
+  <wsdl:message name="inner_property_value_setRequest">
+    <wsdl:part name="parameters" element="tns:inner_property_value_set"/>
+  </wsdl:message>
+  <wsdl:message name="model_property_value_setResponse">
+    <wsdl:part name="parameters" element="tns:model_property_value_setResponse"/>
+  </wsdl:message>
+  <wsdl:message name="model_property_value_setRequest">
+    <wsdl:part name="parameters" element="tns:model_property_value_set"/>
+  </wsdl:message>
+  <wsdl:message name="inner_model_property_createResponse">
+    <wsdl:part name="parameters" element="tns:inner_model_property_createResponse"/>
+  </wsdl:message>
+  <wsdl:message name="inner_model_property_createRequest">
+    <wsdl:part name="parameters" element="tns:inner_model_property_create"/>
+  </wsdl:message>
+  <wsdl:message name="model_property_createResponse">
+    <wsdl:part name="parameters" element="tns:model_property_createResponse"/>
+  </wsdl:message>
+  <wsdl:message name="model_property_createRequest">
+    <wsdl:part name="parameters" element="tns:model_property_create"/>
   </wsdl:message>
   <wsdl:message name="node_patch_idResponse">
     <wsdl:part name="parameters" element="tns:node_patch_idResponse"/>
@@ -3587,11 +4662,23 @@
   <wsdl:message name="node_create_successorRequest">
     <wsdl:part name="parameters" element="tns:node_create_successor"/>
   </wsdl:message>
+  <wsdl:message name="node_get_childrenResponse">
+    <wsdl:part name="parameters" element="tns:node_get_childrenResponse"/>
+  </wsdl:message>
+  <wsdl:message name="node_get_childrenRequest">
+    <wsdl:part name="parameters" element="tns:node_get_children"/>
+  </wsdl:message>
   <wsdl:message name="node_listResponse">
     <wsdl:part name="parameters" element="tns:node_listResponse"/>
   </wsdl:message>
   <wsdl:message name="node_listRequest">
     <wsdl:part name="parameters" element="tns:node_list"/>
+  </wsdl:message>
+  <wsdl:message name="node_get_whole_branchResponse">
+    <wsdl:part name="parameters" element="tns:node_get_whole_branchResponse"/>
+  </wsdl:message>
+  <wsdl:message name="node_get_whole_branchRequest">
+    <wsdl:part name="parameters" element="tns:node_get_whole_branch"/>
   </wsdl:message>
   <wsdl:message name="node_getResponse">
     <wsdl:part name="parameters" element="tns:node_getResponse"/>
@@ -4139,6 +5226,12 @@
   <wsdl:message name="pbs_fix_versionRequest">
     <wsdl:part name="parameters" element="tns:pbs_fix_version"/>
   </wsdl:message>
+  <wsdl:message name="pbs_get_whole_treeResponse">
+    <wsdl:part name="parameters" element="tns:pbs_get_whole_treeResponse"/>
+  </wsdl:message>
+  <wsdl:message name="pbs_get_whole_treeRequest">
+    <wsdl:part name="parameters" element="tns:pbs_get_whole_tree"/>
+  </wsdl:message>
   <wsdl:message name="pbs_getResponse">
     <wsdl:part name="parameters" element="tns:pbs_getResponse"/>
   </wsdl:message>
@@ -4193,11 +5286,23 @@
   <wsdl:message name="system_get_repositories_of_schemaRequest">
     <wsdl:part name="parameters" element="tns:system_get_repositories_of_schema"/>
   </wsdl:message>
+  <wsdl:message name="system_text_errorResponse">
+    <wsdl:part name="parameters" element="tns:system_text_errorResponse"/>
+  </wsdl:message>
+  <wsdl:message name="system_text_errorRequest">
+    <wsdl:part name="parameters" element="tns:system_text_error"/>
+  </wsdl:message>
   <wsdl:message name="system_get_versionResponse">
     <wsdl:part name="parameters" element="tns:system_get_versionResponse"/>
   </wsdl:message>
   <wsdl:message name="system_get_versionRequest">
     <wsdl:part name="parameters" element="tns:system_get_version"/>
+  </wsdl:message>
+  <wsdl:message name="fix_extensionResponse">
+    <wsdl:part name="parameters" element="tns:fix_extensionResponse"/>
+  </wsdl:message>
+  <wsdl:message name="fix_extensionRequest">
+    <wsdl:part name="parameters" element="tns:fix_extension"/>
   </wsdl:message>
   <wsdl:message name="_loginResponse">
     <wsdl:part name="parameters" element="tns:_loginResponse"/>
@@ -4230,9 +5335,13 @@
     <wsdl:part name="parameters" element="tns:_version"/>
   </wsdl:message>
   <wsdl:portType name="SIMDM_MASTER_WSDL">
-    <wsdl:operation name="test_on_error_do">
-      <wsdl:input message="impl:test_on_error_doRequest" name="test_on_error_doRequest"/>
-      <wsdl:output message="impl:test_on_error_doResponse" name="test_on_error_doResponse"/>
+    <wsdl:operation name="test_blob_size">
+      <wsdl:input message="impl:test_blob_sizeRequest" name="test_blob_sizeRequest"/>
+      <wsdl:output message="impl:test_blob_sizeResponse" name="test_blob_sizeResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="test_mapping">
+      <wsdl:input message="impl:test_mappingRequest" name="test_mappingRequest"/>
+      <wsdl:output message="impl:test_mappingResponse" name="test_mappingResponse"/>
     </wsdl:operation>
     <wsdl:operation name="test_pbs_assignments_select">
       <wsdl:input message="impl:test_pbs_assignments_selectRequest" name="test_pbs_assignments_selectRequest"/>
@@ -4241,6 +5350,150 @@
     <wsdl:operation name="test_pbs_search">
       <wsdl:input message="impl:test_pbs_searchRequest" name="test_pbs_searchRequest"/>
       <wsdl:output message="impl:test_pbs_searchResponse" name="test_pbs_searchResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="test__echo">
+      <wsdl:input message="impl:test__echoRequest" name="test__echoRequest"/>
+      <wsdl:output message="impl:test__echoResponse" name="test__echoResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="stm_test_import_file_system">
+      <wsdl:input message="impl:stm_test_import_file_systemRequest" name="stm_test_import_file_systemRequest"/>
+      <wsdl:output message="impl:stm_test_import_file_systemResponse" name="stm_test_import_file_systemResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="stm_import_file_system">
+      <wsdl:input message="impl:stm_import_file_systemRequest" name="stm_import_file_systemRequest"/>
+      <wsdl:output message="impl:stm_import_file_systemResponse" name="stm_import_file_systemResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="stm_list_node_types">
+      <wsdl:input message="impl:stm_list_node_typesRequest" name="stm_list_node_typesRequest"/>
+      <wsdl:output message="impl:stm_list_node_typesResponse" name="stm_list_node_typesResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="stm_file_delete">
+      <wsdl:input message="impl:stm_file_deleteRequest" name="stm_file_deleteRequest"/>
+      <wsdl:output message="impl:stm_file_deleteResponse" name="stm_file_deleteResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="stm_node_delete">
+      <wsdl:input message="impl:stm_node_deleteRequest" name="stm_node_deleteRequest"/>
+      <wsdl:output message="impl:stm_node_deleteResponse" name="stm_node_deleteResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="stm_get_latest_remarks">
+      <wsdl:input message="impl:stm_get_latest_remarksRequest" name="stm_get_latest_remarksRequest"/>
+      <wsdl:output message="impl:stm_get_latest_remarksResponse" name="stm_get_latest_remarksResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="stm_withdraw_resolution">
+      <wsdl:input message="impl:stm_withdraw_resolutionRequest" name="stm_withdraw_resolutionRequest"/>
+      <wsdl:output message="impl:stm_withdraw_resolutionResponse" name="stm_withdraw_resolutionResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="stm_node_add_resolution">
+      <wsdl:input message="impl:stm_node_add_resolutionRequest" name="stm_node_add_resolutionRequest"/>
+      <wsdl:output message="impl:stm_node_add_resolutionResponse" name="stm_node_add_resolutionResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="stm_list_resolutions_awalable_for_me">
+      <wsdl:input message="impl:stm_list_resolutions_awalable_for_meRequest" name="stm_list_resolutions_awalable_for_meRequest"/>
+      <wsdl:output message="impl:stm_list_resolutions_awalable_for_meResponse" name="stm_list_resolutions_awalable_for_meResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="stm_list_awalable_resolutions">
+      <wsdl:input message="impl:stm_list_awalable_resolutionsRequest" name="stm_list_awalable_resolutionsRequest"/>
+      <wsdl:output message="impl:stm_list_awalable_resolutionsResponse" name="stm_list_awalable_resolutionsResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="stm_withdraw_remark">
+      <wsdl:input message="impl:stm_withdraw_remarkRequest" name="stm_withdraw_remarkRequest"/>
+      <wsdl:output message="impl:stm_withdraw_remarkResponse" name="stm_withdraw_remarkResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="stm_add_remark">
+      <wsdl:input message="impl:stm_add_remarkRequest" name="stm_add_remarkRequest"/>
+      <wsdl:output message="impl:stm_add_remarkResponse" name="stm_add_remarkResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="stm_node_get_files">
+      <wsdl:input message="impl:stm_node_get_filesRequest" name="stm_node_get_filesRequest"/>
+      <wsdl:output message="impl:stm_node_get_filesResponse" name="stm_node_get_filesResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="stm_node_get_resolutions">
+      <wsdl:input message="impl:stm_node_get_resolutionsRequest" name="stm_node_get_resolutionsRequest"/>
+      <wsdl:output message="impl:stm_node_get_resolutionsResponse" name="stm_node_get_resolutionsResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="stm_node_get_remarks">
+      <wsdl:input message="impl:stm_node_get_remarksRequest" name="stm_node_get_remarksRequest"/>
+      <wsdl:output message="impl:stm_node_get_remarksResponse" name="stm_node_get_remarksResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="stm_node_get_properties">
+      <wsdl:input message="impl:stm_node_get_propertiesRequest" name="stm_node_get_propertiesRequest"/>
+      <wsdl:output message="impl:stm_node_get_propertiesResponse" name="stm_node_get_propertiesResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="stm_file_extract">
+      <wsdl:input message="impl:stm_file_extractRequest" name="stm_file_extractRequest"/>
+      <wsdl:output message="impl:stm_file_extractResponse" name="stm_file_extractResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="stm_node_assign_file">
+      <wsdl:input message="impl:stm_node_assign_fileRequest" name="stm_node_assign_fileRequest"/>
+      <wsdl:output message="impl:stm_node_assign_fileResponse" name="stm_node_assign_fileResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="stm_list_file_types">
+      <wsdl:input message="impl:stm_list_file_typesRequest" name="stm_list_file_typesRequest"/>
+      <wsdl:output message="impl:stm_list_file_typesResponse" name="stm_list_file_typesResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="stm_node_get_representation">
+      <wsdl:input message="impl:stm_node_get_representationRequest" name="stm_node_get_representationRequest"/>
+      <wsdl:output message="impl:stm_node_get_representationResponse" name="stm_node_get_representationResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="stm_node_get_file_system">
+      <wsdl:input message="impl:stm_node_get_file_systemRequest" name="stm_node_get_file_systemRequest"/>
+      <wsdl:output message="impl:stm_node_get_file_systemResponse" name="stm_node_get_file_systemResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="stm_open_node">
+      <wsdl:input message="impl:stm_open_nodeRequest" name="stm_open_nodeRequest"/>
+      <wsdl:output message="impl:stm_open_nodeResponse" name="stm_open_nodeResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="stm_node_get_children">
+      <wsdl:input message="impl:stm_node_get_childrenRequest" name="stm_node_get_childrenRequest"/>
+      <wsdl:output message="impl:stm_node_get_childrenResponse" name="stm_node_get_childrenResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="model_file_create">
+      <wsdl:input message="impl:model_file_createRequest" name="model_file_createRequest"/>
+      <wsdl:output message="impl:model_file_createResponse" name="model_file_createResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="model_file_body_set">
+      <wsdl:input message="impl:model_file_body_setRequest" name="model_file_body_setRequest"/>
+      <wsdl:output message="impl:model_file_body_setResponse" name="model_file_body_setResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="model_file_body_get">
+      <wsdl:input message="impl:model_file_body_getRequest" name="model_file_body_getRequest"/>
+      <wsdl:output message="impl:model_file_body_getResponse" name="model_file_body_getResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="model_attached_file_get">
+      <wsdl:input message="impl:model_attached_file_getRequest" name="model_attached_file_getRequest"/>
+      <wsdl:output message="impl:model_attached_file_getResponse" name="model_attached_file_getResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="model_pbs_search">
+      <wsdl:input message="impl:model_pbs_searchRequest" name="model_pbs_searchRequest"/>
+      <wsdl:output message="impl:model_pbs_searchResponse" name="model_pbs_searchResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="node_file_list">
+      <wsdl:input message="impl:node_file_listRequest" name="node_file_listRequest"/>
+      <wsdl:output message="impl:node_file_listResponse" name="node_file_listResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="inner_model_node_list">
+      <wsdl:input message="impl:inner_model_node_listRequest" name="inner_model_node_listRequest"/>
+      <wsdl:output message="impl:inner_model_node_listResponse" name="inner_model_node_listResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="model_node_list">
+      <wsdl:input message="impl:model_node_listRequest" name="model_node_listRequest"/>
+      <wsdl:output message="impl:model_node_listResponse" name="model_node_listResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="inner_property_value_set">
+      <wsdl:input message="impl:inner_property_value_setRequest" name="inner_property_value_setRequest"/>
+      <wsdl:output message="impl:inner_property_value_setResponse" name="inner_property_value_setResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="model_property_value_set">
+      <wsdl:input message="impl:model_property_value_setRequest" name="model_property_value_setRequest"/>
+      <wsdl:output message="impl:model_property_value_setResponse" name="model_property_value_setResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="inner_model_property_create">
+      <wsdl:input message="impl:inner_model_property_createRequest" name="inner_model_property_createRequest"/>
+      <wsdl:output message="impl:inner_model_property_createResponse" name="inner_model_property_createResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="model_property_create">
+      <wsdl:input message="impl:model_property_createRequest" name="model_property_createRequest"/>
+      <wsdl:output message="impl:model_property_createResponse" name="model_property_createResponse"/>
     </wsdl:operation>
     <wsdl:operation name="node_patch_id">
       <wsdl:input message="impl:node_patch_idRequest" name="node_patch_idRequest"/>
@@ -4502,9 +5755,17 @@
       <wsdl:input message="impl:node_create_successorRequest" name="node_create_successorRequest"/>
       <wsdl:output message="impl:node_create_successorResponse" name="node_create_successorResponse"/>
     </wsdl:operation>
+    <wsdl:operation name="node_get_children">
+      <wsdl:input message="impl:node_get_childrenRequest" name="node_get_childrenRequest"/>
+      <wsdl:output message="impl:node_get_childrenResponse" name="node_get_childrenResponse"/>
+    </wsdl:operation>
     <wsdl:operation name="node_list">
       <wsdl:input message="impl:node_listRequest" name="node_listRequest"/>
       <wsdl:output message="impl:node_listResponse" name="node_listResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="node_get_whole_branch">
+      <wsdl:input message="impl:node_get_whole_branchRequest" name="node_get_whole_branchRequest"/>
+      <wsdl:output message="impl:node_get_whole_branchResponse" name="node_get_whole_branchResponse"/>
     </wsdl:operation>
     <wsdl:operation name="node_get">
       <wsdl:input message="impl:node_getRequest" name="node_getRequest"/>
@@ -4870,6 +6131,10 @@
       <wsdl:input message="impl:pbs_fix_versionRequest" name="pbs_fix_versionRequest"/>
       <wsdl:output message="impl:pbs_fix_versionResponse" name="pbs_fix_versionResponse"/>
     </wsdl:operation>
+    <wsdl:operation name="pbs_get_whole_tree">
+      <wsdl:input message="impl:pbs_get_whole_treeRequest" name="pbs_get_whole_treeRequest"/>
+      <wsdl:output message="impl:pbs_get_whole_treeResponse" name="pbs_get_whole_treeResponse"/>
+    </wsdl:operation>
     <wsdl:operation name="pbs_get">
       <wsdl:input message="impl:pbs_getRequest" name="pbs_getRequest"/>
       <wsdl:output message="impl:pbs_getResponse" name="pbs_getResponse"/>
@@ -4906,9 +6171,17 @@
       <wsdl:input message="impl:system_get_repositories_of_schemaRequest" name="system_get_repositories_of_schemaRequest"/>
       <wsdl:output message="impl:system_get_repositories_of_schemaResponse" name="system_get_repositories_of_schemaResponse"/>
     </wsdl:operation>
+    <wsdl:operation name="system_text_error">
+      <wsdl:input message="impl:system_text_errorRequest" name="system_text_errorRequest"/>
+      <wsdl:output message="impl:system_text_errorResponse" name="system_text_errorResponse"/>
+    </wsdl:operation>
     <wsdl:operation name="system_get_version">
       <wsdl:input message="impl:system_get_versionRequest" name="system_get_versionRequest"/>
       <wsdl:output message="impl:system_get_versionResponse" name="system_get_versionResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="fix_extension">
+      <wsdl:input message="impl:fix_extensionRequest" name="fix_extensionRequest"/>
+      <wsdl:output message="impl:fix_extensionResponse" name="fix_extensionResponse"/>
     </wsdl:operation>
     <wsdl:operation name="_login">
       <wsdl:input message="impl:_loginRequest" name="_loginRequest"/>
@@ -4933,12 +6206,21 @@
   </wsdl:portType>
   <wsdl:binding name="SIMDM_MASTER_WSDLBinding" type="impl:SIMDM_MASTER_WSDL">
     <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-    <wsdl:operation name="test_on_error_do">
+    <wsdl:operation name="test_blob_size">
       <wsdlsoap:operation soapAction=""/>
-      <wsdl:input name="test_on_error_doRequest">
+      <wsdl:input name="test_blob_sizeRequest">
         <wsdlsoap:body use="literal"/>
       </wsdl:input>
-      <wsdl:output name="test_on_error_doResponse">
+      <wsdl:output name="test_blob_sizeResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="test_mapping">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="test_mappingRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="test_mappingResponse">
         <wsdlsoap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -4957,6 +6239,330 @@
         <wsdlsoap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="test_pbs_searchResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="test__echo">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="test__echoRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="test__echoResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stm_test_import_file_system">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="stm_test_import_file_systemRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stm_test_import_file_systemResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stm_import_file_system">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="stm_import_file_systemRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stm_import_file_systemResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stm_list_node_types">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="stm_list_node_typesRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stm_list_node_typesResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stm_file_delete">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="stm_file_deleteRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stm_file_deleteResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stm_node_delete">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="stm_node_deleteRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stm_node_deleteResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stm_get_latest_remarks">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="stm_get_latest_remarksRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stm_get_latest_remarksResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stm_withdraw_resolution">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="stm_withdraw_resolutionRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stm_withdraw_resolutionResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stm_node_add_resolution">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="stm_node_add_resolutionRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stm_node_add_resolutionResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stm_list_resolutions_awalable_for_me">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="stm_list_resolutions_awalable_for_meRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stm_list_resolutions_awalable_for_meResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stm_list_awalable_resolutions">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="stm_list_awalable_resolutionsRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stm_list_awalable_resolutionsResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stm_withdraw_remark">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="stm_withdraw_remarkRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stm_withdraw_remarkResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stm_add_remark">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="stm_add_remarkRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stm_add_remarkResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stm_node_get_files">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="stm_node_get_filesRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stm_node_get_filesResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stm_node_get_resolutions">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="stm_node_get_resolutionsRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stm_node_get_resolutionsResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stm_node_get_remarks">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="stm_node_get_remarksRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stm_node_get_remarksResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stm_node_get_properties">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="stm_node_get_propertiesRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stm_node_get_propertiesResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stm_file_extract">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="stm_file_extractRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stm_file_extractResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stm_node_assign_file">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="stm_node_assign_fileRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stm_node_assign_fileResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stm_list_file_types">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="stm_list_file_typesRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stm_list_file_typesResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stm_node_get_representation">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="stm_node_get_representationRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stm_node_get_representationResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stm_node_get_file_system">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="stm_node_get_file_systemRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stm_node_get_file_systemResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stm_open_node">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="stm_open_nodeRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stm_open_nodeResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stm_node_get_children">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="stm_node_get_childrenRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stm_node_get_childrenResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="model_file_create">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="model_file_createRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="model_file_createResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="model_file_body_set">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="model_file_body_setRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="model_file_body_setResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="model_file_body_get">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="model_file_body_getRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="model_file_body_getResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="model_attached_file_get">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="model_attached_file_getRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="model_attached_file_getResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="model_pbs_search">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="model_pbs_searchRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="model_pbs_searchResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="node_file_list">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="node_file_listRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="node_file_listResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="inner_model_node_list">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="inner_model_node_listRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="inner_model_node_listResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="model_node_list">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="model_node_listRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="model_node_listResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="inner_property_value_set">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="inner_property_value_setRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="inner_property_value_setResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="model_property_value_set">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="model_property_value_setRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="model_property_value_setResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="inner_model_property_create">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="inner_model_property_createRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="inner_model_property_createResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="model_property_create">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="model_property_createRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="model_property_createResponse">
         <wsdlsoap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -5545,12 +7151,30 @@
         <wsdlsoap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="node_get_children">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="node_get_childrenRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="node_get_childrenResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="node_list">
       <wsdlsoap:operation soapAction=""/>
       <wsdl:input name="node_listRequest">
         <wsdlsoap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="node_listResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="node_get_whole_branch">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="node_get_whole_branchRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="node_get_whole_branchResponse">
         <wsdlsoap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -6373,6 +7997,15 @@
         <wsdlsoap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="pbs_get_whole_tree">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="pbs_get_whole_treeRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="pbs_get_whole_treeResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="pbs_get">
       <wsdlsoap:operation soapAction=""/>
       <wsdl:input name="pbs_getRequest">
@@ -6454,12 +8087,30 @@
         <wsdlsoap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="system_text_error">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="system_text_errorRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="system_text_errorResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="system_get_version">
       <wsdlsoap:operation soapAction=""/>
       <wsdl:input name="system_get_versionRequest">
         <wsdlsoap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="system_get_versionResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fix_extension">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="fix_extensionRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="fix_extensionResponse">
         <wsdlsoap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>

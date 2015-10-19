@@ -8,28 +8,28 @@
 package com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL;
 
 public class Validation_line  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.EDMbaseEntity  implements java.io.Serializable {
-    private int file;
+    private long file;
 
     private java.lang.String file_name;
 
     private java.lang.String parent_folder;
 
-    private int validation_options;
+    private long validation_options;
 
-    private int errors;
+    private long errors;
 
-    private int warnings;
+    private long warnings;
 
     public Validation_line() {
     }
 
     public Validation_line(
-           int file,
+           long file,
            java.lang.String file_name,
            java.lang.String parent_folder,
-           int validation_options,
-           int errors,
-           int warnings) {
+           long validation_options,
+           long errors,
+           long warnings) {
         this.file = file;
         this.file_name = file_name;
         this.parent_folder = parent_folder;
@@ -44,7 +44,7 @@ public class Validation_line  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTE
      * 
      * @return file
      */
-    public int getFile() {
+    public long getFile() {
         return file;
     }
 
@@ -54,7 +54,7 @@ public class Validation_line  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTE
      * 
      * @param file
      */
-    public void setFile(int file) {
+    public void setFile(long file) {
         this.file = file;
     }
 
@@ -104,7 +104,7 @@ public class Validation_line  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTE
      * 
      * @return validation_options
      */
-    public int getValidation_options() {
+    public long getValidation_options() {
         return validation_options;
     }
 
@@ -114,7 +114,7 @@ public class Validation_line  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTE
      * 
      * @param validation_options
      */
-    public void setValidation_options(int validation_options) {
+    public void setValidation_options(long validation_options) {
         this.validation_options = validation_options;
     }
 
@@ -124,7 +124,7 @@ public class Validation_line  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTE
      * 
      * @return errors
      */
-    public int getErrors() {
+    public long getErrors() {
         return errors;
     }
 
@@ -134,7 +134,7 @@ public class Validation_line  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTE
      * 
      * @param errors
      */
-    public void setErrors(int errors) {
+    public void setErrors(long errors) {
         this.errors = errors;
     }
 
@@ -144,7 +144,7 @@ public class Validation_line  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTE
      * 
      * @return warnings
      */
-    public int getWarnings() {
+    public long getWarnings() {
         return warnings;
     }
 
@@ -154,7 +154,7 @@ public class Validation_line  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTE
      * 
      * @param warnings
      */
-    public void setWarnings(int warnings) {
+    public void setWarnings(long warnings) {
         this.warnings = warnings;
     }
 
@@ -191,16 +191,16 @@ public class Validation_line  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTE
         }
         __hashCodeCalc = true;
         int _hashCode = super.hashCode();
-        _hashCode += getFile();
+        _hashCode += new Long(getFile()).hashCode();
         if (getFile_name() != null) {
             _hashCode += getFile_name().hashCode();
         }
         if (getParent_folder() != null) {
             _hashCode += getParent_folder().hashCode();
         }
-        _hashCode += getValidation_options();
-        _hashCode += getErrors();
-        _hashCode += getWarnings();
+        _hashCode += new Long(getValidation_options()).hashCode();
+        _hashCode += new Long(getErrors()).hashCode();
+        _hashCode += new Long(getWarnings()).hashCode();
         __hashCodeCalc = false;
         return _hashCode;
     }
@@ -214,7 +214,7 @@ public class Validation_line  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTE
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("file");
         elemField.setXmlName(new javax.xml.namespace.QName("", "file"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
@@ -232,19 +232,19 @@ public class Validation_line  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTE
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("validation_options");
         elemField.setXmlName(new javax.xml.namespace.QName("", "validation_options"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("errors");
         elemField.setXmlName(new javax.xml.namespace.QName("", "errors"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("warnings");
         elemField.setXmlName(new javax.xml.namespace.QName("", "warnings"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
     }

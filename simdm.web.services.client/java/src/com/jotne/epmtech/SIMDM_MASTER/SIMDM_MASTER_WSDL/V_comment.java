@@ -10,14 +10,14 @@ package com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL;
 public class V_comment  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.EDMbaseEntity  implements java.io.Serializable {
     private com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.V_item item;
 
-    private int commented_item;
+    private long commented_item;
 
     public V_comment() {
     }
 
     public V_comment(
            com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.V_item item,
-           int commented_item) {
+           long commented_item) {
         this.item = item;
         this.commented_item = commented_item;
     }
@@ -48,7 +48,7 @@ public class V_comment  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL
      * 
      * @return commented_item
      */
-    public int getCommented_item() {
+    public long getCommented_item() {
         return commented_item;
     }
 
@@ -58,7 +58,7 @@ public class V_comment  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL
      * 
      * @param commented_item
      */
-    public void setCommented_item(int commented_item) {
+    public void setCommented_item(long commented_item) {
         this.commented_item = commented_item;
     }
 
@@ -92,7 +92,7 @@ public class V_comment  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL
         if (getItem() != null) {
             _hashCode += getItem().hashCode();
         }
-        _hashCode += getCommented_item();
+        _hashCode += new Long(getCommented_item()).hashCode();
         __hashCodeCalc = false;
         return _hashCode;
     }
@@ -112,7 +112,7 @@ public class V_comment  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("commented_item");
         elemField.setXmlName(new javax.xml.namespace.QName("", "commented_item"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
     }

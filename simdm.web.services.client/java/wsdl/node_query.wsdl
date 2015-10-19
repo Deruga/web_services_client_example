@@ -1,172 +1,432 @@
-<?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:tns="http://epmtech.jotne.com/Ap209_multidisciplinary_analysis_and_design_mim_LF/node_query" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:impl="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" targetNamespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:impl="http://localhost:8080/EDMWS/earlybinding/options_2097152/DataRepository/SimDM_Master_AP209e2/QEX/SimDMobjectViewerQuerySchema" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://epmtech.jotne.com/ap209_multidisciplinary_analysis_and_design_mim_lf/SimDMobjectViewerQuerySchema" targetNamespace="http://localhost:8080/EDMWS/earlybinding/options_2097152/DataRepository/SimDM_Master_AP209e2/QEX/SimDMobjectViewerQuerySchema">
   <wsdl:types>
-    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://epmtech.jotne.com/Ap209_multidisciplinary_analysis_and_design_mim_LF/node_query">
-      <xsd:complexType name="EDMbaseEntity" />
-      <xsd:complexType name="ListOf_node_info_ve">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soapenc:Array">
-            <xsd:attribute wsdl:arrayType="tns:node_info_ve[]" ref="soapenc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
-      </xsd:complexType>
-      <xsd:complexType name="node_info_ve">
-        <xsd:complexContent mixed="false">
-          <xsd:extension base="tns:EDMbaseEntity">
-            <xsd:sequence>
-              <xsd:element name="NODE_ID" type="xsd:string" />
-              <xsd:element name="NODE_TYPE" type="xsd:string" />
-              <xsd:element name="COORDSYS_ID" type="xsd:string" />
-              <xsd:element name="COORDSYS_TYPE" type="xsd:string" />
-              <xsd:element name="COORD1" type="xsd:string" />
-              <xsd:element name="COORD2" type="xsd:string" />
-              <xsd:element name="COORD3" type="xsd:string" />
-            </xsd:sequence>
-          </xsd:extension>
-        </xsd:complexContent>
-      </xsd:complexType>
-      <xsd:complexType name="fileTransferInfo">
-        <xsd:complexContent mixed="false">
-          <xsd:extension base="tns:EDMbaseEntity">
-            <xsd:sequence>
-              <xsd:element name="uploadOrDownloadUrl" type="xsd:string" />
-              <xsd:element name="progressInfoUrl" type="xsd:string" />
-              <xsd:element name="fileNameOnServer" type="xsd:string" />
-              <xsd:element name="operation" type="xsd:string" />
-            </xsd:sequence>
-          </xsd:extension>
-        </xsd:complexContent>
-      </xsd:complexType>
-    </xsd:schema>
+    <schema targetNamespace="http://epmtech.jotne.com/ap209_multidisciplinary_analysis_and_design_mim_lf/SimDMobjectViewerQuerySchema" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="EDMbaseEntity"/>
+      <element name="testSearch">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="testSearchResponse">
+        <complexType>
+          <sequence>
+            <element name="Response" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getLoadCases">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getLoadCasesResponse">
+        <complexType>
+          <sequence>
+            <element name="string" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getInputParameterValues">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="QUERYINDEX" type="xsd:long"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getInputParameterValuesResponse">
+        <complexType>
+          <sequence>
+            <element name="string" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getQuerySpecifications">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getQuerySpecificationsResponse">
+        <complexType>
+          <sequence>
+            <element name="QuerySpecification" type="tns:QuerySpecification" minOccurs="0" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+      <complexType name="QuerySpecification">
+        <complexContent>
+          <extension base="tns:EDMbaseEntity">
+            <sequence>
+              <element name="name" nillable="false" type="xsd:string"/>
+              <element name="use2inputParameters" nillable="false" type="xsd:boolean"/>
+              <element name="field_1_explanation" nillable="false" type="xsd:string"/>
+              <element name="field_2_explanation" nillable="false" type="xsd:string"/>
+              <element name="useMaxMinButtons" nillable="false" type="xsd:boolean"/>
+              <element name="surveyOverUpperText" nillable="false" type="xsd:string"/>
+              <element name="surveyOverlowerText" nillable="false" type="xsd:string"/>
+            </sequence>
+          </extension>
+        </complexContent>
+      </complexType>
+      <element name="SimDMobjectViewer">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+            <element name="QUERYINDEX" type="xsd:long"/>
+            <element name="OBJECTKEYS" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="OBJECTKEYS_2" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="FIRSTROW" type="xsd:long"/>
+            <element name="MAXNOOFROWS" type="xsd:long"/>
+            <element name="OPTIONS" type="xsd:long"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="SimDMobjectViewerResponse">
+        <complexType>
+          <sequence>
+            <element name="QueryResult" type="tns:QueryResult"/>
+          </sequence>
+        </complexType>
+      </element>
+      <complexType name="QueryResult">
+        <complexContent>
+          <extension base="tns:EDMbaseEntity">
+            <sequence>
+              <element name="html" nillable="false" type="xsd:string"/>
+              <element name="noOfRowsReturned" nillable="false" type="xsd:long"/>
+              <element name="moreRows" nillable="false" type="xsd:boolean"/>
+            </sequence>
+          </extension>
+        </complexContent>
+      </complexType>
+      <element name="get_version">
+        <complexType>
+          <sequence>
+            <element name="EDMsessionId" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="get_versionResponse">
+        <complexType>
+          <sequence>
+            <element name="Response" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="_login">
+        <complexType>
+          <sequence>
+            <element name="USER" type="xsd:string"/>
+            <element name="GROUP" type="xsd:string"/>
+            <element name="PASSWORD" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="_loginResponse">
+        <complexType>
+          <sequence>
+            <element name="Response" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="_logout">
+        <complexType>
+          <sequence>
+            <element name="EDMSESSIONID" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="_logoutResponse">
+        <complexType>
+          <sequence>
+            <element name="Response" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="_createTemporaryFile">
+        <complexType>
+          <sequence>
+            <element name="EDMSESSIONID" type="xsd:string"/>
+            <element name="FILENAME" type="xsd:string"/>
+            <element name="FILETYPE" type="xsd:string"/>
+            <element name="UPLOAD" type="xsd:boolean"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="_createTemporaryFileResponse">
+        <complexType>
+          <sequence>
+            <element name="fileTransferInfo" type="tns:fileTransferInfo"/>
+          </sequence>
+        </complexType>
+      </element>
+      <complexType name="fileTransferInfo">
+        <complexContent>
+          <extension base="tns:EDMbaseEntity">
+            <sequence>
+              <element name="uploadOrDownloadUrl" nillable="false" type="xsd:string"/>
+              <element name="progressInfoUrl" nillable="false" type="xsd:string"/>
+              <element name="fileNameOnServer" nillable="false" type="xsd:string"/>
+              <element name="operation" nillable="false" type="xsd:string"/>
+            </sequence>
+          </extension>
+        </complexContent>
+      </complexType>
+      <element name="_deleteTemporaryFile">
+        <complexType>
+          <sequence>
+            <element name="EDMSESSIONID" type="xsd:string"/>
+            <element name="FILEINFO" type="tns:fileTransferInfo"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="_deleteTemporaryFileResponse">
+        <complexType>
+          <sequence>
+            <element name="Response" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="_version">
+        <complexType>
+          <sequence>
+            <element name="EDMSESSIONID" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="_versionResponse">
+        <complexType>
+          <sequence>
+            <element name="Response" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+    </schema>
   </wsdl:types>
-  <wsdl:message name="get_node_infoResponse">
-    <wsdl:part name="Response" type="tns:ListOf_node_info_ve" />
+  <wsdl:message name="testSearchResponse">
+    <wsdl:part name="parameters" element="tns:testSearchResponse"/>
   </wsdl:message>
-  <wsdl:message name="get_node_infoRequest">
-    <wsdl:part name="EDMsessionId" type="xsd:string" />
+  <wsdl:message name="testSearchRequest">
+    <wsdl:part name="parameters" element="tns:testSearch"/>
+  </wsdl:message>
+  <wsdl:message name="getLoadCasesResponse">
+    <wsdl:part name="parameters" element="tns:getLoadCasesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getLoadCasesRequest">
+    <wsdl:part name="parameters" element="tns:getLoadCases"/>
+  </wsdl:message>
+  <wsdl:message name="getInputParameterValuesResponse">
+    <wsdl:part name="parameters" element="tns:getInputParameterValuesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getInputParameterValuesRequest">
+    <wsdl:part name="parameters" element="tns:getInputParameterValues"/>
+  </wsdl:message>
+  <wsdl:message name="getQuerySpecificationsResponse">
+    <wsdl:part name="parameters" element="tns:getQuerySpecificationsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getQuerySpecificationsRequest">
+    <wsdl:part name="parameters" element="tns:getQuerySpecifications"/>
+  </wsdl:message>
+  <wsdl:message name="SimDMobjectViewerResponse">
+    <wsdl:part name="parameters" element="tns:SimDMobjectViewerResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SimDMobjectViewerRequest">
+    <wsdl:part name="parameters" element="tns:SimDMobjectViewer"/>
+  </wsdl:message>
+  <wsdl:message name="get_versionResponse">
+    <wsdl:part name="parameters" element="tns:get_versionResponse"/>
+  </wsdl:message>
+  <wsdl:message name="get_versionRequest">
+    <wsdl:part name="parameters" element="tns:get_version"/>
   </wsdl:message>
   <wsdl:message name="_loginResponse">
-    <wsdl:part name="Response" type="xsd:string" />
+    <wsdl:part name="parameters" element="tns:_loginResponse"/>
   </wsdl:message>
   <wsdl:message name="_loginRequest">
-    <wsdl:part name="USER" type="xsd:string" />
-    <wsdl:part name="GROUP" type="xsd:string" />
-    <wsdl:part name="PASSWORD" type="xsd:string" />
+    <wsdl:part name="parameters" element="tns:_login"/>
   </wsdl:message>
   <wsdl:message name="_logoutResponse">
-    <wsdl:part name="Response" type="xsd:string" />
+    <wsdl:part name="parameters" element="tns:_logoutResponse"/>
   </wsdl:message>
   <wsdl:message name="_logoutRequest">
-    <wsdl:part name="EDMSESSIONID" type="xsd:string" />
+    <wsdl:part name="parameters" element="tns:_logout"/>
   </wsdl:message>
   <wsdl:message name="_createTemporaryFileResponse">
-    <wsdl:part name="Response" type="tns:fileTransferInfo" />
+    <wsdl:part name="parameters" element="tns:_createTemporaryFileResponse"/>
   </wsdl:message>
   <wsdl:message name="_createTemporaryFileRequest">
-    <wsdl:part name="EDMSESSIONID" type="xsd:string" />
-    <wsdl:part name="FILENAME" type="xsd:string" />
-    <wsdl:part name="FILETYPE" type="xsd:string" />
-    <wsdl:part name="UPLOAD" type="xsd:boolean" />
+    <wsdl:part name="parameters" element="tns:_createTemporaryFile"/>
   </wsdl:message>
   <wsdl:message name="_deleteTemporaryFileResponse">
-    <wsdl:part name="Response" type="xsd:string" />
+    <wsdl:part name="parameters" element="tns:_deleteTemporaryFileResponse"/>
   </wsdl:message>
   <wsdl:message name="_deleteTemporaryFileRequest">
-    <wsdl:part name="EDMSESSIONID" type="xsd:string" />
-    <wsdl:part name="FILEINFO" type="tns:fileTransferInfo" />
+    <wsdl:part name="parameters" element="tns:_deleteTemporaryFile"/>
   </wsdl:message>
   <wsdl:message name="_versionResponse">
-    <wsdl:part name="Response" type="xsd:string" />
+    <wsdl:part name="parameters" element="tns:_versionResponse"/>
   </wsdl:message>
   <wsdl:message name="_versionRequest">
-    <wsdl:part name="EDMSESSIONID" type="xsd:string" />
+    <wsdl:part name="parameters" element="tns:_version"/>
   </wsdl:message>
-  <wsdl:portType name="node_query">
-    <wsdl:operation name="get_node_info">
-      <wsdl:input name="get_node_infoRequest" message="impl:get_node_infoRequest" />
-      <wsdl:output name="get_node_infoResponse" message="impl:get_node_infoResponse" />
+  <wsdl:portType name="SimDMobjectViewerQuerySchema">
+    <wsdl:operation name="testSearch">
+      <wsdl:input message="impl:testSearchRequest" name="testSearchRequest"/>
+      <wsdl:output message="impl:testSearchResponse" name="testSearchResponse"/>
     </wsdl:operation>
-    <wsdl:operation name="_login" parameterOrder="USER GROUP PASSWORD">
-      <wsdl:input name="_loginRequest" message="impl:_loginRequest" />
-      <wsdl:output name="_loginResponse" message="impl:_loginResponse" />
+    <wsdl:operation name="getLoadCases">
+      <wsdl:input message="impl:getLoadCasesRequest" name="getLoadCasesRequest"/>
+      <wsdl:output message="impl:getLoadCasesResponse" name="getLoadCasesResponse"/>
     </wsdl:operation>
-    <wsdl:operation name="_logout" parameterOrder="EDMSESSIONID">
-      <wsdl:input name="_logoutRequest" message="impl:_logoutRequest" />
-      <wsdl:output name="_logoutResponse" message="impl:_logoutResponse" />
+    <wsdl:operation name="getInputParameterValues">
+      <wsdl:input message="impl:getInputParameterValuesRequest" name="getInputParameterValuesRequest"/>
+      <wsdl:output message="impl:getInputParameterValuesResponse" name="getInputParameterValuesResponse"/>
     </wsdl:operation>
-    <wsdl:operation name="_createTemporaryFile" parameterOrder="EDMSESSIONID FILENAME FILETYPE UPLOAD">
-      <wsdl:input name="_createTemporaryFileRequest" message="impl:_createTemporaryFileRequest" />
-      <wsdl:output name="_createTemporaryFileResponse" message="impl:_createTemporaryFileResponse" />
+    <wsdl:operation name="getQuerySpecifications">
+      <wsdl:input message="impl:getQuerySpecificationsRequest" name="getQuerySpecificationsRequest"/>
+      <wsdl:output message="impl:getQuerySpecificationsResponse" name="getQuerySpecificationsResponse"/>
     </wsdl:operation>
-    <wsdl:operation name="_deleteTemporaryFile" parameterOrder="EDMSESSIONID FILEINFO">
-      <wsdl:input name="_deleteTemporaryFileRequest" message="impl:_deleteTemporaryFileRequest" />
-      <wsdl:output name="_deleteTemporaryFileResponse" message="impl:_deleteTemporaryFileResponse" />
+    <wsdl:operation name="SimDMobjectViewer">
+      <wsdl:input message="impl:SimDMobjectViewerRequest" name="SimDMobjectViewerRequest"/>
+      <wsdl:output message="impl:SimDMobjectViewerResponse" name="SimDMobjectViewerResponse"/>
     </wsdl:operation>
-    <wsdl:operation name="_version" parameterOrder="EDMSESSIONID">
-      <wsdl:input name="_versionRequest" message="impl:_versionRequest" />
-      <wsdl:output name="_versionResponse" message="impl:_versionResponse" />
+    <wsdl:operation name="get_version">
+      <wsdl:input message="impl:get_versionRequest" name="get_versionRequest"/>
+      <wsdl:output message="impl:get_versionResponse" name="get_versionResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="_login">
+      <wsdl:input message="impl:_loginRequest" name="_loginRequest"/>
+      <wsdl:output message="impl:_loginResponse" name="_loginResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="_logout">
+      <wsdl:input message="impl:_logoutRequest" name="_logoutRequest"/>
+      <wsdl:output message="impl:_logoutResponse" name="_logoutResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="_createTemporaryFile">
+      <wsdl:input message="impl:_createTemporaryFileRequest" name="_createTemporaryFileRequest"/>
+      <wsdl:output message="impl:_createTemporaryFileResponse" name="_createTemporaryFileResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="_deleteTemporaryFile">
+      <wsdl:input message="impl:_deleteTemporaryFileRequest" name="_deleteTemporaryFileRequest"/>
+      <wsdl:output message="impl:_deleteTemporaryFileResponse" name="_deleteTemporaryFileResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="_version">
+      <wsdl:input message="impl:_versionRequest" name="_versionRequest"/>
+      <wsdl:output message="impl:_versionResponse" name="_versionResponse"/>
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="node_queryBinding" type="impl:node_query">
-    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
-    <wsdl:operation name="get_node_info">
-      <wsdlsoap:operation soapAction="" />
-      <wsdl:input name="get_node_infoRequest">
-        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+  <wsdl:binding name="SimDMobjectViewerQuerySchemaBinding" type="impl:SimDMobjectViewerQuerySchema">
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="testSearch">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="testSearchRequest">
+        <wsdlsoap:body use="literal"/>
       </wsdl:input>
-      <wsdl:output name="get_node_infoResponse">
-        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      <wsdl:output name="testSearchResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoadCases">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getLoadCasesRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getLoadCasesResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInputParameterValues">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getInputParameterValuesRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getInputParameterValuesResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getQuerySpecifications">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getQuerySpecificationsRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getQuerySpecificationsResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SimDMobjectViewer">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="SimDMobjectViewerRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SimDMobjectViewerResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_version">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="get_versionRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="get_versionResponse">
+        <wsdlsoap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="_login">
-      <wsdlsoap:operation soapAction="" />
+      <wsdlsoap:operation soapAction=""/>
       <wsdl:input name="_loginRequest">
-        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+        <wsdlsoap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="_loginResponse">
-        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+        <wsdlsoap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="_logout">
-      <wsdlsoap:operation soapAction="" />
+      <wsdlsoap:operation soapAction=""/>
       <wsdl:input name="_logoutRequest">
-        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+        <wsdlsoap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="_logoutResponse">
-        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+        <wsdlsoap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="_createTemporaryFile">
-      <wsdlsoap:operation soapAction="" />
+      <wsdlsoap:operation soapAction=""/>
       <wsdl:input name="_createTemporaryFileRequest">
-        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+        <wsdlsoap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="_createTemporaryFileResponse">
-        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+        <wsdlsoap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="_deleteTemporaryFile">
-      <wsdlsoap:operation soapAction="" />
+      <wsdlsoap:operation soapAction=""/>
       <wsdl:input name="_deleteTemporaryFileRequest">
-        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+        <wsdlsoap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="_deleteTemporaryFileResponse">
-        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+        <wsdlsoap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="_version">
-      <wsdlsoap:operation soapAction="" />
+      <wsdlsoap:operation soapAction=""/>
       <wsdl:input name="_versionRequest">
-        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+        <wsdlsoap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="_versionResponse">
-        <wsdlsoap:body use="encoded" namespace="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+        <wsdlsoap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:service name="node_queryService">
-    <wsdl:port name="EDMWS" binding="impl:node_queryBinding">
-      <wsdlsoap:address location="http://localhost:8080/EDMWS/earlybinding/DataRepository/CascadedCsys-ROTFIX-sol101-out/QEX/node_query" />
+  <wsdl:service name="SimDMobjectViewerQuerySchemaService">
+    <wsdl:port binding="impl:SimDMobjectViewerQuerySchemaBinding" name="EDMWS">
+      <wsdlsoap:address location="http://localhost:8080/EDMWS/earlybinding/options_2097152/DataRepository/SimDM_Master_AP209e2/QEX/SimDMobjectViewerQuerySchema"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

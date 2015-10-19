@@ -12,7 +12,7 @@ public class V_baseline  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSD
 
     private boolean editable;
 
-    private int[] nodes;
+    private long[] nodes;
 
     private java.lang.String[] exported_to;
 
@@ -22,7 +22,7 @@ public class V_baseline  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSD
     public V_baseline(
            com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.V_item item,
            boolean editable,
-           int[] nodes,
+           long[] nodes,
            java.lang.String[] exported_to) {
         this.item = item;
         this.editable = editable;
@@ -76,7 +76,7 @@ public class V_baseline  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSD
      * 
      * @return nodes
      */
-    public int[] getNodes() {
+    public long[] getNodes() {
         return nodes;
     }
 
@@ -86,15 +86,15 @@ public class V_baseline  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSD
      * 
      * @param nodes
      */
-    public void setNodes(int[] nodes) {
+    public void setNodes(long[] nodes) {
         this.nodes = nodes;
     }
 
-    public int getNodes(int i) {
+    public long getNodes(int i) {
         return this.nodes[i];
     }
 
-    public void setNodes(int i, int _value) {
+    public void setNodes(int i, long _value) {
         this.nodes[i] = _value;
     }
 
@@ -210,7 +210,7 @@ public class V_baseline  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSD
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("nodes");
         elemField.setXmlName(new javax.xml.namespace.QName("", "nodes"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         elemField.setMaxOccursUnbounded(true);
         typeDesc.addFieldDesc(elemField);

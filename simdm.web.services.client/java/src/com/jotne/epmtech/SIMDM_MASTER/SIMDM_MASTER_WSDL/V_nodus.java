@@ -18,9 +18,9 @@ public class V_nodus  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.E
 
     private java.lang.String[] versions;
 
-    private int ancestor;
+    private long ancestor;
 
-    private int[] nodes;
+    private long[] nodes;
 
     public V_nodus() {
     }
@@ -31,8 +31,8 @@ public class V_nodus  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.E
            boolean editable,
            java.lang.String version,
            java.lang.String[] versions,
-           int ancestor,
-           int[] nodes) {
+           long ancestor,
+           long[] nodes) {
         this.item = item;
         this.locked = locked;
         this.editable = editable;
@@ -156,7 +156,7 @@ public class V_nodus  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.E
      * 
      * @return ancestor
      */
-    public int getAncestor() {
+    public long getAncestor() {
         return ancestor;
     }
 
@@ -166,7 +166,7 @@ public class V_nodus  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.E
      * 
      * @param ancestor
      */
-    public void setAncestor(int ancestor) {
+    public void setAncestor(long ancestor) {
         this.ancestor = ancestor;
     }
 
@@ -176,7 +176,7 @@ public class V_nodus  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.E
      * 
      * @return nodes
      */
-    public int[] getNodes() {
+    public long[] getNodes() {
         return nodes;
     }
 
@@ -186,15 +186,15 @@ public class V_nodus  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.E
      * 
      * @param nodes
      */
-    public void setNodes(int[] nodes) {
+    public void setNodes(long[] nodes) {
         this.nodes = nodes;
     }
 
-    public int getNodes(int i) {
+    public long getNodes(int i) {
         return this.nodes[i];
     }
 
-    public void setNodes(int i, int _value) {
+    public void setNodes(int i, long _value) {
         this.nodes[i] = _value;
     }
 
@@ -255,7 +255,7 @@ public class V_nodus  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.E
                 }
             }
         }
-        _hashCode += getAncestor();
+        _hashCode += new Long(getAncestor()).hashCode();
         if (getNodes() != null) {
             for (int i=0;
                  i<java.lang.reflect.Array.getLength(getNodes());
@@ -311,13 +311,13 @@ public class V_nodus  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.E
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("ancestor");
         elemField.setXmlName(new javax.xml.namespace.QName("", "ancestor"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("nodes");
         elemField.setXmlName(new javax.xml.namespace.QName("", "nodes"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         elemField.setMaxOccursUnbounded(true);
         typeDesc.addFieldDesc(elemField);

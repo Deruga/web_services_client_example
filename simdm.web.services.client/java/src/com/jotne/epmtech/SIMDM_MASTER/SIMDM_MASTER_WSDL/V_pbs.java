@@ -12,15 +12,15 @@ public class V_pbs  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.EDM
 
     private java.lang.String[] parents;
 
-    private int[] persons;
+    private long[] persons;
 
-    private int[] organizations;
+    private long[] organizations;
 
-    private int[] approvals;
+    private long[] approvals;
 
-    private int[] properties;
+    private long[] properties;
 
-    private int[] methods;
+    private long[] methods;
 
     public V_pbs() {
     }
@@ -28,11 +28,11 @@ public class V_pbs  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.EDM
     public V_pbs(
            com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.V_nodus nodus,
            java.lang.String[] parents,
-           int[] persons,
-           int[] organizations,
-           int[] approvals,
-           int[] properties,
-           int[] methods) {
+           long[] persons,
+           long[] organizations,
+           long[] approvals,
+           long[] properties,
+           long[] methods) {
         this.nodus = nodus;
         this.parents = parents;
         this.persons = persons;
@@ -96,7 +96,7 @@ public class V_pbs  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.EDM
      * 
      * @return persons
      */
-    public int[] getPersons() {
+    public long[] getPersons() {
         return persons;
     }
 
@@ -106,15 +106,15 @@ public class V_pbs  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.EDM
      * 
      * @param persons
      */
-    public void setPersons(int[] persons) {
+    public void setPersons(long[] persons) {
         this.persons = persons;
     }
 
-    public int getPersons(int i) {
+    public long getPersons(int i) {
         return this.persons[i];
     }
 
-    public void setPersons(int i, int _value) {
+    public void setPersons(int i, long _value) {
         this.persons[i] = _value;
     }
 
@@ -124,7 +124,7 @@ public class V_pbs  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.EDM
      * 
      * @return organizations
      */
-    public int[] getOrganizations() {
+    public long[] getOrganizations() {
         return organizations;
     }
 
@@ -134,15 +134,15 @@ public class V_pbs  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.EDM
      * 
      * @param organizations
      */
-    public void setOrganizations(int[] organizations) {
+    public void setOrganizations(long[] organizations) {
         this.organizations = organizations;
     }
 
-    public int getOrganizations(int i) {
+    public long getOrganizations(int i) {
         return this.organizations[i];
     }
 
-    public void setOrganizations(int i, int _value) {
+    public void setOrganizations(int i, long _value) {
         this.organizations[i] = _value;
     }
 
@@ -152,7 +152,7 @@ public class V_pbs  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.EDM
      * 
      * @return approvals
      */
-    public int[] getApprovals() {
+    public long[] getApprovals() {
         return approvals;
     }
 
@@ -162,15 +162,15 @@ public class V_pbs  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.EDM
      * 
      * @param approvals
      */
-    public void setApprovals(int[] approvals) {
+    public void setApprovals(long[] approvals) {
         this.approvals = approvals;
     }
 
-    public int getApprovals(int i) {
+    public long getApprovals(int i) {
         return this.approvals[i];
     }
 
-    public void setApprovals(int i, int _value) {
+    public void setApprovals(int i, long _value) {
         this.approvals[i] = _value;
     }
 
@@ -180,7 +180,7 @@ public class V_pbs  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.EDM
      * 
      * @return properties
      */
-    public int[] getProperties() {
+    public long[] getProperties() {
         return properties;
     }
 
@@ -190,15 +190,15 @@ public class V_pbs  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.EDM
      * 
      * @param properties
      */
-    public void setProperties(int[] properties) {
+    public void setProperties(long[] properties) {
         this.properties = properties;
     }
 
-    public int getProperties(int i) {
+    public long getProperties(int i) {
         return this.properties[i];
     }
 
-    public void setProperties(int i, int _value) {
+    public void setProperties(int i, long _value) {
         this.properties[i] = _value;
     }
 
@@ -208,7 +208,7 @@ public class V_pbs  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.EDM
      * 
      * @return methods
      */
-    public int[] getMethods() {
+    public long[] getMethods() {
         return methods;
     }
 
@@ -218,15 +218,15 @@ public class V_pbs  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.EDM
      * 
      * @param methods
      */
-    public void setMethods(int[] methods) {
+    public void setMethods(long[] methods) {
         this.methods = methods;
     }
 
-    public int getMethods(int i) {
+    public long getMethods(int i) {
         return this.methods[i];
     }
 
-    public void setMethods(int i, int _value) {
+    public void setMethods(int i, long _value) {
         this.methods[i] = _value;
     }
 
@@ -369,35 +369,35 @@ public class V_pbs  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.EDM
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("persons");
         elemField.setXmlName(new javax.xml.namespace.QName("", "persons"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         elemField.setMaxOccursUnbounded(true);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("organizations");
         elemField.setXmlName(new javax.xml.namespace.QName("", "organizations"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         elemField.setMaxOccursUnbounded(true);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("approvals");
         elemField.setXmlName(new javax.xml.namespace.QName("", "approvals"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         elemField.setMaxOccursUnbounded(true);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("properties");
         elemField.setXmlName(new javax.xml.namespace.QName("", "properties"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         elemField.setMaxOccursUnbounded(true);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("methods");
         elemField.setXmlName(new javax.xml.namespace.QName("", "methods"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         elemField.setMaxOccursUnbounded(true);
         typeDesc.addFieldDesc(elemField);

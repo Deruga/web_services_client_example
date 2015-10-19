@@ -10,17 +10,17 @@ package com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL;
 public class V_link  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.EDMbaseEntity  implements java.io.Serializable {
     private com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.V_item item;
 
-    private int domain;
+    private long domain;
 
-    private int link;
+    private long link;
 
     public V_link() {
     }
 
     public V_link(
            com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.V_item item,
-           int domain,
-           int link) {
+           long domain,
+           long link) {
         this.item = item;
         this.domain = domain;
         this.link = link;
@@ -52,7 +52,7 @@ public class V_link  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @return domain
      */
-    public int getDomain() {
+    public long getDomain() {
         return domain;
     }
 
@@ -62,7 +62,7 @@ public class V_link  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @param domain
      */
-    public void setDomain(int domain) {
+    public void setDomain(long domain) {
         this.domain = domain;
     }
 
@@ -72,7 +72,7 @@ public class V_link  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @return link
      */
-    public int getLink() {
+    public long getLink() {
         return link;
     }
 
@@ -82,7 +82,7 @@ public class V_link  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @param link
      */
-    public void setLink(int link) {
+    public void setLink(long link) {
         this.link = link;
     }
 
@@ -117,8 +117,8 @@ public class V_link  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
         if (getItem() != null) {
             _hashCode += getItem().hashCode();
         }
-        _hashCode += getDomain();
-        _hashCode += getLink();
+        _hashCode += new Long(getDomain()).hashCode();
+        _hashCode += new Long(getLink()).hashCode();
         __hashCodeCalc = false;
         return _hashCode;
     }
@@ -138,13 +138,13 @@ public class V_link  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("domain");
         elemField.setXmlName(new javax.xml.namespace.QName("", "domain"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("link");
         elemField.setXmlName(new javax.xml.namespace.QName("", "link"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
     }

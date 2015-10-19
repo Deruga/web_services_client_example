@@ -10,14 +10,14 @@ package com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL;
 public class Merge_result  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.EDMbaseEntity  implements java.io.Serializable {
     private com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.V_node target;
 
-    private int log_id;
+    private long log_id;
 
     public Merge_result() {
     }
 
     public Merge_result(
            com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.V_node target,
-           int log_id) {
+           long log_id) {
         this.target = target;
         this.log_id = log_id;
     }
@@ -48,7 +48,7 @@ public class Merge_result  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_W
      * 
      * @return log_id
      */
-    public int getLog_id() {
+    public long getLog_id() {
         return log_id;
     }
 
@@ -58,7 +58,7 @@ public class Merge_result  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_W
      * 
      * @param log_id
      */
-    public void setLog_id(int log_id) {
+    public void setLog_id(long log_id) {
         this.log_id = log_id;
     }
 
@@ -92,7 +92,7 @@ public class Merge_result  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_W
         if (getTarget() != null) {
             _hashCode += getTarget().hashCode();
         }
-        _hashCode += getLog_id();
+        _hashCode += new Long(getLog_id()).hashCode();
         __hashCodeCalc = false;
         return _hashCode;
     }
@@ -112,7 +112,7 @@ public class Merge_result  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_W
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("log_id");
         elemField.setXmlName(new javax.xml.namespace.QName("", "log_id"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
     }

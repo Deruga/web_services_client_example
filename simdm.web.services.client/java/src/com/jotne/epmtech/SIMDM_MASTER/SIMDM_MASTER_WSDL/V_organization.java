@@ -10,14 +10,14 @@ package com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL;
 public class V_organization  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.EDMbaseEntity  implements java.io.Serializable {
     private com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.V_item item;
 
-    private int[] persons;
+    private long[] persons;
 
     public V_organization() {
     }
 
     public V_organization(
            com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.V_item item,
-           int[] persons) {
+           long[] persons) {
         this.item = item;
         this.persons = persons;
     }
@@ -48,7 +48,7 @@ public class V_organization  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER
      * 
      * @return persons
      */
-    public int[] getPersons() {
+    public long[] getPersons() {
         return persons;
     }
 
@@ -58,15 +58,15 @@ public class V_organization  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER
      * 
      * @param persons
      */
-    public void setPersons(int[] persons) {
+    public void setPersons(long[] persons) {
         this.persons = persons;
     }
 
-    public int getPersons(int i) {
+    public long getPersons(int i) {
         return this.persons[i];
     }
 
-    public void setPersons(int i, int _value) {
+    public void setPersons(int i, long _value) {
         this.persons[i] = _value;
     }
 
@@ -132,7 +132,7 @@ public class V_organization  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("persons");
         elemField.setXmlName(new javax.xml.namespace.QName("", "persons"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         elemField.setMaxOccursUnbounded(true);
         typeDesc.addFieldDesc(elemField);

@@ -8,9 +8,9 @@
 package com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL;
 
 public class Attached_file_validation_line  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.EDMbaseEntity  implements java.io.Serializable {
-    private int attachment_id;
+    private long attachment_id;
 
-    private int file_id;
+    private long file_id;
 
     private java.lang.String file_type;
 
@@ -20,7 +20,7 @@ public class Attached_file_validation_line  extends com.jotne.epmtech.SIMDM_MAST
 
     private java.lang.String file_creator;
 
-    private int node_id;
+    private long node_id;
 
     private java.lang.String node_path_name;
 
@@ -30,13 +30,13 @@ public class Attached_file_validation_line  extends com.jotne.epmtech.SIMDM_MAST
     }
 
     public Attached_file_validation_line(
-           int attachment_id,
-           int file_id,
+           long attachment_id,
+           long file_id,
            java.lang.String file_type,
            java.lang.String file_name,
            java.lang.String file_introduced,
            java.lang.String file_creator,
-           int node_id,
+           long node_id,
            java.lang.String node_path_name,
            com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.Logical valid) {
         this.attachment_id = attachment_id;
@@ -56,7 +56,7 @@ public class Attached_file_validation_line  extends com.jotne.epmtech.SIMDM_MAST
      * 
      * @return attachment_id
      */
-    public int getAttachment_id() {
+    public long getAttachment_id() {
         return attachment_id;
     }
 
@@ -66,7 +66,7 @@ public class Attached_file_validation_line  extends com.jotne.epmtech.SIMDM_MAST
      * 
      * @param attachment_id
      */
-    public void setAttachment_id(int attachment_id) {
+    public void setAttachment_id(long attachment_id) {
         this.attachment_id = attachment_id;
     }
 
@@ -76,7 +76,7 @@ public class Attached_file_validation_line  extends com.jotne.epmtech.SIMDM_MAST
      * 
      * @return file_id
      */
-    public int getFile_id() {
+    public long getFile_id() {
         return file_id;
     }
 
@@ -86,7 +86,7 @@ public class Attached_file_validation_line  extends com.jotne.epmtech.SIMDM_MAST
      * 
      * @param file_id
      */
-    public void setFile_id(int file_id) {
+    public void setFile_id(long file_id) {
         this.file_id = file_id;
     }
 
@@ -176,7 +176,7 @@ public class Attached_file_validation_line  extends com.jotne.epmtech.SIMDM_MAST
      * 
      * @return node_id
      */
-    public int getNode_id() {
+    public long getNode_id() {
         return node_id;
     }
 
@@ -186,7 +186,7 @@ public class Attached_file_validation_line  extends com.jotne.epmtech.SIMDM_MAST
      * 
      * @param node_id
      */
-    public void setNode_id(int node_id) {
+    public void setNode_id(long node_id) {
         this.node_id = node_id;
     }
 
@@ -274,8 +274,8 @@ public class Attached_file_validation_line  extends com.jotne.epmtech.SIMDM_MAST
         }
         __hashCodeCalc = true;
         int _hashCode = super.hashCode();
-        _hashCode += getAttachment_id();
-        _hashCode += getFile_id();
+        _hashCode += new Long(getAttachment_id()).hashCode();
+        _hashCode += new Long(getFile_id()).hashCode();
         if (getFile_type() != null) {
             _hashCode += getFile_type().hashCode();
         }
@@ -288,7 +288,7 @@ public class Attached_file_validation_line  extends com.jotne.epmtech.SIMDM_MAST
         if (getFile_creator() != null) {
             _hashCode += getFile_creator().hashCode();
         }
-        _hashCode += getNode_id();
+        _hashCode += new Long(getNode_id()).hashCode();
         if (getNode_path_name() != null) {
             _hashCode += getNode_path_name().hashCode();
         }
@@ -308,13 +308,13 @@ public class Attached_file_validation_line  extends com.jotne.epmtech.SIMDM_MAST
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("attachment_id");
         elemField.setXmlName(new javax.xml.namespace.QName("", "attachment_id"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("file_id");
         elemField.setXmlName(new javax.xml.namespace.QName("", "file_id"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
@@ -344,7 +344,7 @@ public class Attached_file_validation_line  extends com.jotne.epmtech.SIMDM_MAST
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("node_id");
         elemField.setXmlName(new javax.xml.namespace.QName("", "node_id"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();

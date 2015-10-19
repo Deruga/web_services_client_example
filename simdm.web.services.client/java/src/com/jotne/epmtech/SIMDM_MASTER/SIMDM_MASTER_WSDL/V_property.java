@@ -18,9 +18,9 @@ public class V_property  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSD
 
     private boolean scalar;
 
-    private int low_dimension;
+    private long low_dimension;
 
-    private int high_dimension;
+    private long high_dimension;
 
     private java.lang.String default_value;
 
@@ -33,8 +33,8 @@ public class V_property  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSD
            java.lang.String units,
            boolean mandatory,
            boolean scalar,
-           int low_dimension,
-           int high_dimension,
+           long low_dimension,
+           long high_dimension,
            java.lang.String default_value) {
         this.item = item;
         this.applicable_to = applicable_to;
@@ -160,7 +160,7 @@ public class V_property  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSD
      * 
      * @return low_dimension
      */
-    public int getLow_dimension() {
+    public long getLow_dimension() {
         return low_dimension;
     }
 
@@ -170,7 +170,7 @@ public class V_property  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSD
      * 
      * @param low_dimension
      */
-    public void setLow_dimension(int low_dimension) {
+    public void setLow_dimension(long low_dimension) {
         this.low_dimension = low_dimension;
     }
 
@@ -180,7 +180,7 @@ public class V_property  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSD
      * 
      * @return high_dimension
      */
-    public int getHigh_dimension() {
+    public long getHigh_dimension() {
         return high_dimension;
     }
 
@@ -190,7 +190,7 @@ public class V_property  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSD
      * 
      * @param high_dimension
      */
-    public void setHigh_dimension(int high_dimension) {
+    public void setHigh_dimension(long high_dimension) {
         this.high_dimension = high_dimension;
     }
 
@@ -272,8 +272,8 @@ public class V_property  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSD
         }
         _hashCode += (isMandatory() ? Boolean.TRUE : Boolean.FALSE).hashCode();
         _hashCode += (isScalar() ? Boolean.TRUE : Boolean.FALSE).hashCode();
-        _hashCode += getLow_dimension();
-        _hashCode += getHigh_dimension();
+        _hashCode += new Long(getLow_dimension()).hashCode();
+        _hashCode += new Long(getHigh_dimension()).hashCode();
         if (getDefault_value() != null) {
             _hashCode += getDefault_value().hashCode();
         }
@@ -321,13 +321,13 @@ public class V_property  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSD
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("low_dimension");
         elemField.setXmlName(new javax.xml.namespace.QName("", "low_dimension"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("high_dimension");
         elemField.setXmlName(new javax.xml.namespace.QName("", "high_dimension"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();

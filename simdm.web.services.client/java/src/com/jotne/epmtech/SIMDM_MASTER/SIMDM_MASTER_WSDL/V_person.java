@@ -12,7 +12,7 @@ public class V_person  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.
 
     private java.lang.String login;
 
-    private int[] organizations;
+    private long[] organizations;
 
     public V_person() {
     }
@@ -20,7 +20,7 @@ public class V_person  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.
     public V_person(
            com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.V_item item,
            java.lang.String login,
-           int[] organizations) {
+           long[] organizations) {
         this.item = item;
         this.login = login;
         this.organizations = organizations;
@@ -72,7 +72,7 @@ public class V_person  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.
      * 
      * @return organizations
      */
-    public int[] getOrganizations() {
+    public long[] getOrganizations() {
         return organizations;
     }
 
@@ -82,15 +82,15 @@ public class V_person  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.
      * 
      * @param organizations
      */
-    public void setOrganizations(int[] organizations) {
+    public void setOrganizations(long[] organizations) {
         this.organizations = organizations;
     }
 
-    public int getOrganizations(int i) {
+    public long getOrganizations(int i) {
         return this.organizations[i];
     }
 
-    public void setOrganizations(int i, int _value) {
+    public void setOrganizations(int i, long _value) {
         this.organizations[i] = _value;
     }
 
@@ -168,7 +168,7 @@ public class V_person  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("organizations");
         elemField.setXmlName(new javax.xml.namespace.QName("", "organizations"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         elemField.setMaxOccursUnbounded(true);
         typeDesc.addFieldDesc(elemField);

@@ -8,7 +8,7 @@
 package com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL;
 
 public class V_item  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.EDMbaseEntity  implements java.io.Serializable {
-    private int instance_id;
+    private long instance_id;
 
     private java.lang.String item_type;
 
@@ -18,36 +18,44 @@ public class V_item  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
 
     private java.lang.String introduced;
 
-    private java.lang.Integer creator;
+    private long creator;
+
+    private java.lang.String last_changed;
+
+    private long last_editor;
 
     private java.lang.String preview;
 
-    private java.lang.Boolean cancelled;
+    private boolean cancelled;
 
-    private java.lang.Integer[] comments;
+    private long[] comments;
 
-    private java.lang.Integer[] events;
+    private long[] events;
 
     public V_item() {
     }
 
     public V_item(
-           int instance_id,
+           long instance_id,
            java.lang.String item_type,
            java.lang.String name,
            java.lang.String description,
            java.lang.String introduced,
-           java.lang.Integer creator,
+           long creator,
+           java.lang.String last_changed,
+           long last_editor,
            java.lang.String preview,
-           java.lang.Boolean cancelled,
-           java.lang.Integer[] comments,
-           java.lang.Integer[] events) {
+           boolean cancelled,
+           long[] comments,
+           long[] events) {
         this.instance_id = instance_id;
         this.item_type = item_type;
         this.name = name;
         this.description = description;
         this.introduced = introduced;
         this.creator = creator;
+        this.last_changed = last_changed;
+        this.last_editor = last_editor;
         this.preview = preview;
         this.cancelled = cancelled;
         this.comments = comments;
@@ -60,7 +68,7 @@ public class V_item  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @return instance_id
      */
-    public int getInstance_id() {
+    public long getInstance_id() {
         return instance_id;
     }
 
@@ -70,7 +78,7 @@ public class V_item  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @param instance_id
      */
-    public void setInstance_id(int instance_id) {
+    public void setInstance_id(long instance_id) {
         this.instance_id = instance_id;
     }
 
@@ -160,7 +168,7 @@ public class V_item  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @return creator
      */
-    public java.lang.Integer getCreator() {
+    public long getCreator() {
         return creator;
     }
 
@@ -170,8 +178,48 @@ public class V_item  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @param creator
      */
-    public void setCreator(java.lang.Integer creator) {
+    public void setCreator(long creator) {
         this.creator = creator;
+    }
+
+
+    /**
+     * Gets the last_changed value for this V_item.
+     * 
+     * @return last_changed
+     */
+    public java.lang.String getLast_changed() {
+        return last_changed;
+    }
+
+
+    /**
+     * Sets the last_changed value for this V_item.
+     * 
+     * @param last_changed
+     */
+    public void setLast_changed(java.lang.String last_changed) {
+        this.last_changed = last_changed;
+    }
+
+
+    /**
+     * Gets the last_editor value for this V_item.
+     * 
+     * @return last_editor
+     */
+    public long getLast_editor() {
+        return last_editor;
+    }
+
+
+    /**
+     * Sets the last_editor value for this V_item.
+     * 
+     * @param last_editor
+     */
+    public void setLast_editor(long last_editor) {
+        this.last_editor = last_editor;
     }
 
 
@@ -200,7 +248,7 @@ public class V_item  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @return cancelled
      */
-    public java.lang.Boolean getCancelled() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
@@ -210,7 +258,7 @@ public class V_item  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @param cancelled
      */
-    public void setCancelled(java.lang.Boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 
@@ -220,7 +268,7 @@ public class V_item  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @return comments
      */
-    public java.lang.Integer[] getComments() {
+    public long[] getComments() {
         return comments;
     }
 
@@ -230,15 +278,15 @@ public class V_item  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @param comments
      */
-    public void setComments(java.lang.Integer[] comments) {
+    public void setComments(long[] comments) {
         this.comments = comments;
     }
 
-    public java.lang.Integer getComments(int i) {
+    public long getComments(int i) {
         return this.comments[i];
     }
 
-    public void setComments(int i, java.lang.Integer _value) {
+    public void setComments(int i, long _value) {
         this.comments[i] = _value;
     }
 
@@ -248,7 +296,7 @@ public class V_item  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @return events
      */
-    public java.lang.Integer[] getEvents() {
+    public long[] getEvents() {
         return events;
     }
 
@@ -258,15 +306,15 @@ public class V_item  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
      * 
      * @param events
      */
-    public void setEvents(java.lang.Integer[] events) {
+    public void setEvents(long[] events) {
         this.events = events;
     }
 
-    public java.lang.Integer getEvents(int i) {
+    public long getEvents(int i) {
         return this.events[i];
     }
 
-    public void setEvents(int i, java.lang.Integer _value) {
+    public void setEvents(int i, long _value) {
         this.events[i] = _value;
     }
 
@@ -295,15 +343,15 @@ public class V_item  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
             ((this.introduced==null && other.getIntroduced()==null) || 
              (this.introduced!=null &&
               this.introduced.equals(other.getIntroduced()))) &&
-            ((this.creator==null && other.getCreator()==null) || 
-             (this.creator!=null &&
-              this.creator.equals(other.getCreator()))) &&
+            this.creator == other.getCreator() &&
+            ((this.last_changed==null && other.getLast_changed()==null) || 
+             (this.last_changed!=null &&
+              this.last_changed.equals(other.getLast_changed()))) &&
+            this.last_editor == other.getLast_editor() &&
             ((this.preview==null && other.getPreview()==null) || 
              (this.preview!=null &&
               this.preview.equals(other.getPreview()))) &&
-            ((this.cancelled==null && other.getCancelled()==null) || 
-             (this.cancelled!=null &&
-              this.cancelled.equals(other.getCancelled()))) &&
+            this.cancelled == other.isCancelled() &&
             ((this.comments==null && other.getComments()==null) || 
              (this.comments!=null &&
               java.util.Arrays.equals(this.comments, other.getComments()))) &&
@@ -321,7 +369,7 @@ public class V_item  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
         }
         __hashCodeCalc = true;
         int _hashCode = super.hashCode();
-        _hashCode += getInstance_id();
+        _hashCode += new Long(getInstance_id()).hashCode();
         if (getItem_type() != null) {
             _hashCode += getItem_type().hashCode();
         }
@@ -334,15 +382,15 @@ public class V_item  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
         if (getIntroduced() != null) {
             _hashCode += getIntroduced().hashCode();
         }
-        if (getCreator() != null) {
-            _hashCode += getCreator().hashCode();
+        _hashCode += new Long(getCreator()).hashCode();
+        if (getLast_changed() != null) {
+            _hashCode += getLast_changed().hashCode();
         }
+        _hashCode += new Long(getLast_editor()).hashCode();
         if (getPreview() != null) {
             _hashCode += getPreview().hashCode();
         }
-        if (getCancelled() != null) {
-            _hashCode += getCancelled().hashCode();
-        }
+        _hashCode += (isCancelled() ? Boolean.TRUE : Boolean.FALSE).hashCode();
         if (getComments() != null) {
             for (int i=0;
                  i<java.lang.reflect.Array.getLength(getComments());
@@ -378,14 +426,14 @@ public class V_item  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("instance_id");
         elemField.setXmlName(new javax.xml.namespace.QName("", "instance_id"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("item_type");
         elemField.setXmlName(new javax.xml.namespace.QName("", "item_type"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
-        elemField.setNillable(true);
+        elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("name");
@@ -397,44 +445,56 @@ public class V_item  extends com.jotne.epmtech.SIMDM_MASTER.SIMDM_MASTER_WSDL.ED
         elemField.setFieldName("description");
         elemField.setXmlName(new javax.xml.namespace.QName("", "description"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
-        elemField.setNillable(true);
+        elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("introduced");
         elemField.setXmlName(new javax.xml.namespace.QName("", "introduced"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
-        elemField.setNillable(true);
+        elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("creator");
         elemField.setXmlName(new javax.xml.namespace.QName("", "creator"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
-        elemField.setNillable(true);
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("last_changed");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "last_changed"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("last_editor");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "last_editor"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
+        elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("preview");
         elemField.setXmlName(new javax.xml.namespace.QName("", "preview"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
-        elemField.setNillable(true);
+        elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("cancelled");
         elemField.setXmlName(new javax.xml.namespace.QName("", "cancelled"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
-        elemField.setNillable(true);
+        elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("comments");
         elemField.setXmlName(new javax.xml.namespace.QName("", "comments"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
-        elemField.setNillable(true);
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
+        elemField.setNillable(false);
         elemField.setMaxOccursUnbounded(true);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("events");
         elemField.setXmlName(new javax.xml.namespace.QName("", "events"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
-        elemField.setNillable(true);
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
+        elemField.setNillable(false);
         elemField.setMaxOccursUnbounded(true);
         typeDesc.addFieldDesc(elemField);
     }
